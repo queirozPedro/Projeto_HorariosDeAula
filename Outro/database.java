@@ -10,13 +10,8 @@ public class database {
             System.out.println(e.getMessage());
         }
 
-        String url = "jdbc:postgresql://babar.db.elephantsql.com:5432/jwovwopv";
-        String username = "jwovwopv";
-        String password = "SgL55s3Cvm9TAhQibdo7QxDG-b4EUvXB";
-
-        try {
-            Connection db = DriverManager.getConnection(url, username, password);
-            Statement st = db.createStatement();
+        try (Connection connection = PostgreSQLConnection.getInstance().getConnection()){
+            Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM professor");
             while (rs.next()) {
                 System.out.print("Column 1 returned ");
