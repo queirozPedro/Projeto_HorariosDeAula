@@ -18,10 +18,4 @@ public class Professor{
     public String toString() {
         return "Professor [nome=" + nome + ", cpf=" + cpf + ", formacao=" + formacao + ", email=" + email + "]";
     }
-
-    public int horasAulaPorSemana(){
-        // As horas da aula vao estar nas disciplinas
-        // A gente puxa por aqui
-        return 0;
-    }
 }
