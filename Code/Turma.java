@@ -24,5 +24,10 @@ public class Turma extends ComponenteCurricular{
             System.out.println(professores.get(0));
         }
     }
+
+    @Override
+    public String toString() {
+        return "Turma [professores=" + professores + ", horario=" + horario + ", turno=" + turno + "]";
+    }
     
 }

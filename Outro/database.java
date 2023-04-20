@@ -1,6 +1,6 @@
 import java.sql.*;
 
-public class Teste {
+public class database {
 
     public static void main(String[] args) {
         try {
