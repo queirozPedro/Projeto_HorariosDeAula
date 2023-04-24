@@ -1,5 +1,3 @@
-package Projeto_HorariosDeAula.Code;
-
 import java.io.IOException;
 import java.util.Scanner;
 
