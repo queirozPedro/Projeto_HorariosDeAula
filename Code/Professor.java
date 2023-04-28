@@ -7,11 +7,29 @@ public class Professor{
     private String email;
     //private List<ComponenteCurricular> disciplinas;
     
+    /** 
+     * O Construtor vai receber todas as variáveis e enviar para o banco de Dados
+     * É um protópipo 
+    */
     public Professor(String nome, String cpf, String formacao, String email) {
         this.nome = nome;
         this.cpf = cpf;
         this.formacao = formacao;
         this.email = email;
+
+        try (Connection connection = PostgreSQLConnection.getInstance().getConnection()){
+
+            PreparedStatement pstmt = connection.prepareStatement("insert into professor(nome, cpf, formacao, email) values (?, ?, ?, ?)");
+            pstmt.setString(1, nome);
+            pstmt.setString(2, cpf);
+            pstmt.setString(3, formacao);
+            pstmt.setString(4, email);
+            pstmt.executeUpdate();
+
+            }
+        catch (java.sql.SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
@@ -27,6 +45,8 @@ public class Professor{
         this.formacao = formacao;
         this.email = email;
     }
+
+
 
     @Override
     public String toString() {
