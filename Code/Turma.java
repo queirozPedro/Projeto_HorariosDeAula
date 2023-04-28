@@ -9,7 +9,14 @@ public class Turma{
     private ArrayList<Integer> idProfessores;
     private ArrayList<Integer> idComponenteCurricular;
 
-    // Construtor
+    public Turma(List<Professor> professores, String horario, String turno, int idProfessores,
+            int idComponenteCurricular) {
+        this.professores = professores;
+        this.horario = horario;
+        this.turno = turno;
+        this.idProfessores.add = idProfessores;
+        this.idComponenteCurricular.add = idComponenteCurricular;
+    }
 
     @Override
     public String toString() {
