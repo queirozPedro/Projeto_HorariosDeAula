@@ -28,38 +28,6 @@ public class Professor{
         this.email = email;
     }
 
-    /**
-     * Metodo que edita o Nome do professor
-     * @param nome
-     */
-    public void editaProfessorNome(String nome){
-        this.nome = nome;
-    }
-
-    /**
-     * Metodo que edita o Cpf do professor
-     * @param cpf
-     */
-    public void editaProfessorCpf(String cpf){
-        this.cpf = cpf;
-    }
-
-    /**
-     * Metodo que edita a Formacao do professor
-     * @param formacao
-     */
-    public void editaProfessorFormacao(String formacao){
-        this.formacao = formacao;
-    }
-
-    /**
-     * Metodo que edita o Email do professor
-     * @param email
-     */
-    public void editaProfessorEmail(String email){
-        this.email = email;
-    }
-
     @Override
     public String toString() {
         return "Professor [nome=" + nome + ", cpf=" + cpf + ", formacao=" + formacao + ", email=" + email + "]";
