@@ -5,8 +5,8 @@ public class Professor{
     private String cpf;
     private String formacao;
     private String email;
-    //private List<ComponenteCurricular> disciplinas;
-    
+    private ArrayList<Integer> idTurma;
+
     /** 
      * O Construtor vai receber todas as variáveis e enviar para o banco de Dados
      * É um protópipo 
