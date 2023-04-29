@@ -1,5 +1,3 @@
-package Projeto_HorariosDeAula.Code;
-
 import java.util.ArrayList;
 import java.util.List;
 public class Turma{
