@@ -1,12 +1,10 @@
 import java.sql.*;
-import java.util.ArrayList;
 
 public class Professor{
     private String nome;
     private String cpf;
     private String formacao;
-    private String email;
-    private ArrayList<Integer> idTurma = new ArrayList<>();
+    private String email;;
 
     /** 
      * O Construtor vai receber todas as variáveis e enviar para o banco de Dados
