@@ -1,11 +1,12 @@
-package Projeto_HorariosDeAula.Code;
+import java.sql.*;
+import java.util.ArrayList;
 
 public class Professor{
     private String nome;
     private String cpf;
     private String formacao;
     private String email;
-    private ArrayList<Integer> idTurma;
+    private ArrayList<Integer> idTurma = new ArrayList<>();
 
     /** 
      * O Construtor vai receber todas as variáveis e enviar para o banco de Dados
@@ -19,51 +20,45 @@ public class Professor{
     }
     
     public void Cadastrar(){
-
-        if (buscarProfessor(this.cpf) != null) {
-            try (Connection connection = PostgreSQLConnection.getInstance().getConnection()){
-
+        Connection connection = PostgreSQLConnection.getInstance().getConnection();
+    
+        try {
+            if (buscarProfessor(this.cpf) == null) {
                 PreparedStatement pstmt = connection.prepareStatement("insert into professor(nome, cpf, formacao, email) values (?, ?, ?, ?)");
-                pstmt.setString(1, nome);
-                pstmt.setString(2, cpf);
-                pstmt.setString(3, formacao);
-                pstmt.setString(4, email);
+                pstmt.setString(1, this.nome);
+                pstmt.setString(2, this.cpf);
+                pstmt.setString(3, this.formacao);
+                pstmt.setString(4, this.email);
                 pstmt.executeUpdate();
-
+                System.out.println("Professor cadastrado com sucesso!");
+            } else {
+                System.out.println("Professor já cadastrado!");
             }
-            catch (java.sql.SQLException e) {
-                System.out.println(e.getMessage());
-            }
-        } else{
-            System.out.println("Professor já cadastrado!");
+        } catch (java.sql.SQLException e) {
+            System.out.println("Erro ao cadastrar professor: " + e.getMessage());
         }
-
-        
-
     }
 
-    public Professor buscarProfessor(String cpf){
-        
-        try(Connection connection = PostgreSQLConnection.getInstance().getConnection()){
-
-            Statement st = connection.createStatement();
-            ResultSet rs = st.executeQuery("SELECT cpf from professor");
-
-            while (rs.next()) {
-
-                if (cpf == rs.getString(3)) {
-                    return new Professor(rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
-                } else{
-                    return new Professor(null, null, null, null);
-                }
-                
+    public static Professor buscarProfessor(String cpf){
+        Connection connection = PostgreSQLConnection.getInstance().getConnection();
+        ResultSet rs = null;
+        PreparedStatement pstmt = null;
+    
+        try{
+            pstmt = connection.prepareStatement("SELECT * from professor WHERE cpf = ?");
+            pstmt.setString(1, cpf);
+            rs = pstmt.executeQuery();
+    
+            if (rs.next()) {
+                return new Professor(rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
             }
-
-        }
-        catch(java.sql.SQLException e){
+    
+            return null;
+        } catch(SQLException e){
             System.out.println(e.getMessage());
         }
-
+    
+        return null;
     }
 
     /**
