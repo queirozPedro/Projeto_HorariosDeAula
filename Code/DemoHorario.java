@@ -1,5 +1,3 @@
-package Projeto_HorariosDeAula.Code;
-
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -26,7 +24,7 @@ public class DemoHorario {
                         op = sc.nextInt();
                         switch (op) {
                             case 1:
-                            
+
                                 break;
                             case 2:
                 
@@ -127,7 +125,8 @@ public class DemoHorario {
             }
 
         } while (op >= 0);
-        
+
+        PostgreSQLConnection.getInstance().closeConnection();
         System.out.println("Finalizando programa...");
         sc.close();
     }
