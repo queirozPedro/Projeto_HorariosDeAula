@@ -1,5 +1,3 @@
-package Projeto_HorariosDeAula.Code;
-
 public class ComponenteCurricular {
     private int cargaHoraria; 
     private String nome;
