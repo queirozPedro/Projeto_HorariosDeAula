@@ -30,4 +30,15 @@ public class PostgreSQLConnection {
     public Connection getConnection() {
         return connection;
     }
+
+    public void closeConnection() {
+        try {
+            if (connection != null) {
+                connection.close();
+                System.out.println("Conexão fechada com sucesso.");
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro ao fechar conexão: " + e.getMessage());
+        }
+    }
 }
