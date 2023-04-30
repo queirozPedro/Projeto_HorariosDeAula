@@ -1,4 +1,5 @@
 import java.sql.*;
+import java.util.ArrayList;
 
 public class Professor{
     private String nome;
@@ -57,6 +58,30 @@ public class Professor{
         }
     
         return null;
+    }
+
+    public static ArrayList<Professor> listarProfessores(){
+
+        Connection connection = PostgreSQLConnection.getInstance().getConnection();
+        ArrayList<Professor> professores = new ArrayList<>();
+        ResultSet rs = null;
+        PreparedStatement pstmt = null;
+    
+        try{
+            pstmt = connection.prepareStatement("SELECT * from professor");
+            rs = pstmt.executeQuery();
+    
+            while (rs.next()) {
+                Professor professor = new Professor(rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
+                professores.add(professor);
+            }
+    
+            return professores;
+        } catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+        
+        return professores;
     }
 
     /**
