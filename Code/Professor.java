@@ -38,6 +38,27 @@ public class Professor{
         }
     }
 
+    public static void ExcluirProfessor(String cpf){
+        Connection connection = PostgreSQLConnection.getInstance().getConnection();
+        PreparedStatement pstmt = null;
+
+        try {
+            pstmt = connection.prepareStatement("DELETE from professor where cpf = ?");
+            pstmt.setString(1, cpf);
+            int rowsDeleted = pstmt.executeUpdate();
+    
+            if (rowsDeleted > 0){
+                System.out.println("Professor excluído com sucesso!");
+            }
+            else {
+                System.out.println("Professor não encontrado!");
+            }
+    
+        } catch (SQLException e) {
+            System.out.println("Erro ao excluir professor: " + e.getMessage());
+        }
+    }
+
     public static Professor buscarProfessor(String cpf){
         Connection connection = PostgreSQLConnection.getInstance().getConnection();
         ResultSet rs = null;
