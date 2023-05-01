@@ -18,24 +18,6 @@ public class Professor{
     }
     
 
-    
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public void setFormacao(String formacao) {
-        this.formacao = formacao;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-
     /**
      * Função que Cadastra o professor no banco de Dados
      */
@@ -95,7 +77,7 @@ public class Professor{
         PreparedStatement pstmt = null;
     
         try{
-            pstmt = connection.prepareStatement("SELECT * from professor WHERE cpf = ?");
+            pstmt = connection.prepareStatement("SELECT * from professor WHERE cpf = ?"); // Seleciona todas as linhas onde o cpf for igual ao consultado
             pstmt.setString(1, cpf);
             rs = pstmt.executeQuery();
     
@@ -110,7 +92,7 @@ public class Professor{
     
         return null;
     }
-
+    
     public static ArrayList<Professor> listarProfessores(){
 
         Connection connection = PostgreSQLConnection.getInstance().getConnection();
@@ -148,8 +130,6 @@ public class Professor{
         this.formacao = formacao;
         this.email = email;
     }
-
-
 
     @Override
     public String toString() {

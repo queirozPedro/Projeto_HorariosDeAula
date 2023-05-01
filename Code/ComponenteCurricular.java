@@ -71,7 +71,7 @@ public class ComponenteCurricular {
             if (rs.next()) {
                 return new ComponenteCurricular(rs.getInt(3), rs.getString(2), rs.getInt(4), rs.getString(5), rs.getBoolean(6));
             }
-    
+
             return null;
         } catch(SQLException e){
             System.out.println(e.getMessage());
