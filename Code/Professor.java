@@ -9,7 +9,6 @@ public class Professor{
 
     /** 
      * O Construtor vai receber todas as variáveis e enviar para o banco de Dados
-     * É um protópipo 
     */
     public Professor(String nome, String cpf, String formacao, String email) {
         this.nome = nome;
@@ -18,12 +17,37 @@ public class Professor{
         this.email = email;
     }
     
+
+    
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public void setFormacao(String formacao) {
+        this.formacao = formacao;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+
+    /**
+     * Função que Cadastra o professor no banco de Dados
+     */
     public void Cadastrar(){
+        // Cria um Objeto connection que vai servir para conectar o Banco
+        // Possui gets de Instancia e Conexão
         Connection connection = PostgreSQLConnection.getInstance().getConnection();
     
         try {
             if (buscarProfessor(this.cpf) == null) {
                 PreparedStatement pstmt = connection.prepareStatement("insert into professor(nome, cpf, formacao, email) values (?, ?, ?, ?)");
+                // Criar uma maneira de receber os dados já formatados!!
                 pstmt.setString(1, this.nome);
                 pstmt.setString(2, this.cpf);
                 pstmt.setString(3, this.formacao);
@@ -59,6 +83,12 @@ public class Professor{
         }
     }
 
+    /**
+     * Metodo que percorre o banco de dados em busca de um professor usando seu CPF como chave.
+     * Retorna o professor caso encontrado e Null caso não encontrado
+     * @param cpf
+     * @return Professor
+     */
     public static Professor buscarProfessor(String cpf){
         Connection connection = PostgreSQLConnection.getInstance().getConnection();
         ResultSet rs = null;
