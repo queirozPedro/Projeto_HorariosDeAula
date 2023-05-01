@@ -1,7 +1,7 @@
 O menu do programa deve ter, ao menos, as seguintes opções:
 
  - Cadastrar Professor -> Metodo feito. Falta Corrigir os dados recebidos. Falta Implementação
- - Editar Professor -> Metodo ainda não feito. Falta Implementação
+ - Editar Professor -> Metodo ainda não feito. Falta Implementação <- Trabalhando nisso
  - Ver dados de um Professor -> Metodo ainda não feito. Falta Implementação
  - Listar Professores -> Metodo Feito. Falta Implementação
  - Excluir Professor -> Metodo Feito. Falta Implementação

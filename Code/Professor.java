@@ -1,5 +1,6 @@
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Professor{
     private String nome;
@@ -11,12 +12,13 @@ public class Professor{
      * O Construtor vai receber todas as variáveis e enviar para o banco de Dados
     */
     public Professor(String nome, String cpf, String formacao, String email) {
+        // Tenho que dar um jeito de checar se a formatação está correta...
+
         this.nome = nome;
         this.cpf = cpf;
         this.formacao = formacao;
         this.email = email;
     }
-    
 
     /**
      * Função que Cadastra o professor no banco de Dados
@@ -117,18 +119,19 @@ public class Professor{
         return professores;
     }
 
-    /**
-     * Metodo que reedita os dados de um professor
-     * @param nome
-     * @param cpf
-     * @param formacao
-     * @param email
-     */
-    public void editaProfessor(String nome, String cpf, String formacao, String email){
-        this.nome = nome;
-        this.cpf = cpf;
-        this.formacao = formacao;
-        this.email = email;
+
+    public static void editaProfessor(String nome, String cpf, String formacao, String email){
+        Professor aux = buscarProfessor(cpf);
+        if(aux == null){
+            System.out.println("Professor não encontrado");
+            return;
+        }
+        else{
+            Connection connection = PostgreSQLConnection.getInstance().getConnection();
+            // PreparedStatement pstmt = connection.prepareStatement("EDIT?? from professor where cpf = ?");
+            // pstmt.setString(1, cpf);
+
+        }
     }
 
     @Override
