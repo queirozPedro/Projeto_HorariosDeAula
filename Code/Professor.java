@@ -44,6 +44,8 @@ public class Professor{
         this.email = email;
     }
 
+    
+
     public int getId_prof() {
         return id_prof;
     }
