@@ -6,6 +6,8 @@ public class DemoHorario {
 
     public static void main(String[] args) throws IOException, InterruptedException {
         Scanner sc = new Scanner(System.in);
+        ArrayList<Professor> professores = new ArrayList<>();
+        ArrayList<ComponenteCurricular> disciplinas = new ArrayList<>();
         int op = 0;
         do {
             new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Apaga o texto do terminal
@@ -50,7 +52,6 @@ public class DemoHorario {
                 // Menu do Componente Curricular
                 case 2:
                     do {
-                        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Apaga o texto do terminal
                         menuComponenteCurricular();
                         System.out.print("  >> ");
                         op = sc.nextInt();
@@ -59,6 +60,25 @@ public class DemoHorario {
                             
                                 break;
                             case 2:
+
+                                disciplinas = ComponenteCurricular.listarComponentes();
+
+                                System.out.println("Qual componente curricular será editado: \n" + disciplinas);
+
+                                System.out.println(">> ");
+                                int id = sc.nextInt();
+
+                                System.out.println("\nQual dado desse componente será editado: ");
+                                System.out.println(ComponenteCurricular.buscarComponente(id));
+                                System.out.println(">> ");
+                                int id_dado = sc.nextInt();
+
+                                sc.nextLine();
+
+                                System.out.println("\nDigite o novo XXXX desse componente: ");
+                                Boolean dado = sc.nextBoolean();
+
+                                ComponenteCurricular.editaComponente(id, dado, id_dado);
                 
                                 break;
                             case 3:
@@ -88,8 +108,8 @@ public class DemoHorario {
                         switch (op) {
                             case 1:
 
-                                ArrayList<Professor> professores = Professor.listarProfessores();
-                                ArrayList<ComponenteCurricular> disciplinas = ComponenteCurricular.listarComponentes();
+                                professores = Professor.listarProfessores();
+                                disciplinas = ComponenteCurricular.listarComponentes();
                                 int idProfessor;
                                 int idComponente;
 
@@ -111,6 +131,43 @@ public class DemoHorario {
                                 
                                 break;
                             case 2:
+
+                                ArrayList<Turma> turmas = Turma.listarTurmas();
+                                int id_prof;
+
+                                System.out.println("Qual turma será editado: \n" + turmas);
+
+                                System.out.println(">> ");
+                                int id = sc.nextInt();
+
+                                System.out.println("\nQual dado desse componente será editado: ");
+                                System.out.println(ComponenteCurricular.buscarComponente(id));
+                                System.out.println(">> ");
+                                int id_dado = sc.nextInt();
+
+                                sc.nextLine();
+
+                                if (id_dado == 6) {
+                                    Turma turma1 = Turma.buscarTurma(id);
+                                    ArrayList<Integer> idProfessores = turma1.getIdProfessor();
+                                    System.out.println("Qual professor deseja editar: \n");
+                                    for (Integer professor : idProfessores) {
+                                        System.out.println(professor);
+                                        System.out.println(Professor.buscarProfessor(professor));
+                                    }
+                                    System.out.println(">> ");
+                                    id_prof = sc.nextInt();
+
+                                    professores = Professor.listarProfessores();
+                                    System.out.println("\nQual o novo professor dessa turma: " + professores);
+                                    int professor11 = sc.nextInt();
+
+                                    System.out.println(id+ " " + professores.get(professor11 - 1).getId_prof() + " " + id_dado + " " + id_prof);
+                                    
+                                    Turma.editaTurma(id, professores.get(professor11 - 1).getId_prof(), id_dado, id_prof); 
+                                }
+
+                                
                     
                                 break;
                             case 3:
