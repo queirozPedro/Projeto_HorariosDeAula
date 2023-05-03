@@ -44,6 +44,9 @@ public class Professor{
         this.email = email;
     }
 
+    public int getId_prof() {
+        return id_prof;
+    }
 
     /**
      * Função que Cadastra o professor no banco de Dados
@@ -55,7 +58,7 @@ public class Professor{
     
         try {
             if (buscarProfessor(this.cpf) == null) {
-                PreparedStatement pstmt = connection.prepareStatement("insert into professor(nome, cpf, formacao, email) values (?, ?, ?, ?)");
+                PreparedStatement pstmt = connection.prepareStatement("INSERT INTO professor(nome, cpf, formacao, email) VALUES (?, ?, ?, ?)");
                 // Criar uma maneira de receber os dados já formatados!!
                 pstmt.setString(1, this.nome);
                 pstmt.setString(2, this.cpf);
@@ -118,6 +121,27 @@ public class Professor{
     
         return null;
     }
+
+    public static Professor buscarProfessor(int id_prof){
+        Connection connection = PostgreSQLConnection.getInstance().getConnection();
+        ResultSet rs = null;
+        PreparedStatement pstmt = null;
+    
+        try{
+            pstmt = connection.prepareStatement("SELECT * from professor WHERE id_prof = ?"); // Seleciona todas as linhas onde o cpf for igual ao consultado
+            pstmt.setInt(1, id_prof);
+            rs = pstmt.executeQuery();
+    
+            if (rs.next()) {
+                return new Professor(rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
+            }
+    
+        } catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+    
+        return null;
+    }
     
     public static ArrayList<Professor> listarProfessores(){
 
@@ -144,18 +168,53 @@ public class Professor{
     }
 
 
-    public static void editaProfessor(String nome, String cpf, String formacao, String email){
-        Professor aux = buscarProfessor(cpf);
-        if(aux == null){
-            System.out.println("Professor não encontrado");
-            return;
-        }
-        else{
-            Connection connection = PostgreSQLConnection.getInstance().getConnection();
-            // PreparedStatement pstmt = connection.prepareStatement("EDIT?? from professor where cpf = ?");
-            // pstmt.setString(1, cpf);
+    public static void editaProfessor(int id_prof, String dado, int id_dado){
 
+        Connection connection = PostgreSQLConnection.getInstance().getConnection();
+    
+        try {
+
+            if (id_dado == 1) {
+                PreparedStatement pstmt = connection.prepareStatement("UPDATE professor SET nome = ? WHERE id_prof = ?");
+                pstmt.setString(1, dado);
+                pstmt.setInt(2, id_prof);
+                pstmt.executeUpdate();
+
+                System.out.println("Nome editado com sucesso!");
+
+            } else if (id_dado == 2) {
+                PreparedStatement pstmt = connection.prepareStatement("UPDATE professor SET cpf = ? WHERE id_prof = ?");
+                pstmt.setString(1, dado);
+                pstmt.setInt(2, id_prof);
+                pstmt.executeUpdate();
+
+                System.out.println("CPF editado com sucesso!");
+
+            } else if (id_dado == 3) {
+                PreparedStatement pstmt = connection.prepareStatement("UPDATE professor SET formacao = ? WHERE id_prof = ?");
+                pstmt.setString(1, dado);
+                pstmt.setInt(2, id_prof);
+                pstmt.executeUpdate();
+
+                System.out.println("Formação editada com sucesso!");
+                
+            } else if (id_dado == 4) {
+                PreparedStatement pstmt = connection.prepareStatement("UPDATE professor SET email = ? WHERE id_prof = ?");
+                pstmt.setString(1, dado);
+                pstmt.setInt(2, id_prof);
+                pstmt.executeUpdate();
+
+                System.out.println("Email editado com sucesso!");
+
+            } else{
+                System.out.println("Dado inválido!");
+            }
+
+
+        } catch (java.sql.SQLException e) {
+            System.out.println("Erro ao cadastrar professor: " + e.getMessage());
         }
+
     }
 
     @Override
