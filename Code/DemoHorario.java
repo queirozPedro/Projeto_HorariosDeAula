@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class DemoHorario {
@@ -81,12 +82,32 @@ public class DemoHorario {
                 // Menu da Turma
                 case 3:
                     do {
-                        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Apaga o texto do terminal
                         menuTurma();
                         System.out.print("  >> ");
                         op = sc.nextInt();
                         switch (op) {
                             case 1:
+
+                                ArrayList<Professor> professores = Professor.listarProfessores();
+                                ArrayList<ComponenteCurricular> disciplinas = ComponenteCurricular.listarComponentes();
+                                int idProfessor;
+                                int idComponente;
+
+                                System.out.println("Qual será o professor dessa turma: \n" + professores);
+                                idProfessor = sc.nextInt();
+
+                                System.out.println("\nQual será a disciplina dessa turma: \n" + disciplinas);
+                                idComponente = sc.nextInt();
+
+                                System.out.println("Qual o horário dessa turma: ");
+                                String horario1 = sc.next();
+
+                                System.out.println("Qual a quantidade de vagas para essa turma: ");
+                                int vagas = sc.nextInt();
+
+                                Turma turma = new Turma(idProfessor, idComponente, horario1, null, vagas);
+
+                                turma.Cadastrar();
                                 
                                 break;
                             case 2:
@@ -96,6 +117,8 @@ public class DemoHorario {
 
                                 break;
                             case 4:
+
+                                System.out.println(Turma.listarTurmas());
 
                                 break;
                             case 5:
@@ -130,7 +153,6 @@ public class DemoHorario {
         System.out.println("Finalizando programa...");
         sc.close();
     }
-
 
     public static void menuPrincipal(){
         System.out.println(" == Menu ==");
