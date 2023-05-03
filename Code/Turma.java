@@ -58,20 +58,6 @@ public class Turma{
             pstmt.setInt(6, this.idProfessor.get(0));
             pstmt.executeUpdate();
 
-            pstmt = connection.prepareStatement("SELECT id_turma from turma WHERE codigo = ? and id_comp = ?");
-            pstmt.setInt(1, this.codigo);
-            pstmt.setInt(2, this.idComponenteCurricular);
-
-            rs = pstmt.executeQuery();
-
-            if (rs.next()) {
-                PreparedStatement pstmt2 = connection.prepareStatement("INSERT INTO turma_professor (id_turma,id_prof) VALUES (?, ?)");
-                pstmt2.setInt(1, rs.getInt(1));
-                pstmt2.setInt(2, this.idProfessor.get(0));
-
-                pstmt2.executeUpdate();
-            }
-
             System.out.println("Turma cadastrada com sucesso!");
         } catch (java.sql.SQLException e) {
             System.out.println("Erro ao cadastrar turma: " + e.getMessage());
@@ -109,11 +95,6 @@ public class Turma{
             PreparedStatement pstmt = connection.prepareStatement("UPDATE turma SET id_prof = array_append(id_prof, ?) WHERE id_turma = ?");
             pstmt.setInt(1, id_prof);
             pstmt.setInt(2, id_turma);
-            pstmt.executeUpdate();
-
-            pstmt = connection.prepareStatement("INSERT INTO turma_professor (id_turma, id_prof) VALUES (?, ?)");
-            pstmt.setInt(1, id_turma);
-            pstmt.setInt(2, id_prof);
             pstmt.executeUpdate();
 
             System.out.println("Professor adicionado!");
