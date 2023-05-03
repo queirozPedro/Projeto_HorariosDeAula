@@ -1,5 +1,6 @@
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Professor{
     private int id_prof;
@@ -12,20 +13,16 @@ public class Professor{
      * O Construtor vai receber todas as variáveis e enviar para o banco de Dados
     */
     public Professor(String nome, String cpf, String formacao, String email) {
+        // Tenho que dar um jeito de checar se a formatação está correta...
+
         this.nome = nome;
         this.cpf = cpf;
         this.formacao = formacao;
         this.email = email;
     }
     
-    public Professor(int id_prof, String nome, String cpf, String formacao, String email) {
-        this.id_prof = id_prof;
-        this.nome = nome;
-        this.cpf = cpf;
-        this.formacao = formacao;
-        this.email = email;
-    }
 
+    
     public void setNome(String nome) {
         this.nome = nome;
     }
@@ -102,7 +99,7 @@ public class Professor{
         PreparedStatement pstmt = null;
     
         try{
-            pstmt = connection.prepareStatement("SELECT * from professor WHERE cpf = ?");
+            pstmt = connection.prepareStatement("SELECT * from professor WHERE cpf = ?"); // Seleciona todas as linhas onde o cpf for igual ao consultado
             pstmt.setString(1, cpf);
             rs = pstmt.executeQuery();
     
@@ -116,7 +113,7 @@ public class Professor{
     
         return null;
     }
-
+    
     public static ArrayList<Professor> listarProfessores(){
 
         Connection connection = PostgreSQLConnection.getInstance().getConnection();
@@ -141,18 +138,19 @@ public class Professor{
         return professores;
     }
 
-    /**
-     * Metodo que reedita os dados de um professor
-     * @param nome
-     * @param cpf
-     * @param formacao
-     * @param email
-     */
-    public void editaProfessor(String nome, String cpf, String formacao, String email){
-        this.nome = nome;
-        this.cpf = cpf;
-        this.formacao = formacao;
-        this.email = email;
+
+    public static void editaProfessor(String nome, String cpf, String formacao, String email){
+        Professor aux = buscarProfessor(cpf);
+        if(aux == null){
+            System.out.println("Professor não encontrado");
+            return;
+        }
+        else{
+            Connection connection = PostgreSQLConnection.getInstance().getConnection();
+            // PreparedStatement pstmt = connection.prepareStatement("EDIT?? from professor where cpf = ?");
+            // pstmt.setString(1, cpf);
+
+        }
     }
 
     @Override

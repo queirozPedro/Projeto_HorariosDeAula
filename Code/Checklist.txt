@@ -1,0 +1,21 @@
+O menu do programa deve ter, ao menos, as seguintes opções:
+
+ - Cadastrar Professor -> Metodo feito. Falta Corrigir os dados recebidos. Falta Implementação
+ - Editar Professor -> Metodo ainda não feito. Falta Implementação <- Trabalhando nisso
+ - Ver dados de um Professor -> Metodo ainda não feito. Falta Implementação
+ - Listar Professores -> Metodo Feito. Falta Implementação
+ - Excluir Professor -> Metodo Feito. Falta Implementação
+
+ - Cadastrar Componente Curricular -> Metodo Feito. Falta Implementação
+ - Editar Componente Curricular -> Metodo ainda não feito. Falta Implementação
+ - Ver dados de um Componente Curricular -> Metodo ainda não feito. Falta Implementação
+ - Listar Componentes Curriculares -> Em andamento
+ - Excluir Componente Curricular -> Em andamento
+
+ - Cadastrar Turma -> Em andamento
+ - Editar Turma -> Metodo ainda não feito. Falta Implementação
+ - Ver dados de uma Turma -> Metodo ainda não feito. Falta Implementação
+ - Listar todas as Turmas (em formato de tabela) -> Metodo ainda não feito. Falta Implementação
+ - Listar Turmas por semestre (em formato de tabela) -> Metodo ainda não feito. Falta Implementação
+ - Listar Turmas por Professor (em formato de tabela) -> Metodo ainda não feito. Falta Implementação
+ - Excluir Turma -> Metodo ainda não feito. Falta Implementação
