@@ -2,6 +2,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class Professor{
+    private int id_prof;
     private String nome;
     private String cpf;
     private String formacao;
@@ -17,8 +18,14 @@ public class Professor{
         this.email = email;
     }
     
+    public Professor(int id_prof, String nome, String cpf, String formacao, String email) {
+        this.id_prof = id_prof;
+        this.nome = nome;
+        this.cpf = cpf;
+        this.formacao = formacao;
+        this.email = email;
+    }
 
-    
     public void setNome(String nome) {
         this.nome = nome;
     }
@@ -103,7 +110,6 @@ public class Professor{
                 return new Professor(rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
             }
     
-            return null;
         } catch(SQLException e){
             System.out.println(e.getMessage());
         }
@@ -123,7 +129,7 @@ public class Professor{
             rs = pstmt.executeQuery();
     
             while (rs.next()) {
-                Professor professor = new Professor(rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
+                Professor professor = new Professor(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
                 professores.add(professor);
             }
     
@@ -149,10 +155,10 @@ public class Professor{
         this.email = email;
     }
 
-
-
     @Override
     public String toString() {
-        return "Professor [nome=" + nome + ", cpf=" + cpf + ", formacao=" + formacao + ", email=" + email + "]";
+        return "Professor [id_prof=" + id_prof + ", nome=" + nome + ", cpf=" + cpf + ", formacao=" + formacao
+                + ", email=" + email + "]";
     }
+      
 }
