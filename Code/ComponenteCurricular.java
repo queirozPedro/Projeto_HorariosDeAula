@@ -2,6 +2,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class ComponenteCurricular {
+    private int id_componente;
     private int cargaHoraria; 
     private String nome;
     private int semestre;
@@ -9,6 +10,16 @@ public class ComponenteCurricular {
     private boolean optativa;
 
     public ComponenteCurricular(int cargaHoraria, String nome, int semestre, String codigo, boolean optativa) {
+        this.cargaHoraria = cargaHoraria;
+        this.nome = nome;
+        this.semestre = semestre;
+        this.codigo = codigo;
+        this.optativa = optativa;
+    }
+
+    public ComponenteCurricular(int id_componente, int cargaHoraria, String nome, int semestre, String codigo,
+            boolean optativa) {
+        this.id_componente = id_componente;
         this.cargaHoraria = cargaHoraria;
         this.nome = nome;
         this.semestre = semestre;
@@ -80,6 +91,27 @@ public class ComponenteCurricular {
         return null;
     }
 
+    public static ComponenteCurricular buscarComponente(int id){
+        Connection connection = PostgreSQLConnection.getInstance().getConnection();
+        ResultSet rs = null;
+        PreparedStatement pstmt = null;
+    
+        try{
+            pstmt = connection.prepareStatement("SELECT * from componente_curricular WHERE id_comp = ?");
+            pstmt.setInt(1, id);
+            rs = pstmt.executeQuery();
+    
+            if (rs.next()) {
+                return new ComponenteCurricular(rs.getInt(3), rs.getString(2), rs.getInt(4), rs.getString(5), rs.getBoolean(6));
+            }
+    
+        } catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+    
+        return null;
+    }
+
     public static ArrayList<ComponenteCurricular> listarComponentes(){
 
         Connection connection = PostgreSQLConnection.getInstance().getConnection();
@@ -92,7 +124,7 @@ public class ComponenteCurricular {
             rs = pstmt.executeQuery();
     
             while (rs.next()) {
-                ComponenteCurricular componente = new ComponenteCurricular(rs.getInt(3), rs.getString(2), rs.getInt(4), rs.getString(5), rs.getBoolean(6));
+                ComponenteCurricular componente = new ComponenteCurricular(rs.getInt(1), rs.getInt(3), rs.getString(2), rs.getInt(4), rs.getString(5), rs.getBoolean(6));
                 componentes.add(componente);
             }
     
@@ -106,7 +138,9 @@ public class ComponenteCurricular {
 
     @Override
     public String toString() {
-        return "ComponenteCurricular [cargaHoraria=" + cargaHoraria + ", nome=" + nome + ", semestre=" + semestre
-                + ", optativa=" + optativa + "]";
+        return "ComponenteCurricular [id_componente=" + id_componente + ", cargaHoraria=" + cargaHoraria + ", nome="
+                + nome + ", semestre=" + semestre + ", codigo=" + codigo + ", optativa=" + optativa + "]";
     }
+
+    
 }
