@@ -41,6 +41,7 @@ public class DemoHorario {
                                 System.out.print("Email: ");
                                 aux.setEmail(sc.nextLine());
                                 sc.nextLine();
+                                aux.Cadastrar();
                                 break;
                             case 2:
                                 
