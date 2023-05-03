@@ -80,7 +80,7 @@ public class ComponenteCurricular {
             rs = pstmt.executeQuery();
     
             if (rs.next()) {
-                return new ComponenteCurricular(rs.getInt(3), rs.getString(2), rs.getInt(4), rs.getString(5), rs.getBoolean(6));
+                return new ComponenteCurricular(rs.getInt(1), rs.getInt(3), rs.getString(2), rs.getInt(4), rs.getString(5), rs.getBoolean(6));
             }
 
             return null;
@@ -102,7 +102,7 @@ public class ComponenteCurricular {
             rs = pstmt.executeQuery();
     
             if (rs.next()) {
-                return new ComponenteCurricular(rs.getInt(3), rs.getString(2), rs.getInt(4), rs.getString(5), rs.getBoolean(6));
+                return new ComponenteCurricular(rs.getInt(1), rs.getInt(3), rs.getString(2), rs.getInt(4), rs.getString(5), rs.getBoolean(6));
             }
     
         } catch(SQLException e){
@@ -134,6 +134,68 @@ public class ComponenteCurricular {
         }
         
         return componentes;
+    }
+
+    public static void editaComponente(int id_comp, Object dado, int id_dado){
+
+        Connection connection = PostgreSQLConnection.getInstance().getConnection();
+    
+        try {
+
+            if (id_dado == 1) {
+                PreparedStatement pstmt = connection.prepareStatement("UPDATE componente_curricular SET nome = ? WHERE id_comp = ?");
+                String nome = dado.toString();
+                pstmt.setString(1, nome);
+                pstmt.setInt(2, id_comp);
+                pstmt.executeUpdate();
+
+                System.out.println("Nome editado com sucesso!");
+
+            } else if (id_dado == 2) {
+                PreparedStatement pstmt = connection.prepareStatement("UPDATE componente_curricular SET carga_horaria = ? WHERE id_comp = ?");
+                int carga_horaria = (int) dado;
+                pstmt.setInt(1, carga_horaria);
+                pstmt.setInt(2, id_comp);
+                pstmt.executeUpdate();
+
+                System.out.println("Carga horária editada com sucesso!");
+
+            } else if (id_dado == 3) {
+                PreparedStatement pstmt = connection.prepareStatement("UPDATE componente_curricular SET semestre = ? WHERE id_comp = ?");
+                int semestre = (int) dado;
+                pstmt.setInt(1, semestre);
+                pstmt.setInt(2, id_comp);
+                pstmt.executeUpdate();
+
+                System.out.println("Semestre editado com sucesso!");
+                
+            } else if (id_dado == 4) {
+                PreparedStatement pstmt = connection.prepareStatement("UPDATE componente_curricular SET codigo = ? WHERE id_comp = ?");
+                String codigo = dado.toString();
+                pstmt.setString(1, codigo);
+                pstmt.setInt(2, id_comp);
+                pstmt.executeUpdate();
+
+                System.out.println("Código editado com sucesso!");
+
+            } else if (id_dado == 5) {
+                PreparedStatement pstmt = connection.prepareStatement("UPDATE componente_curricular SET optativa = ? WHERE id_comp = ?");
+                Boolean optativa = Boolean.valueOf(dado.toString());
+                pstmt.setBoolean(1, optativa);
+                pstmt.setInt(2, id_comp);
+                pstmt.executeUpdate();
+                
+                System.out.println("Componente editado com sucesso!");
+
+            } else{
+                System.out.println("Dado inválido!");
+            }
+
+
+        } catch (java.sql.SQLException e) {
+            System.out.println("Erro ao cadastrar professor: " + e.getMessage());
+        }
+
     }
 
     @Override
