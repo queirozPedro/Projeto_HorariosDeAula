@@ -8,6 +8,7 @@ public class DemoHorario {
         Scanner sc = new Scanner(System.in);
         ArrayList<Professor> professores = new ArrayList<>();
         ArrayList<ComponenteCurricular> disciplinas = new ArrayList<>();
+        Professor aux = new Professor(0, null, null, null, null);
         int op = 0;
         do {
             new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Apaga o texto do terminal
@@ -27,10 +28,22 @@ public class DemoHorario {
                         op = sc.nextInt();
                         switch (op) {
                             case 1:
-
+                                System.out.println("Insira as Informações do Professor:");
+                                System.out.print("Nome: ");
+                                aux.setNome(sc.nextLine());
+                                sc.nextLine();
+                                System.out.print("Cpf: ");
+                                aux.setCpf(sc.nextLine());
+                                sc.nextLine();
+                                System.out.print("Formação: ");
+                                aux.setFormacao(sc.nextLine());
+                                sc.nextLine();
+                                System.out.print("Email: ");
+                                aux.setEmail(sc.nextLine());
+                                sc.nextLine();
                                 break;
                             case 2:
-                
+                                
                                 break;
                             case 3:
 
