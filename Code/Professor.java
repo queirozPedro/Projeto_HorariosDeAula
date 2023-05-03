@@ -1,6 +1,5 @@
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Professor{
     private int id_prof;
