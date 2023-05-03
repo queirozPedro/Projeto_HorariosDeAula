@@ -31,6 +31,10 @@ public class Turma{
         this.codigo = codigo;
     }
 
+    public ArrayList<Integer> getIdProfessor() {
+        return idProfessor;
+    }
+
     public void Cadastrar(){
 
         Connection connection = PostgreSQLConnection.getInstance().getConnection();
@@ -146,6 +150,31 @@ public class Turma{
         return null;
     }
 
+    public static Turma buscarTurma(int id_turma){
+        Connection connection = PostgreSQLConnection.getInstance().getConnection();
+        ResultSet rs = null;
+        PreparedStatement pstmt = null;
+    
+        try{
+            pstmt = connection.prepareStatement("SELECT * FROM turma WHERE id_turma = ?");
+            pstmt.setInt(1, id_turma);
+            rs = pstmt.executeQuery();
+    
+            if (rs.next()) {
+                Array array = rs.getArray("id_prof");
+                Integer[] intArray = (Integer[]) array.getArray();
+                ArrayList<Integer> professores = new ArrayList<>(Arrays.asList(intArray));
+
+                return new Turma(rs.getInt(1), professores, rs.getInt(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getInt(6));
+            }
+    
+        } catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+    
+        return null;
+    }
+
     public static ArrayList<Turma> listarTurmas(){
 
         Connection connection = PostgreSQLConnection.getInstance().getConnection();
@@ -232,6 +261,78 @@ public class Turma{
         }
         
         return turmas;
+
+    }
+
+    public static void editaTurma(int id_turma, Object dado, int id_dado, int id_prof){
+
+        Connection connection = PostgreSQLConnection.getInstance().getConnection();
+    
+        try {
+
+            if (id_dado == 1) {
+                PreparedStatement pstmt = connection.prepareStatement("UPDATE turma SET id_comp = ? WHERE id_turma = ?");
+                int id_comp = (int) dado;
+                pstmt.setInt(1, id_comp);
+                pstmt.setInt(2, id_turma);
+                pstmt.executeUpdate();
+
+                System.out.println("Componente editado com sucesso!");
+
+            } else if (id_dado == 2) {
+                PreparedStatement pstmt = connection.prepareStatement("UPDATE turma SET horario1 = ? WHERE id_turma = ?");
+                String horario1 = dado.toString();
+                pstmt.setString(1, horario1);
+                pstmt.setInt(2, id_turma);
+                pstmt.executeUpdate();
+
+                System.out.println("Horário editado com sucesso!");
+
+            } else if (id_dado == 3) {
+                PreparedStatement pstmt = connection.prepareStatement("UPDATE turma SET horario2 = ? WHERE id_turma = ?");
+                String horario2 = dado.toString();
+                pstmt.setString(1, horario2);
+                pstmt.setInt(2, id_turma);
+                pstmt.executeUpdate();
+
+                System.out.println("Horário editado com sucesso!");
+                
+            } else if (id_dado == 4) {
+                PreparedStatement pstmt = connection.prepareStatement("UPDATE turma SET vagas = ? WHERE id_turma = ?");
+                int vagas = (int) dado;
+                pstmt.setInt(1, vagas);
+                pstmt.setInt(2, id_turma);
+                pstmt.executeUpdate();
+
+                System.out.println("Vagas editadas com sucesso!");
+
+            } else if (id_dado == 5) {
+                PreparedStatement pstmt = connection.prepareStatement("UPDATE turma SET codigo = ? WHERE id_turma = ?");
+                int codigo = (int) dado;
+                pstmt.setInt(1, codigo);
+                pstmt.setInt(2, id_turma);
+                pstmt.executeUpdate();
+
+                System.out.println("Código editado com sucesso!");
+
+            } else if (id_dado == 6) {
+                
+                PreparedStatement pstmt = connection.prepareStatement("UPDATE turma SET id_prof[?] = ? WHERE id_turma = ?");
+                int id_prof_novo = (int) dado;
+                pstmt.setInt(1, id_prof);
+                pstmt.setInt(2, id_prof_novo);
+                pstmt.setInt(3, id_turma);
+                pstmt.executeUpdate();
+
+                System.out.println("Professor editado com sucesso!");
+            } else{
+                System.out.println("Dado inválido!");
+            }
+
+
+        } catch (java.sql.SQLException e) {
+            System.out.println("Erro ao cadastrar professor: " + e.getMessage());
+        }
 
     }
 
