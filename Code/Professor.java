@@ -20,8 +20,14 @@ public class Professor{
         this.formacao = formacao;
         this.email = email;
     }
-    
 
+    public Professor(int id_prof, String nome, String cpf, String formacao, String email) {
+        this.id_prof = id_prof;
+        this.nome = nome;
+        this.cpf = cpf;
+        this.formacao = formacao;
+        this.email = email;
+    }
     
     public void setNome(String nome) {
         this.nome = nome;
