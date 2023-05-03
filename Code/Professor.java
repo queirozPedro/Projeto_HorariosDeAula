@@ -8,13 +8,16 @@ public class Professor{
     private String formacao;
     private String email;;
 
+    /** 
+     * O Construtor vai receber todas as variáveis e enviar para o banco de Dados
+    */
+    public Professor(String nome, String cpf, String formacao, String email) {
+        // Tenho que dar um jeito de checar se a formatação está correta...
 
-    public Professor() {
-        this.id_prof = 0;
-        this.nome = null;
-        this.cpf = null;
-        this.formacao = null;
-        this.email = null;
+        this.nome = nome;
+        this.cpf = cpf;
+        this.formacao = formacao;
+        this.email = email;
     }
 
     public Professor(int id_prof, String nome, String cpf, String formacao, String email) {
@@ -207,9 +210,11 @@ public class Professor{
                 System.out.println("Dado inválido!");
             }
 
+
         } catch (java.sql.SQLException e) {
             System.out.println("Erro ao cadastrar professor: " + e.getMessage());
         }
+
     }
 
     @Override
