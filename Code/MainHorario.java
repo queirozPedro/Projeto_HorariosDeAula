@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class MainHorario {
 
     public static void main(String[] args) throws IOException, InterruptedException {
+        
         Scanner sc = new Scanner(System.in);
         ArrayList<Professor> professores = new ArrayList<>();
         ArrayList<ComponenteCurricular> disciplinas = new ArrayList<>();
@@ -12,18 +13,17 @@ public class MainHorario {
 
         int op = 0;
         do {
-            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Apaga o texto do terminal
+            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
             Menu.Principal();
             System.out.print("  >> ");
             op = sc.nextInt();
-            
-            // Esse trambolho so vai ficar aqui por um tempo, logo logo a gente tira ele, confia...
+        
             switch (op) {
 
                 // Menu do Professor
                 case 1:
                     do {
-                        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Apaga o texto do terminal
+                        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); 
                         Menu.Professor();
                         System.out.print("  >> ");
                         op = sc.nextInt();
@@ -214,7 +214,7 @@ public class MainHorario {
 
                 // Finalizar o programa
                 case 4:
-                    new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Apaga o texto do terminal
+                    new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); 
                     op = -1;
                     break;
                 default:
