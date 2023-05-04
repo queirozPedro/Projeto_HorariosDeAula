@@ -222,5 +222,4 @@ public class Professor{
         return "Professor [id_prof=" + id_prof + ", nome=" + nome + ", cpf=" + cpf + ", formacao=" + formacao
                 + ", email=" + email + "]";
     }
-      
 }

@@ -2,7 +2,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class DemoHorario {
+public class MainHorario {
 
     public static void main(String[] args) throws IOException, InterruptedException {
         Scanner sc = new Scanner(System.in);
@@ -13,7 +13,7 @@ public class DemoHorario {
         int op = 0;
         do {
             new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Apaga o texto do terminal
-            menuPrincipal();
+            Menu.Principal();
             System.out.print("  >> ");
             op = sc.nextInt();
             
@@ -24,7 +24,7 @@ public class DemoHorario {
                 case 1:
                     do {
                         new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Apaga o texto do terminal
-                        menuProfessor();
+                        Menu.Professor();
                         System.out.print("  >> ");
                         op = sc.nextInt();
                         switch (op) {
@@ -42,7 +42,7 @@ public class DemoHorario {
                                 System.out.print("Email: ");
                                 aux.setEmail(sc.nextLine());
                                 System.out.println("Insirir Professor? "+ aux.toString() + " ?");
-                                operacoes();
+                                Menu.Operacoes();
                                 op = sc.nextInt();
                                 aux.Cadastrar();
                                 break;
@@ -69,7 +69,7 @@ public class DemoHorario {
                 // Menu do Componente Curricular
                 case 2:
                     do {
-                        menuComponenteCurricular();
+                        Menu.ComponenteCurricular();
                         System.out.print("  >> ");
                         op = sc.nextInt();
                         switch (op) {
@@ -119,7 +119,7 @@ public class DemoHorario {
                 // Menu da Turma
                 case 3:
                     do {
-                        menuTurma();
+                        Menu.Turma();
                         System.out.print("  >> ");
                         op = sc.nextInt();
                         switch (op) {
@@ -227,58 +227,4 @@ public class DemoHorario {
         System.out.println("Finalizando programa...");
         sc.close();
     }
-
-    public static void menuPrincipal(){
-        System.out.println(" == Menu ==");
-        System.out.println(" 1 -> Menu do Professor");
-        System.out.println(" 2 -> Menu do Componente Curricular");
-        System.out.println(" 3 -> Menu da Turma");
-        System.out.println(" 4 -> Finalizar Programa");
-    }
-
-    public static void menuProfessor(){
-        System.out.println(" == Opções do Professor ==");
-        System.out.println(" 1 -> Cadastrar Professor");
-        System.out.println(" 2 -> Editar Professor");
-        System.out.println(" 3 -> Ver dados de um Professor");
-        System.out.println(" 4 -> Listar Professores");
-        System.out.println(" 5 -> Excluir Professor");
-        System.out.println(" 6 -> Voltar");
-    }
-
-    public static void menuComponenteCurricular(){
-        System.out.println(" == Opções do Componente Curricular ==");
-        System.out.println("1 -> Cadastrar Componente Curricular");
-        System.out.println("2 -> Editar Componente Curricular");
-        System.out.println("3 -> Ver dados de um Componente Curricular");
-        System.out.println("4 -> Listar Componentes Curriculares");
-        System.out.println("5 -> Excluir Componente Curricular");
-        System.out.println("6 -> Voltar");
-    }
-
-    public static void menuTurma(){
-        System.out.println(" = Opções da Turma ==");
-        System.out.println("1 -> Cadastrar Turma");
-        System.out.println("2 -> Editar Turma");
-        System.out.println("3 -> Ver dados de uma Turma");
-        System.out.println("4 -> Listar todas as Turmas (em formato de tabela)");
-        System.out.println("5 -> Listar Turmas por semestre (em formato de tabela)");
-        System.out.println("6 -> Listar Turmas por Professor (em formato de tabela)");
-        System.out.println("7 -> Excluir Turma");
-        System.out.println("8 -> Voltar");
-    }
-
-    public static void operacoes(){
-        System.out.println(" Proseguir com a Operação?");
-        System.out.println(" 1 -> Sim");
-        System.out.println(" 2 -> Não");
-        System.out.println(" 3 -> Refazer");
-    }
 }
-
-
-// Rascunhos
-//String menu[] = {"Menu do Professor","Componente Curricular", "Menu da Turma"};
-//String menuDoProfessor[] = {"Cadastrar Professor", "Editar Professor", "Ver dados de um Professor", "Listar Professores", "Excluir Professor"};
-//String menuDoComponenteCurricular[] = {"Cadastrar Componente Curricular", "Editar Componente Curricular", "Ver dados de um Componente Curricular", "Listar Componentes Curriculares", "Excluir Componente Curricular"};
-//String menuDaTurma[] = {"Cadastrar Turma", "Editar Turma", "Ver dados de uma Turma", "Listar todas as Turmas (em formato de tabela)", "Listar Turmas por semestre (em formato de tabela)", "Listar Turmas por Professor (em formato de tabela)", "Excluir Turma"};
