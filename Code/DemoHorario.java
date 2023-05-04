@@ -8,7 +8,8 @@ public class DemoHorario {
         Scanner sc = new Scanner(System.in);
         ArrayList<Professor> professores = new ArrayList<>();
         ArrayList<ComponenteCurricular> disciplinas = new ArrayList<>();
-        Professor aux = new Professor(0, null, null, null, null);
+        Professor aux = new Professor(null, null, null, null);
+
         int op = 0;
         do {
             new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); // Apaga o texto do terminal
@@ -28,19 +29,34 @@ public class DemoHorario {
                         op = sc.nextInt();
                         switch (op) {
                             case 1:
+                                // Ent, isso aqui eu ainda vou ajeitar
+                                // Tava ajeitando a ideia só
                                 System.out.println("Insira as Informações do Professor:");
                                 System.out.print("Nome: ");
                                 aux.setNome(sc.nextLine());
                                 sc.nextLine();
                                 System.out.print("Cpf: ");
                                 aux.setCpf(sc.nextLine());
-                                sc.nextLine();
                                 System.out.print("Formação: ");
                                 aux.setFormacao(sc.nextLine());
-                                sc.nextLine();
                                 System.out.print("Email: ");
                                 aux.setEmail(sc.nextLine());
-                                sc.nextLine();
+                                System.out.println("Insirir Professor? "+ aux.toString() + " ?");
+                                operacoes();
+                                op = sc.nextInt();
+                                switch (op) {
+                                    case 1:
+                                        aux.Cadastrar();
+                                        break;
+                                    case 2:
+                                        op = 6;
+                                        break;
+                                    case 3:
+
+                                        break;
+                                    default:
+                                        break;
+                                }
                                 aux.Cadastrar();
                                 break;
                             case 2:
@@ -53,7 +69,7 @@ public class DemoHorario {
 
                                 break;
                             case 5:
-
+                                
                                 break;
                             case 6: 
                                 break;
@@ -263,6 +279,13 @@ public class DemoHorario {
         System.out.println("6 -> Listar Turmas por Professor (em formato de tabela)");
         System.out.println("7 -> Excluir Turma");
         System.out.println("8 -> Voltar");
+    }
+
+    public static void operacoes(){
+        System.out.println(" Proseguir com a Operação?");
+        System.out.println(" 1 -> Sim");
+        System.out.println(" 2 -> Não");
+        System.out.println(" 3 -> Refazer");
     }
 }
 
