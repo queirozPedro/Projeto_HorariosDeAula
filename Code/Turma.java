@@ -108,7 +108,7 @@ public class Turma{
     
         try {
 
-            pstmt = connection.prepareStatement("INSERT INTO turma_professor (id_turma, id_prof) VALUES (?, ?)");
+            PreparedStatement pstmt = connection.prepareStatement("INSERT INTO turma_professor (id_turma, id_prof) VALUES (?, ?)");
             pstmt.setInt(1, id_turma);
             pstmt.setInt(2, id_prof);
             pstmt.executeUpdate();
