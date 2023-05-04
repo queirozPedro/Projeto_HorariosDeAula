@@ -145,7 +145,7 @@ public class Turma{
             int numero_turma = 0;
             ArrayList<Integer> professores = new ArrayList<>();
     
-            if (rs.next()) {
+            while (rs.next()) {
                 id_turma = rs.getInt(1);
                 id_comp = rs.getInt(2);
                 horario1 = rs.getString(3);
@@ -183,7 +183,7 @@ public class Turma{
             int numero_turma = 0;
             ArrayList<Integer> professores = new ArrayList<>();
     
-            if (rs.next()) {
+            while (rs.next()) {
                 id_turma = rs.getInt(1);
                 id_comp = rs.getInt(2);
                 horario1 = rs.getString(3);
@@ -191,8 +191,11 @@ public class Turma{
                 vagas = rs.getInt(5);
                 numero_turma = rs.getInt(6);
                 professores.add(rs.getInt(7));
+                System.out.println(rs.getInt(7));
                 
             }
+
+            System.out.println(professores);
 
             return new Turma(id_turma, professores, id_comp, horario1, horario2, vagas, numero_turma);
     
@@ -211,10 +214,17 @@ public class Turma{
         PreparedStatement pstmt = null;
     
         try{
-            pstmt = connection.prepareStatement("SELECT * from turma");
+            pstmt = connection.prepareStatement("SELECT * from turma NATURAL JOIN turma_professor ORDER BY id_turma");
             rs = pstmt.executeQuery();
 
-            int id = 0;
+            int id = 1;
+            int id_turma = 0;
+            int id_comp = 0;
+            String horario1 = "";
+            String horario2 = "";
+            int vagas = 0;
+            int numero_turma = 0;
+            ArrayList<Integer> professores = new ArrayList<>();
     
             while (rs.next()) {
                 id_turma = rs.getInt(1);
@@ -225,8 +235,19 @@ public class Turma{
                 numero_turma = rs.getInt(6);
                 professores.add(rs.getInt(7));
 
-                Turma turma = new Turma(rs.getInt(1), professores, rs.getInt(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getInt(6));
-                turmas.add(turma);
+                if (id != rs.getInt(1)) {
+                    if (id == id_turma) {
+                        Turma turma = new Turma(id_turma, professores, id_comp, horario1, horario2, vagas, numero_turma);
+                        turmas.add(turma);
+
+
+                        professores.clear();
+                        
+                    }
+                    id++;
+                }
+
+
             }
     
             return turmas;
