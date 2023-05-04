@@ -41,10 +41,8 @@ public class MainHorario {
                                 aux.setFormacao(sc.nextLine());
                                 System.out.print("Email: ");
                                 aux.setEmail(sc.nextLine());
-                                System.out.println("Insirir Professor? "+ aux.toString() + " ?");
-                                Menu.Operacoes();
-                                op = sc.nextInt();
-                                aux.Cadastrar();
+                                //aux.Cadastrar();
+
                                 break;
                             case 2:
                                 
