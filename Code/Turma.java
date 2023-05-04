@@ -39,7 +39,6 @@ public class Turma{
 
         Connection connection = PostgreSQLConnection.getInstance().getConnection();
     
-        //Vai selecionar um dos professores e um dos componentes curriculares presentes no banco dados
         try {
 
             PreparedStatement pstmt = connection.prepareStatement("SELECT count(*) FROM turma WHERE id_comp = ?");
@@ -49,14 +48,27 @@ public class Turma{
             if (rs.next()) {
                 this.codigo += rs.getInt(1);
             }
-            pstmt = connection.prepareStatement("INSERT INTO turma (id_comp, horario1, horario2, vagas, codigo,id_prof) VALUES (?, ?, ?, ?, ?, ARRAY[?])");
+            pstmt = connection.prepareStatement("INSERT INTO turma (id_comp, horario1, horario2, vagas, codigo) VALUES (?, ?, ?, ?, ?)");
             pstmt.setInt(1, this.idComponenteCurricular);
             pstmt.setString(2, this.horario1);
             pstmt.setString(3, this.horario2);
             pstmt.setInt(4, this.vagas);
             pstmt.setInt(5, this.codigo);
-            pstmt.setInt(6, this.idProfessor.get(0));
             pstmt.executeUpdate();
+
+            pstmt = connection.prepareStatement("SELECT id_turma from turma WHERE codigo = ? and id_comp = ?");
+            pstmt.setInt(1, this.codigo);
+            pstmt.setInt(2, this.idComponenteCurricular);
+
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                PreparedStatement pstmt2 = connection.prepareStatement("INSERT INTO turma_professor (id_turma,id_prof) VALUES (?, ?)");
+                pstmt2.setInt(1, rs.getInt(1));
+                pstmt2.setInt(2, this.idProfessor.get(0));
+
+                pstmt2.executeUpdate();
+            }
 
             System.out.println("Turma cadastrada com sucesso!");
         } catch (java.sql.SQLException e) {
@@ -65,14 +77,18 @@ public class Turma{
 
     }
 
-    public static void ExcluirTurma(int codigo){
+    public static void ExcluirTurma(int id_turma){
         Connection connection = PostgreSQLConnection.getInstance().getConnection();
         PreparedStatement pstmt = null;
 
         try {
-            pstmt = connection.prepareStatement("DELETE FROM turma WHERE codigo = ?");
-            pstmt.setInt(1, codigo);
+            pstmt = connection.prepareStatement("DELETE FROM turma WHERE id_turma = ?");
+            pstmt.setInt(1, id_turma);
             int rowsDeleted = pstmt.executeUpdate();
+
+            pstmt = connection.prepareStatement("DELETE FROM turma_professor WHERE id_turma = ?");
+            pstmt.setInt(1, id_turma);
+            pstmt.executeUpdate();
     
             if (rowsDeleted > 0){
                 System.out.println("Turma excluída com sucesso!");
@@ -91,10 +107,10 @@ public class Turma{
         Connection connection = PostgreSQLConnection.getInstance().getConnection();
     
         try {
-            
-            PreparedStatement pstmt = connection.prepareStatement("UPDATE turma SET id_prof = array_append(id_prof, ?) WHERE id_turma = ?");
-            pstmt.setInt(1, id_prof);
-            pstmt.setInt(2, id_turma);
+
+            pstmt = connection.prepareStatement("INSERT INTO turma_professor (id_turma, id_prof) VALUES (?, ?)");
+            pstmt.setInt(1, id_turma);
+            pstmt.setInt(2, id_prof);
             pstmt.executeUpdate();
 
             System.out.println("Professor adicionado!");
@@ -111,18 +127,31 @@ public class Turma{
         PreparedStatement pstmt = null;
     
         try{
-            pstmt = connection.prepareStatement("SELECT * FROM turma WHERE codigo = ? and id_comp = ?");
+            pstmt = connection.prepareStatement("SELECT * FROM turma NATURAL JOIN turma_professor WHERE turma.codigo = ? AND turma.id_comp = ?");
             pstmt.setInt(1, codigo);
             pstmt.setInt(2, id_componente);
             rs = pstmt.executeQuery();
-    
-            if (rs.next()) {
-                Array array = rs.getArray("id_prof");
-                Integer[] intArray = (Integer[]) array.getArray();
-                ArrayList<Integer> professores = new ArrayList<>(Arrays.asList(intArray));
 
-                return new Turma(rs.getInt(1), professores, rs.getInt(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getInt(6));
+            int id_turma = 0;
+            int id_comp = 0;
+            String horario1 = "";
+            String horario2 = "";
+            int vagas = 0;
+            int numero_turma = 0;
+            ArrayList<Integer> professores = new ArrayList<>();
+    
+            while (rs.next()) {
+                id_turma = rs.getInt(1);
+                id_comp = rs.getInt(2);
+                horario1 = rs.getString(3);
+                horario2 = rs.getString(4);
+                vagas = rs.getInt(5);
+                numero_turma = rs.getInt(6);
+                professores.add(rs.getInt(7));
+                
             }
+
+            return new Turma(id_turma, professores, id_comp, horario1, horario2, vagas, numero_turma);
     
         } catch(SQLException e){
             System.out.println(e.getMessage());
@@ -131,23 +160,36 @@ public class Turma{
         return null;
     }
 
-    public static Turma buscarTurma(int id_turma){
+    public static Turma buscarTurma(int idTurma){
         Connection connection = PostgreSQLConnection.getInstance().getConnection();
         ResultSet rs = null;
         PreparedStatement pstmt = null;
     
         try{
-            pstmt = connection.prepareStatement("SELECT * FROM turma WHERE id_turma = ?");
-            pstmt.setInt(1, id_turma);
+            pstmt = connection.prepareStatement("SELECT * FROM turma NATURAL JOIN turma_professor WHERE turma.id_turma = ?");
+            pstmt.setInt(1, idTurma);
             rs = pstmt.executeQuery();
-    
-            if (rs.next()) {
-                Array array = rs.getArray("id_prof");
-                Integer[] intArray = (Integer[]) array.getArray();
-                ArrayList<Integer> professores = new ArrayList<>(Arrays.asList(intArray));
 
-                return new Turma(rs.getInt(1), professores, rs.getInt(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getInt(6));
+            int id_turma = 0;
+            int id_comp = 0;
+            String horario1 = "";
+            String horario2 = "";
+            int vagas = 0;
+            int numero_turma = 0;
+            ArrayList<Integer> professores = new ArrayList<>();
+    
+            while (rs.next()) {
+                id_turma = rs.getInt(1);
+                id_comp = rs.getInt(2);
+                horario1 = rs.getString(3);
+                horario2 = rs.getString(4);
+                vagas = rs.getInt(5);
+                numero_turma = rs.getInt(6);
+                professores.add(rs.getInt(7));
+                
             }
+
+            return new Turma(id_turma, professores, id_comp, horario1, horario2, vagas, numero_turma);
     
         } catch(SQLException e){
             System.out.println(e.getMessage());
@@ -164,16 +206,14 @@ public class Turma{
         PreparedStatement pstmt = null;
     
         try{
-            pstmt = connection.prepareStatement("SELECT * from turma");
+            pstmt = connection.prepareStatement("SELECT id_turma from turma ORDER BY id_turma");
             rs = pstmt.executeQuery();
     
             while (rs.next()) {
-                Array array = rs.getArray("id_prof");
-                Integer[] intArray = (Integer[]) array.getArray();
-                ArrayList<Integer> professores = new ArrayList<>(Arrays.asList(intArray));
 
-                Turma turma = new Turma(rs.getInt(1), professores, rs.getInt(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getInt(6));
+                Turma turma = Turma.buscarTurma(rs.getInt(1));
                 turmas.add(turma);
+
             }
     
             return turmas;
