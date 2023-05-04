@@ -8,9 +8,7 @@ public class Professor{
     private String formacao;
     private String email;;
 
-    /** 
-     * O Construtor vai receber todas as variáveis e enviar para o banco de Dados
-    */
+    //Dois contrutores sobrecarregados, que servem para receber os dados e indexalos caso necessário 
     public Professor(String nome, String cpf, String formacao, String email) {
         // Tenho que dar um jeito de checar se a formatação está correta...
 
@@ -19,7 +17,6 @@ public class Professor{
         this.formacao = formacao;
         this.email = email;
     }
-
     public Professor(int id_prof, String nome, String cpf, String formacao, String email) {
         this.id_prof = id_prof;
         this.nome = nome;
@@ -28,18 +25,16 @@ public class Professor{
         this.email = email;
     }
     
+    // Seters que recebem os dados dos professor
     public void setNome(String nome) {
         this.nome = nome;
     }
-
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
-
     public void setFormacao(String formacao) {
         this.formacao = formacao;
     }
-
     public void setEmail(String email) {
         this.email = email;
     }
@@ -49,22 +44,24 @@ public class Professor{
     }
 
     /**
-     * Função que Cadastra o professor no banco de Dados
+     * Função que Cadastra o Professor no Banco de Dados. 
      */
     public void Cadastrar(){
-        // Cria um Objeto connection que vai servir para conectar o Banco
-        // Possui gets de Instancia e Conexão
+        // Cria um Objeto connection que vai servir para conectar ao Banco
         Connection connection = PostgreSQLConnection.getInstance().getConnection();
     
         try {
             if (buscarProfessor(this.cpf) == null) {
+                // O PreparedStatement serve como uma especie de Hascode que indexa um dado ou um conjunto de dados
                 PreparedStatement pstmt = connection.prepareStatement("INSERT INTO professor(nome, cpf, formacao, email) VALUES (?, ?, ?, ?)");
+                
                 // Criar uma maneira de receber os dados já formatados!!
                 pstmt.setString(1, this.nome);
                 pstmt.setString(2, this.cpf);
                 pstmt.setString(3, this.formacao);
                 pstmt.setString(4, this.email);
                 pstmt.executeUpdate();
+
                 System.out.println("Professor cadastrado com sucesso!");
             } else {
                 System.out.println("Professor já cadastrado!");
@@ -74,7 +71,12 @@ public class Professor{
         }
     }
 
+    /**
+     * Metodo que exclui um professor. Recebe o Cpf do professor, busca no Banco e se ele for encontrado será excluido
+     * @param cpf
+     */
     public static void ExcluirProfessor(String cpf){
+        // Conexão com o Banco
         Connection connection = PostgreSQLConnection.getInstance().getConnection();
         PreparedStatement pstmt = null;
 
@@ -89,7 +91,7 @@ public class Professor{
             else {
                 System.out.println("Professor não encontrado!");
             }
-    
+
         } catch (SQLException e) {
             System.out.println("Erro ao excluir professor: " + e.getMessage());
         }
@@ -118,10 +120,14 @@ public class Professor{
         } catch(SQLException e){
             System.out.println(e.getMessage());
         }
-    
         return null;
     }
 
+    /**
+     * Busca um professor no banco, usa o id do professor para buscar.
+     * @param id_prof
+     * @return
+     */
     public static Professor buscarProfessor(int id_prof){
         Connection connection = PostgreSQLConnection.getInstance().getConnection();
         ResultSet rs = null;
@@ -143,6 +149,10 @@ public class Professor{
         return null;
     }
     
+    /**
+     * Retorna uma lista de Professores que estão no Banco de Dados
+     * @return ArrayList<Professor>
+     */ 
     public static ArrayList<Professor> listarProfessores(){
 
         Connection connection = PostgreSQLConnection.getInstance().getConnection();
@@ -167,9 +177,13 @@ public class Professor{
         return professores;
     }
 
-
+    /**
+     * Não entendi como funciona
+     * @param id_prof
+     * @param dado
+     * @param id_dado
+     */
     public static void editaProfessor(int id_prof, String dado, int id_dado){
-
         Connection connection = PostgreSQLConnection.getInstance().getConnection();
     
         try {
@@ -217,6 +231,9 @@ public class Professor{
 
     }
 
+    /**
+     * ToString simples, preciso organizar depois
+     */
     @Override
     public String toString() {
         return "Professor [id_prof=" + id_prof + ", nome=" + nome + ", cpf=" + cpf + ", formacao=" + formacao
