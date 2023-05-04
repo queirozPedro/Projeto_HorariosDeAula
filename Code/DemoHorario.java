@@ -33,8 +33,8 @@ public class DemoHorario {
                                 // Tava ajeitando a ideia só
                                 System.out.println("Insira as Informações do Professor:");
                                 System.out.print("Nome: ");
-                                aux.setNome(sc.nextLine());
                                 sc.nextLine();
+                                aux.setNome(sc.nextLine());
                                 System.out.print("Cpf: ");
                                 aux.setCpf(sc.nextLine());
                                 System.out.print("Formação: ");
@@ -44,19 +44,6 @@ public class DemoHorario {
                                 System.out.println("Insirir Professor? "+ aux.toString() + " ?");
                                 operacoes();
                                 op = sc.nextInt();
-                                switch (op) {
-                                    case 1:
-                                        aux.Cadastrar();
-                                        break;
-                                    case 2:
-                                        op = 6;
-                                        break;
-                                    case 3:
-
-                                        break;
-                                    default:
-                                        break;
-                                }
                                 aux.Cadastrar();
                                 break;
                             case 2:
