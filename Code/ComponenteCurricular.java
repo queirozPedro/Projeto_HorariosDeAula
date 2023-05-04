@@ -9,6 +9,7 @@ public class ComponenteCurricular {
     private String codigo;
     private boolean optativa;
 
+    // Sobrecarga dos construtores, um para as variaveis padrão do código e um para a edição
     public ComponenteCurricular(int cargaHoraria, String nome, int semestre, String codigo, boolean optativa) {
         this.cargaHoraria = cargaHoraria;
         this.nome = nome;
@@ -16,7 +17,6 @@ public class ComponenteCurricular {
         this.codigo = codigo;
         this.optativa = optativa;
     }
-
     public ComponenteCurricular(int id_componente, int cargaHoraria, String nome, int semestre, String codigo,
             boolean optativa) {
         this.id_componente = id_componente;
@@ -27,6 +27,9 @@ public class ComponenteCurricular {
         this.optativa = optativa;
     }
 
+    /**
+     * Metodo cadastrar que cadastra o Componente Curricular no Banco.
+     */
     public void Cadastrar(){
         Connection connection = PostgreSQLConnection.getInstance().getConnection();
     
