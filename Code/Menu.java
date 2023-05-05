@@ -40,9 +40,8 @@ public class Menu {
     }
 
     public static void Operacoes(){
-        System.out.println(" Proseguir com a Operação?");
         System.out.println(" 1 -> Sim");
         System.out.println(" 2 -> Não");
-        System.out.println(" 3 -> Refazer");
+        System.out.println(" 3 -> Cancelar");
     }
 }

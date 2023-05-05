@@ -29,20 +29,37 @@ public class MainHorario {
                         op = sc.nextInt();
                         switch (op) {
                             case 1:
-                                // Ent, isso aqui eu ainda vou ajeitar
-                                // Tava ajeitando a ideia só
-                                System.out.println("Insira as Informações do Professor:");
-                                System.out.print("Nome: ");
+                                System.out.println("Cadastrando Novo Professor");
                                 sc.nextLine();
+                                System.out.print("Nome: ");
                                 aux.setNome(sc.nextLine());
-                                System.out.print("Cpf: ");
-                                aux.setCpf(sc.nextLine());
-                                System.out.print("Formação: ");
-                                aux.setFormacao(sc.nextLine());
-                                System.out.print("Email: ");
-                                aux.setEmail(sc.nextLine());
-                                //aux.Cadastrar();
 
+                                System.out.println("Cpf: ");
+                                aux.setCpf(sc.nextLine());
+                                
+                                System.out.println("Formação: ");
+                                aux.setFormacao(sc.nextLine());
+
+                                System.out.println("Email: ");
+                                aux.setEmail(sc.nextLine());
+
+                                System.out.println(aux.toString());
+                                System.out.println("\nCadastrar Professor? ");
+                                Menu.Operacoes();
+                                op = sc.nextInt();
+                                switch (op) {
+                                    case 1:
+                                        aux.Cadastrar();
+                                        break;
+                                    case 2:
+
+                                        break;
+                                    case 3:
+                                        
+                                        break;
+                                    default:
+                                        break;
+                                }
                                 break;
                             case 2:
                                 

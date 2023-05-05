@@ -236,7 +236,6 @@ public class Professor{
      */
     @Override
     public String toString() {
-        return "Professor [id_prof=" + id_prof + ", nome=" + nome + ", cpf=" + cpf + ", formacao=" + formacao
-                + ", email=" + email + "]";
+        return "Informações do Professor\nNome: "+ nome + "\nCpf: "+ cpf +"\nFormação: "+ formacao +"\nEmail: "+ email;
     }
 }
