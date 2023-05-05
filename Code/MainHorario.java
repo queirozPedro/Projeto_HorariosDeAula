@@ -116,10 +116,46 @@ public class MainHorario {
                                 break;
                             case 4: // Listar Professores 
                                 new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-                                System.out.println("Lista dos Professores Ativos:");
+                                System.out.println("Lista dos Professores Ativos");
+                                // Falta terminar
                                 break;
                             case 5: // Excluir Profesorres
-
+                                do {
+                                    new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                                    System.out.println(" => Remover de Professor");
+                                    System.out.println(" 1 -> Remover Professor");
+                                    System.out.println(" 2 -> Voltar");
+                                    System.out.println("  >> ");
+                                    op = sc.nextInt();
+                                    switch (op) {
+                                        case 1:
+                                            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                                            System.out.println("Removendo Professor");
+                                            System.out.print("Insira o Cpf:");
+                                            auxString = sc.nextLine();
+                                            aux = Professor.buscarProfessor(auxString);
+                                            System.out.println("\n"+ aux.toString());
+                                            System.out.println("\nRemover professor? ");
+                                            System.out.println(" 1 -> Sim");
+                                            System.out.println(" 2 -> Não");
+                                            System.out.print("  >> ");
+                                            if(op == 1){
+                                                Professor.ExcluirProfessor(auxString);
+                                            }
+                                            else{
+                                                aux.limpaProfessor();
+                                            }
+                                            break;
+                                        case 2:
+                                            break;
+                                        default:
+                                            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                                            System.out.println("Opção não disponível, pressione Enter para continuar!");
+                                            sc.nextLine();
+                                            sc.nextLine();
+                                            break;
+                                    }
+                                } while (op != 2);
                                 break;
                             case 6: // Sair
                                 break;
