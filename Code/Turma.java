@@ -203,15 +203,42 @@ public class Turma{
         Connection connection = PostgreSQLConnection.getInstance().getConnection();
         ArrayList<Turma> turmas = new ArrayList<>();
         ResultSet rs = null;
+        ResultSet rs2 = null;
         PreparedStatement pstmt = null;
+        PreparedStatement pstmt2 = null;
     
         try{
             pstmt = connection.prepareStatement("SELECT * FROM turma ORDER BY id_turma");
             rs = pstmt.executeQuery();
+
+            int id_turma = 0;
+            int id_comp = 0;
+            String horario1 = "";
+            String horario2 = "";
+            int vagas = 0;
+            int numero_turma = 0;
+            ArrayList<Integer> professores = new ArrayList<>();
     
             while (rs.next()) {
 
-                Turma turma = Turma.buscarTurma(rs.getInt(1));
+                id_turma = rs.getInt(1);
+                id_comp = rs.getInt(2);
+                horario1 = rs.getString(3);
+                horario2 = rs.getString(4);
+                vagas = rs.getInt(5);
+                numero_turma = rs.getInt(6);
+
+                professores = new ArrayList<>();
+
+                pstmt2 = connection.prepareStatement("SELECT id_prof FROM turma_professor WHERE id_turma = ? ORDER BY id_prof");
+                pstmt2.setInt(1, rs.getInt(1));
+                rs2 = pstmt2.executeQuery();
+
+                while (rs2.next()) {
+                    professores.add(rs2.getInt(1));
+                }
+
+                Turma turma = new Turma(id_turma, professores, id_comp, horario1, horario2, vagas, numero_turma);
                 turmas.add(turma);
 
             }
