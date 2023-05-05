@@ -80,6 +80,18 @@ public class Turma{
 
             }
 
+            pstmt = connection.prepareStatement("SELECT sum(carga_horaria)/15 FROM componente_curricular as cc INNER JOIN (SELECT id_comp FROM turma NATURAL JOIN turma_professor WHERE id_prof = ?) as d ON cc.id_comp = d.id_comp");
+            pstmt.setInt(1, this.idProfessor.get(0));
+            rs = pstmt.executeQuery();
+            
+            while (rs.next()) {
+                if ((rs.getInt(1) + (ComponenteCurricular.buscarComponente(idComponenteCurricular).getCargaHoraria() / 15)) > 20) {
+                System.out.println("Professor atingiu o limite de horas por semana!");
+                return;
+                }
+
+            }
+
             pstmt = connection.prepareStatement("INSERT INTO turma (id_comp, horario1, horario2, vagas, codigo) VALUES (?, ?, ?, ?, ?)");
             pstmt.setInt(1, this.idComponenteCurricular);
             pstmt.setString(2, this.horario1);
