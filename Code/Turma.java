@@ -206,7 +206,7 @@ public class Turma{
         PreparedStatement pstmt = null;
     
         try{
-            pstmt = connection.prepareStatement("SELECT id_turma from turma ORDER BY id_turma");
+            pstmt = connection.prepareStatement("SELECT * FROM turma ORDER BY id_turma");
             rs = pstmt.executeQuery();
     
             while (rs.next()) {
@@ -233,16 +233,13 @@ public class Turma{
         PreparedStatement pstmt = null;
     
         try{
-            pstmt = connection.prepareStatement("SELECT t.id_turma, t.id_comp, t.horario1, t.horario2, t.vagas, t.codigo, t.id_prof FROM turma as t, componente_curricular as cc WHERE cc.semestre = ?");
+            pstmt = connection.prepareStatement("SELECT id_turma FROM turma as t INNER JOIN componente_curricular as cc on t.id_comp = cc.id_comp WHERE semestre = ? ORDER BY id_turma");
             pstmt.setInt(1, semestre);
             rs = pstmt.executeQuery();
     
             while (rs.next()) {
-                Array array = rs.getArray("id_prof");
-                Integer[] intArray = (Integer[]) array.getArray();
-                ArrayList<Integer> professores = new ArrayList<>(Arrays.asList(intArray));
 
-                Turma turma = new Turma(rs.getInt(1), professores, rs.getInt(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getInt(6));
+                Turma turma = Turma.buscarTurma(rs.getInt(1));
                 turmas.add(turma);
             }
     
@@ -338,11 +335,11 @@ public class Turma{
 
             } else if (id_dado == 6) {
                 
-                PreparedStatement pstmt = connection.prepareStatement("UPDATE turma SET id_prof[?] = ? WHERE id_turma = ?");
+                PreparedStatement pstmt = connection.prepareStatement("UPDATE turma_professor SET id_prof = ? WHERE id_turma = ? and id_prof = ?");
                 int id_prof_novo = (int) dado;
-                pstmt.setInt(1, id_prof);
-                pstmt.setInt(2, id_prof_novo);
-                pstmt.setInt(3, id_turma);
+                pstmt.setInt(1, id_prof_novo);
+                pstmt.setInt(2, id_turma);
+                pstmt.setInt(3, id_prof);
                 pstmt.executeUpdate();
 
                 System.out.println("Professor editado com sucesso!");
