@@ -12,12 +12,13 @@ public class MainHorario {
         Professor aux = new Professor(null, null, null, null);
 
         int op = 0;
+        String auxString = null;
+
         do {
             new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
             Menu.Principal();
             System.out.print("  >> ");
             op = sc.nextInt();
-            String auxString;
 
             switch (op) {
 
@@ -98,6 +99,8 @@ public class MainHorario {
                                             auxString = sc.nextLine();
                                             aux = Professor.buscarProfessor(auxString);
                                             System.out.println(aux.toString());
+                                            System.out.println("\nPressione Enter para continuar!");
+                                            sc.nextLine();
                                             break;
                                         case 2:
                                             break;
