@@ -29,37 +29,51 @@ public class MainHorario {
                         op = sc.nextInt();
                         switch (op) {
                             case 1:
-                                System.out.println("Cadastrando Novo Professor");
-                                sc.nextLine();
-                                System.out.print("Nome: ");
-                                aux.setNome(sc.nextLine());
-
-                                System.out.println("Cpf: ");
-                                aux.setCpf(sc.nextLine());
-                                
-                                System.out.println("Formação: ");
-                                aux.setFormacao(sc.nextLine());
-
-                                System.out.println("Email: ");
-                                aux.setEmail(sc.nextLine());
-
-                                System.out.println(aux.toString());
-                                System.out.println("\nCadastrar Professor? ");
-                        
+                                do{
+                                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); 
+                                Menu.cadastroProfessor();
+                                System.out.println("  >> ");
                                 op = sc.nextInt();
                                 switch (op) {
                                     case 1:
-                                        aux.Cadastrar();
-                                        break;
-                                    case 2:
+                                    new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); 
+                                    System.out.println("Cadastrando Novo Professor");
+                                    sc.nextLine();
+                                    System.out.print("Nome: ");
+                                    aux.setNome(sc.nextLine());
+    
+                                    System.out.print("Cpf: ");
+                                    aux.setCpf(sc.nextLine());
+                                    
+                                    System.out.print("Formação: ");
+                                    aux.setFormacao(sc.nextLine());
+    
+                                    System.out.print("Email: ");
+                                    aux.setEmail(sc.nextLine());
 
-                                        break;
-                                    case 3:
-                                        
+                                    new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                                    System.out.println("\n"+aux.toString());
+                                    System.out.println("\nCadastrar professor? ");
+                                    System.out.println(" 1 -> Sim");
+                                    System.out.println(" 2 -> Não");
+                                    System.out.println("  >> ");
+                                    op = sc.nextInt();
+                                    if(op == 1){
+                                        aux.Cadastrar();
+                                    }
+                                    else{
+                                        aux.limpaProfessor();
+                                    }
+                                    break;
+                                    
+                                    case 2:
                                         break;
                                     default:
+                                        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); 
+                                        System.out.println("Opção não disponível, pressione Enter para continuar!");
                                         break;
                                 }
+                                }while(op != 2);
                                 break;
                             case 2:
                                 
@@ -79,6 +93,7 @@ public class MainHorario {
                                 break;
                         }
                     } while(op != 6);
+                    op = 0;
                     break;
 
                 // Menu do Componente Curricular
@@ -129,6 +144,7 @@ public class MainHorario {
                                 break;
                         }
                     } while (op != 6);
+                    op = 0;
                     break;
 
                 // Menu da Turma
@@ -225,6 +241,7 @@ public class MainHorario {
                                 break;
                         }
                     } while(op != 8);
+                    op = 0;
                     break;
 
                 // Finalizar o programa

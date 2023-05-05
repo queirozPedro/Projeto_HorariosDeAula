@@ -1,6 +1,6 @@
 public class Menu {
     public static void Principal(){
-        System.out.println(" == Menu ==");
+        System.out.println(" ====  Menu Principal  ====");
         System.out.println(" 1 -> Menu do Professor");
         System.out.println(" 2 -> Menu do Componente Curricular");
         System.out.println(" 3 -> Menu da Turma");

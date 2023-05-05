@@ -231,6 +231,14 @@ public class Professor{
 
     }
 
+    public void limpaProfessor(){
+        this.id_prof = 0;
+        this.nome = null;
+        this.cpf = null;
+        this.formacao = null;
+        this.email = null;
+    }
+
     /**
      * ToString simples, preciso organizar depois
      */
