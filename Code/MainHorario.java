@@ -30,7 +30,7 @@ public class MainHorario {
                         System.out.print("  >> ");
                         op = sc.nextInt();
                         switch (op) {
-                            case 1:
+                            case 1: // Cadastrar Professor
                                 do {
                                     new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
                                     System.out.println(" => Cadastro de Professores");
@@ -79,10 +79,11 @@ public class MainHorario {
                                     }
                                 } while (op != 2);
                                 break;
-                            case 2:
+                            case 2: // Editar Professor
+                                 
                                 // Não sei como a funcão edita professor funciona vou fazer o resto e depois olho pra ela
                                 break;
-                            case 3:
+                            case 3: // Ver dados do Professor
                                 do {
                                     new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
                                     System.out.println(" => Ver Dados de um Professor");
