@@ -107,13 +107,8 @@ public class Turma{
         Connection connection = PostgreSQLConnection.getInstance().getConnection();
     
         try {
-            
-            PreparedStatement pstmt = connection.prepareStatement("UPDATE turma SET id_prof = array_append(id_prof, ?) WHERE id_turma = ?");
-            pstmt.setInt(1, id_prof);
-            pstmt.setInt(2, id_turma);
-            pstmt.executeUpdate();
 
-            pstmt = connection.prepareStatement("INSERT INTO turma_professor (id_turma, id_prof) VALUES (?, ?)");
+            PreparedStatement pstmt = connection.prepareStatement("INSERT INTO turma_professor (id_turma, id_prof) VALUES (?, ?)");
             pstmt.setInt(1, id_turma);
             pstmt.setInt(2, id_prof);
             pstmt.executeUpdate();
@@ -191,11 +186,8 @@ public class Turma{
                 vagas = rs.getInt(5);
                 numero_turma = rs.getInt(6);
                 professores.add(rs.getInt(7));
-                System.out.println(rs.getInt(7));
                 
             }
-
-            System.out.println(professores);
 
             return new Turma(id_turma, professores, id_comp, horario1, horario2, vagas, numero_turma);
     
@@ -214,39 +206,13 @@ public class Turma{
         PreparedStatement pstmt = null;
     
         try{
-            pstmt = connection.prepareStatement("SELECT * from turma NATURAL JOIN turma_professor ORDER BY id_turma");
+            pstmt = connection.prepareStatement("SELECT * FROM turma ORDER BY id_turma");
             rs = pstmt.executeQuery();
-
-            int id = 1;
-            int id_turma = 0;
-            int id_comp = 0;
-            String horario1 = "";
-            String horario2 = "";
-            int vagas = 0;
-            int numero_turma = 0;
-            ArrayList<Integer> professores = new ArrayList<>();
     
             while (rs.next()) {
-                id_turma = rs.getInt(1);
-                id_comp = rs.getInt(2);
-                horario1 = rs.getString(3);
-                horario2 = rs.getString(4);
-                vagas = rs.getInt(5);
-                numero_turma = rs.getInt(6);
-                professores.add(rs.getInt(7));
 
-                if (id != rs.getInt(1)) {
-                    if (id == id_turma) {
-                        Turma turma = new Turma(id_turma, professores, id_comp, horario1, horario2, vagas, numero_turma);
-                        turmas.add(turma);
-
-
-                        professores.clear();
-                        
-                    }
-                    id++;
-                }
-
+                Turma turma = Turma.buscarTurma(rs.getInt(1));
+                turmas.add(turma);
 
             }
     
@@ -267,16 +233,13 @@ public class Turma{
         PreparedStatement pstmt = null;
     
         try{
-            pstmt = connection.prepareStatement("SELECT t.id_turma, t.id_comp, t.horario1, t.horario2, t.vagas, t.codigo, t.id_prof FROM turma as t, componente_curricular as cc WHERE cc.semestre = ?");
+            pstmt = connection.prepareStatement("SELECT id_turma FROM turma as t INNER JOIN componente_curricular as cc on t.id_comp = cc.id_comp WHERE semestre = ? ORDER BY id_turma");
             pstmt.setInt(1, semestre);
             rs = pstmt.executeQuery();
     
             while (rs.next()) {
-                Array array = rs.getArray("id_prof");
-                Integer[] intArray = (Integer[]) array.getArray();
-                ArrayList<Integer> professores = new ArrayList<>(Arrays.asList(intArray));
 
-                Turma turma = new Turma(rs.getInt(1), professores, rs.getInt(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getInt(6));
+                Turma turma = Turma.buscarTurma(rs.getInt(1));
                 turmas.add(turma);
             }
     
@@ -372,11 +335,11 @@ public class Turma{
 
             } else if (id_dado == 6) {
                 
-                PreparedStatement pstmt = connection.prepareStatement("UPDATE turma SET id_prof[?] = ? WHERE id_turma = ?");
+                PreparedStatement pstmt = connection.prepareStatement("UPDATE turma_professor SET id_prof = ? WHERE id_turma = ? and id_prof = ?");
                 int id_prof_novo = (int) dado;
-                pstmt.setInt(1, id_prof);
-                pstmt.setInt(2, id_prof_novo);
-                pstmt.setInt(3, id_turma);
+                pstmt.setInt(1, id_prof_novo);
+                pstmt.setInt(2, id_turma);
+                pstmt.setInt(3, id_prof);
                 pstmt.executeUpdate();
 
                 System.out.println("Professor editado com sucesso!");
