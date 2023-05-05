@@ -27,6 +27,10 @@ public class ComponenteCurricular {
         this.optativa = optativa;
     }
 
+    public int getCargaHoraria() {
+        return cargaHoraria;
+    }
+    
     /**
      * Metodo cadastrar que cadastra o Componente Curricular no Banco.
      */
