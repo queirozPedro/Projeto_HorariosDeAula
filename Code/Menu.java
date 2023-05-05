@@ -17,6 +17,12 @@ public class Menu {
         System.out.println(" 6 -> Voltar");
     }
 
+    public static void cadastroProfessor(){
+        System.out.println(" => Cadastro de Professores");
+        System.out.println(" 1 -> Cadastrar Novo Professor");
+        System.out.println(" 2 -> Voltar");
+    }
+
     public static void ComponenteCurricular(){
         System.out.println(" == Opções do Componente Curricular ==");
         System.out.println("1 -> Cadastrar Componente Curricular");
@@ -37,11 +43,5 @@ public class Menu {
         System.out.println("6 -> Listar Turmas por Professor (em formato de tabela)");
         System.out.println("7 -> Excluir Turma");
         System.out.println("8 -> Voltar");
-    }
-
-    public static void Operacoes(){
-        System.out.println(" 1 -> Sim");
-        System.out.println(" 2 -> Não");
-        System.out.println(" 3 -> Cancelar");
     }
 }

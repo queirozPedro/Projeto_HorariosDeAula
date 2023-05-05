@@ -45,7 +45,7 @@ public class MainHorario {
 
                                 System.out.println(aux.toString());
                                 System.out.println("\nCadastrar Professor? ");
-                                Menu.Operacoes();
+                        
                                 op = sc.nextInt();
                                 switch (op) {
                                     case 1:
