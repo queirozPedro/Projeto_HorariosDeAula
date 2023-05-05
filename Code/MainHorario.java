@@ -114,13 +114,14 @@ public class MainHorario {
                                     }
                                 } while (op != 2);
                                 break;
-                            case 4:
+                            case 4: // Listar Professores 
+                                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                                System.out.println("Lista dos Professores Ativos:");
+                                break;
+                            case 5: // Excluir Profesorres
 
                                 break;
-                            case 5:
-
-                                break;
-                            case 6:
+                            case 6: // Sair
                                 break;
                             default:
                                 break;
