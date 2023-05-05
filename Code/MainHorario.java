@@ -132,6 +132,7 @@ public class MainHorario {
                                             new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
                                             System.out.println("Removendo Professor");
                                             System.out.print("Insira o Cpf:");
+                                            sc.nextLine();
                                             auxString = sc.nextLine();
                                             aux = Professor.buscarProfessor(auxString);
                                             System.out.println("\n"+ aux.toString());
