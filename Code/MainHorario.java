@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class MainHorario {
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        
+
         Scanner sc = new Scanner(System.in);
         ArrayList<Professor> professores = new ArrayList<>();
         ArrayList<ComponenteCurricular> disciplinas = new ArrayList<>();
@@ -17,82 +17,111 @@ public class MainHorario {
             Menu.Principal();
             System.out.print("  >> ");
             op = sc.nextInt();
-        
+            String auxString;
+
             switch (op) {
 
                 // Menu do Professor
                 case 1:
                     do {
-                        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); 
+                        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
                         Menu.Professor();
                         System.out.print("  >> ");
                         op = sc.nextInt();
                         switch (op) {
                             case 1:
-                                do{
-                                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); 
-                                Menu.cadastroProfessor();
-                                System.out.println("  >> ");
-                                op = sc.nextInt();
-                                switch (op) {
-                                    case 1:
-                                    new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); 
-                                    System.out.println("Cadastrando Novo Professor");
-                                    sc.nextLine();
-                                    System.out.print("Nome: ");
-                                    aux.setNome(sc.nextLine());
-    
-                                    System.out.print("Cpf: ");
-                                    aux.setCpf(sc.nextLine());
-                                    
-                                    System.out.print("Formação: ");
-                                    aux.setFormacao(sc.nextLine());
-    
-                                    System.out.print("Email: ");
-                                    aux.setEmail(sc.nextLine());
-
+                                do {
                                     new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-                                    System.out.println("\n"+aux.toString());
-                                    System.out.println("\nCadastrar professor? ");
-                                    System.out.println(" 1 -> Sim");
-                                    System.out.println(" 2 -> Não");
+                                    System.out.println(" => Cadastro de Professores");
+                                    System.out.println(" 1 -> Cadastrar Novo Professor");
+                                    System.out.println(" 2 -> Voltar");
                                     System.out.println("  >> ");
                                     op = sc.nextInt();
-                                    if(op == 1){
-                                        aux.Cadastrar();
+                                    switch (op) {
+                                        case 1:
+                                            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                                            System.out.println("Cadastrando Novo Professor");
+                                            sc.nextLine();
+                                            System.out.print("Nome: ");
+                                            aux.setNome(sc.nextLine());
+
+                                            System.out.print("Cpf: ");
+                                            aux.setCpf(sc.nextLine());
+
+                                            System.out.print("Formação: ");
+                                            aux.setFormacao(sc.nextLine());
+
+                                            System.out.print("Email: ");
+                                            aux.setEmail(sc.nextLine());
+
+                                            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                                            System.out.println("\n" + aux.toString());
+                                            System.out.println("\nCadastrar professor? ");
+                                            System.out.println(" 1 -> Sim");
+                                            System.out.println(" 2 -> Não");
+                                            System.out.print("  >> ");
+                                            op = sc.nextInt();
+                                            if (op == 1) {
+                                                aux.Cadastrar();
+                                            } else {
+                                                aux.limpaProfessor();
+                                            }
+                                            break;
+                                        case 2:
+                                            break;
+                                        default:
+                                            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                                            System.out.println("Opção não disponível, pressione Enter para continuar!");
+                                            sc.nextLine();
+                                            sc.nextLine();
+                                            break;
                                     }
-                                    else{
-                                        aux.limpaProfessor();
-                                    }
-                                    break;
-                                    
-                                    case 2:
-                                        break;
-                                    default:
-                                        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); 
-                                        System.out.println("Opção não disponível, pressione Enter para continuar!");
-                                        break;
-                                }
-                                }while(op != 2);
+                                } while (op != 2);
                                 break;
                             case 2:
-                                
+                                // Não sei como a funcão edita professor funciona vou fazer o resto e depois olho pra ela
                                 break;
                             case 3:
-
+                                do {
+                                    new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                                    System.out.println(" => Ver Dados de um Professor");
+                                    System.out.println(" 1 -> Ver Professores");
+                                    System.out.println(" 2 -> Voltar");
+                                    System.out.print("  >> ");
+                                    op = sc.nextInt();
+                                    switch (op) {
+                                        case 1:
+                                            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                                            sc.nextLine();
+                                            System.out.println("Buscando Professor");
+                                            System.out.print("Insira o Cpf do Professor: ");
+                                            auxString = sc.nextLine();
+                                            aux = Professor.buscarProfessor(auxString);
+                                            System.out.println(aux.toString());
+                                            break;
+                                        case 2:
+                                            break;
+                                        default:
+                                            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                                            System.out.println("Opção não disponível, pressione Enter para continuar!");
+                                            sc.nextLine();
+                                            sc.nextLine();
+                                            break;
+                                    }
+                                } while (op != 2);
                                 break;
                             case 4:
 
                                 break;
                             case 5:
-                                
+
                                 break;
-                            case 6: 
+                            case 6:
                                 break;
                             default:
                                 break;
                         }
-                    } while(op != 6);
+                    } while (op != 6);
                     op = 0;
                     break;
 
@@ -104,7 +133,7 @@ public class MainHorario {
                         op = sc.nextInt();
                         switch (op) {
                             case 1:
-                            
+
                                 break;
                             case 2:
 
@@ -126,7 +155,7 @@ public class MainHorario {
                                 Boolean dado = sc.nextBoolean();
 
                                 ComponenteCurricular.editaComponente(id, dado, id_dado);
-                
+
                                 break;
                             case 3:
 
@@ -137,8 +166,8 @@ public class MainHorario {
                             case 5:
 
                                 break;
-                            case 6: 
-                               
+                            case 6:
+
                                 break;
                             default:
                                 break;
@@ -176,7 +205,7 @@ public class MainHorario {
                                 Turma turma = new Turma(idProfessor, idComponente, horario1, null, vagas);
 
                                 turma.Cadastrar();
-                                
+
                                 break;
                             case 2:
 
@@ -210,13 +239,13 @@ public class MainHorario {
                                     System.out.println("\nQual o novo professor dessa turma: " + professores);
                                     int professor11 = sc.nextInt();
 
-                                    System.out.println(id+ " " + professores.get(professor11 - 1).getId_prof() + " " + id_dado + " " + id_prof);
-                                    
-                                    Turma.editaTurma(id, professores.get(professor11 - 1).getId_prof(), id_dado, id_prof); 
+                                    System.out.println(id + " " + professores.get(professor11 - 1).getId_prof() + " "
+                                            + id_dado + " " + id_prof);
+
+                                    Turma.editaTurma(id, professores.get(professor11 - 1).getId_prof(), id_dado,
+                                            id_prof);
                                 }
 
-                                
-                    
                                 break;
                             case 3:
 
@@ -229,7 +258,7 @@ public class MainHorario {
                             case 5:
 
                                 break;
-                            case 6: 
+                            case 6:
 
                                 break;
                             case 7:
@@ -240,13 +269,13 @@ public class MainHorario {
                             default:
                                 break;
                         }
-                    } while(op != 8);
+                    } while (op != 8);
                     op = 0;
                     break;
 
                 // Finalizar o programa
                 case 4:
-                    new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); 
+                    new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
                     op = -1;
                     break;
                 default:
