@@ -54,6 +54,7 @@ public class Turma{
                 this.codigo += rs.getInt(1);
             }
 
+            //Verifica se os horários que estão sendo cadastrados estão disponíveis no semestre que a turma vai ser inserida
             pstmt = connection.prepareStatement("SELECT horario1, horario2 FROM turma as t INNER JOIN componente_curricular as cc ON t.id_comp = cc.id_comp WHERE semestre in(SELECT semestre FROM componente_curricular WHERE id_comp = ?)");
             pstmt.setInt(1, this.idComponenteCurricular);
             rs = pstmt.executeQuery();
@@ -66,6 +67,7 @@ public class Turma{
 
             }
 
+            //Verifica se os horários que estão sendo cadastrados estáo disponíveis para o professor escolhido para ministrar essa turma
             pstmt = connection.prepareStatement("SELECT horario1, horario2 FROM turma NATURAL JOIN turma_professor WHERE id_prof = ?");
             pstmt.setInt(1, this.idProfessor.get(0));
             rs = pstmt.executeQuery();
