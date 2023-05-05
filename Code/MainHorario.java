@@ -291,10 +291,12 @@ public class MainHorario {
                                 break;
                             case 3:
 
+                                Turma.adicionarProfessor(6, 5);
+
                                 break;
                             case 4:
 
-                                System.out.println(Turma.listarTurmas());
+                                System.out.println(Turma.listarTurmasSemestre(3));
 
                                 break;
                             case 5:
@@ -304,6 +306,15 @@ public class MainHorario {
 
                                 break;
                             case 7:
+
+                                turmas = Turma.listarTurmas();
+
+                                System.out.println("Qual turma deseja excluir: \n" + turmas);
+                                
+                                System.out.println(">> ");
+                                int id_turma = sc.nextInt();
+
+                                Turma.ExcluirTurma(turmas.get(id_turma - 1).getIdTurma());
 
                                 break;
                             case 8:
