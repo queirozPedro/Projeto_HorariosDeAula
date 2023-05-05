@@ -35,7 +35,7 @@ public class ComponenteCurricular {
     
         try {
             if (buscarComponente(this.codigo) == null) {
-                PreparedStatement pstmt = connection.prepareStatement("insert into componente_curricular(nome, carga_horaria, semestre, codigo, optativa) values (?, ?, ?, ?, ?)");
+                PreparedStatement pstmt = connection.prepareStatement("INSERT INTO componente_curricular(nome, carga_horaria, semestre, codigo, optativa) VALUES (?, ?, ?, ?, ?)");
                 pstmt.setString(1, this.nome);
                 pstmt.setInt(2, this.cargaHoraria);
                 pstmt.setInt(3, this.semestre);
