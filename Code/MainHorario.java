@@ -371,7 +371,15 @@ public class MainHorario {
                                 } while (op != 2);
                                 break;
                             case 4: // Listar Componentes Curriculares
-
+                                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                                System.out.println("Lista dos Componentes Curriculares");
+                                disciplinas = ComponenteCurricular.listarComponentes();
+                                for(int i = 0; i < disciplinas.size() ; i++){
+                                    System.out.println(disciplinas.get(i).toString(i));
+                                }
+                                System.out.println("\nPressione Enter para continuar!");
+                                sc.nextLine();
+                                sc.nextLine();
                                 break;
                             case 5: // Excluir Componente Curricular
 
