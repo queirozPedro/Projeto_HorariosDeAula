@@ -82,8 +82,29 @@ public class MainHorario {
                                 } while (op != 2);
                                 break;
                             case 2: // Editar Professor
-                                 
-                                // Não sei como a funcão edita professor funciona vou fazer o resto e depois olho pra ela
+                                do {
+                                    professores = Professor.listarProfessores();
+                                    System.out.println("Qual professor será editado: \n");
+                                    for (int i = 0; i < professores.size(); i++) {
+                                        System.out.println(i+1 + " - " + professores.get(i) + "\n");
+                                    }
+                                    System.out.print(">> ");
+                                    int id = sc.nextInt();
+
+                                    System.out.println("Qual dado será editado: ");
+                                    System.out.println(" 1 -> Nome");
+                                    System.out.println(" 2 -> CPF");
+                                    System.out.println(" 3 -> Formação");
+                                    System.out.println(" 4 -> Email");
+                                    System.out.println(">> ");
+                                    op = sc.nextInt();
+
+                                    System.out.println("\nNovo dado: ");
+                                    sc.nextLine();
+                                    String dado = sc.nextLine();
+
+                                    Professor.editaProfessor(professores.get(id - 1).getId_prof(), dado, op);
+                                } while (op != 4);
                                 break;
                             case 3: // Ver dados do Professor
                                 do {
@@ -184,13 +205,13 @@ public class MainHorario {
                         op = sc.nextInt();
                         switch (op) {
                             case 1:
-                            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-                            System.out.println(" => Cadastro de Componentes Curriculares");
-                            System.out.println(" 1 -> Cadastrar Novo Componente Curricular");
-                            System.out.println(" 2 -> Voltar");
-                            System.out.println("  >> ");
-                            op = sc.nextInt();
                             do {
+                                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                                System.out.println(" => Cadastro de Componentes Curriculares");
+                                System.out.println(" 1 -> Cadastrar Novo Componente Curricular");
+                                System.out.println(" 2 -> Voltar");
+                                System.out.print("  >> ");
+                                op = sc.nextInt();
                                 switch (op) {
                                     case 1:
                                         new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
@@ -201,12 +222,12 @@ public class MainHorario {
                                         auxComp.setNome(sc.nextLine());
 
                                         System.out.print("Código: ");
-                                        auxComp.setCodigo(auxString);
+                                        auxComp.setCodigo(sc.nextLine());
 
                                         System.out.print("Carga Horária: ");
                                         auxComp.setCargaHoraria(sc.nextInt());
 
-                                        System.out.println("Semestre: ");
+                                        System.out.print("Semestre: ");
                                         auxComp.setSemestre(sc.nextInt());
 
                                         System.out.println("Optativa (1 -> Sim; 2 -> Não):");
@@ -221,10 +242,15 @@ public class MainHorario {
                                         System.out.println(" 2 -> Não");
                                         System.out.print("  >> ");
                                         op = sc.nextInt();
-                                        if (op == 1)
+                                        if (op == 1){
                                             auxComp.Cadastrar();
-                                        else 
+                                            System.out.println("Pressione Enter para continuar!");
+                                            sc.nextLine();
+                                            sc.nextLine();
+                                        }
+                                        else{
                                             auxComp.limpaComponente();
+                                        }
                                         
                                         break;
                                     case 2:
