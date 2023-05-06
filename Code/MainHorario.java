@@ -341,8 +341,35 @@ public class MainHorario {
 
                                 break;
                             case 3: // Ver Dados de um Componente Curricular
-
-                                break;
+                                do{    
+                                    new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                                    System.out.println(" => Ver Dados de um Componente Curricular");
+                                    System.out.println(" 1 -> Ver Componente Curricular");
+                                    System.out.println(" 2 -> Voltar");
+                                    System.out.print("  >> ");
+                                    op = sc.nextInt();
+                                
+                                    switch (op) {
+                                        case 1:
+                                            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                                            sc.nextLine();
+                                            System.out.println("Buscando Componente Curricular");
+                                            System.out.print("Insira o Código do Componente: ");
+                                            auxComp = ComponenteCurricular.buscarComponente(sc.nextLine());
+                                            System.out.println(auxComp.toString());
+                                            System.out.println("\nPressione Enter para continuar!");
+                                            sc.nextLine();
+                                            break;
+                                    case 2:
+                                        break;
+                                    default:
+                                        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                                        System.out.println("Opção não disponível, pressione Enter para continuar!");
+                                        sc.nextLine();
+                                        sc.nextLine();
+                                        break;
+                                    }
+                                    } while (op != 2);
                             case 4: // Listar Componentes Curriculares
 
                                 break;
