@@ -81,7 +81,12 @@ public class Professor{
         PreparedStatement pstmt = null;
 
         try {
-            pstmt = connection.prepareStatement("DELETE from professor where cpf = ?");
+
+            pstmt = connection.prepareStatement("DELETE FROM turma_professor WHERE id_prof in(SELECT id_prof FROM professor WHERE cpf = ?)");
+            pstmt.setString(1, cpf);
+            pstmt.executeUpdate();
+
+            pstmt = connection.prepareStatement("DELETE FROM professor WHERE cpf = ?");
             pstmt.setString(1, cpf);
             int rowsDeleted = pstmt.executeUpdate();
     
