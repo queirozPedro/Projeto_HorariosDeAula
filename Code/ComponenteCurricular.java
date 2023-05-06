@@ -48,6 +48,9 @@ public class ComponenteCurricular {
         return cargaHoraria;
     }
     
+    public int getId_componente() {
+        return id_componente;
+    }
     /**
      * Metodo cadastrar que cadastra o Componente Curricular no Banco.
      */
