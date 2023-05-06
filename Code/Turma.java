@@ -441,11 +441,13 @@ public class Turma{
     public static void editaTurma(int id_turma, Object dado, int id_dado, int id_prof){
 
         Connection connection = PostgreSQLConnection.getInstance().getConnection();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
     
         try {
 
             if (id_dado == 1) {
-                PreparedStatement pstmt = connection.prepareStatement("UPDATE turma SET id_comp = ? WHERE id_turma = ?");
+                pstmt = connection.prepareStatement("UPDATE turma SET id_comp = ? WHERE id_turma = ?");
                 int id_comp = (int) dado;
                 pstmt.setInt(1, id_comp);
                 pstmt.setInt(2, id_turma);
@@ -454,7 +456,7 @@ public class Turma{
                 System.out.println("Componente editado com sucesso!");
 
             } else if (id_dado == 2) {
-                PreparedStatement pstmt = connection.prepareStatement("UPDATE turma SET horario1 = ? WHERE id_turma = ?");
+                pstmt = connection.prepareStatement("UPDATE turma SET horario1 = ? WHERE id_turma = ?");
                 String horario1 = dado.toString();
                 pstmt.setString(1, horario1);
                 pstmt.setInt(2, id_turma);
@@ -463,7 +465,7 @@ public class Turma{
                 System.out.println("Horário editado com sucesso!");
 
             } else if (id_dado == 3) {
-                PreparedStatement pstmt = connection.prepareStatement("UPDATE turma SET horario2 = ? WHERE id_turma = ?");
+                pstmt = connection.prepareStatement("UPDATE turma SET horario2 = ? WHERE id_turma = ?");
                 String horario2 = dado.toString();
                 pstmt.setString(1, horario2);
                 pstmt.setInt(2, id_turma);
@@ -472,7 +474,7 @@ public class Turma{
                 System.out.println("Horário editado com sucesso!");
                 
             } else if (id_dado == 4) {
-                PreparedStatement pstmt = connection.prepareStatement("UPDATE turma SET vagas = ? WHERE id_turma = ?");
+                pstmt = connection.prepareStatement("UPDATE turma SET vagas = ? WHERE id_turma = ?");
                 int vagas = (int) dado;
                 pstmt.setInt(1, vagas);
                 pstmt.setInt(2, id_turma);
@@ -481,7 +483,7 @@ public class Turma{
                 System.out.println("Vagas editadas com sucesso!");
 
             } else if (id_dado == 5) {
-                PreparedStatement pstmt = connection.prepareStatement("UPDATE turma SET codigo = ? WHERE id_turma = ?");
+                pstmt = connection.prepareStatement("UPDATE turma SET codigo = ? WHERE id_turma = ?");
                 int codigo = (int) dado;
                 pstmt.setInt(1, codigo);
                 pstmt.setInt(2, id_turma);
@@ -490,9 +492,38 @@ public class Turma{
                 System.out.println("Código editado com sucesso!");
 
             } else if (id_dado == 6) {
+
+                PreparedStatement pstmt2 = null;
+                ResultSet rs2 = null;
                 
-                PreparedStatement pstmt = connection.prepareStatement("UPDATE turma_professor SET id_prof = ? WHERE id_turma = ? and id_prof = ?");
                 int id_prof_novo = (int) dado;
+
+                pstmt = connection.prepareStatement("SELECT horario1, horario2 FROM turma NATURAL JOIN turma_professor WHERE id_prof = ?");
+                pstmt.setInt(1, id_prof_novo);
+                rs = pstmt.executeQuery();
+
+                while (rs.next()) {
+
+                    String horario1_prof = rs.getString(1);
+                    String horario2_prof = rs.getString(2);
+
+                    pstmt2 = connection.prepareStatement("SELECT horario1, horario2 FROM turma WHERE id_turma = ?");
+                    pstmt2.setInt(1, id_turma);
+                    rs2 = pstmt2.executeQuery();
+
+                    while (rs2.next()) {
+                        String horario1_turma = rs2.getString(1);
+                        String horario2_turma = rs2.getString(2);
+
+                        if (horario1_prof.equals(horario1_turma) || (horario2_prof != null && horario2_prof.equals(horario1_turma)) || horario1_prof.equals(horario2_turma) || (horario2_prof != null && horario2_prof.equals(horario2_turma))) {
+                            System.out.println("Horário não está disponível!");
+                            return;
+                        }
+                    }
+
+                }
+                
+                pstmt = connection.prepareStatement("UPDATE turma_professor SET id_prof = ? WHERE id_turma = ? and id_prof = ?");
                 pstmt.setInt(1, id_prof_novo);
                 pstmt.setInt(2, id_turma);
                 pstmt.setInt(3, id_prof);
