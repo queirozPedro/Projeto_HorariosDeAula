@@ -382,7 +382,45 @@ public class MainHorario {
                                 sc.nextLine();
                                 break;
                             case 5: // Excluir Componente Curricular
-
+                            do {
+                                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                                System.out.println(" => Remover de Componente Curricular");
+                                System.out.println(" 1 -> Remover Componente Curricular");
+                                System.out.println(" 2 -> Voltar");
+                                System.out.println("  >> ");
+                                op = sc.nextInt();
+                                switch (op) {
+                                    case 1:
+                                        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                                        System.out.println("Removendo Componente Curricular");
+                                        System.out.print("Insira o Código do Componente Curricular:");
+                                        sc.nextLine();
+                                        auxString = sc.nextLine();
+                                        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                                        auxComp = ComponenteCurricular.buscarComponente(auxString);
+                                        System.out.println("\n"+ auxComp.toString());
+                                        System.out.println("\nRemover Componente Curricular? ");
+                                        System.out.println(" 1 -> Sim");
+                                        System.out.println(" 2 -> Não");
+                                        System.out.print("  >> ");
+                                        op = sc.nextInt();
+                                        if(op == 1){
+                                            ComponenteCurricular.ExcluirComponente(auxString);
+                                        }
+                                        else{
+                                            auxComp.limpaComponente();
+                                        }
+                                        break;
+                                    case 2:
+                                        break;
+                                    default:
+                                        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                                        System.out.println("Opção não disponível, pressione Enter para continuar!");
+                                        sc.nextLine();
+                                        sc.nextLine();
+                                        break;
+                                }
+                            } while (op != 2);
                                 break;
                             case 6:
                                 break;

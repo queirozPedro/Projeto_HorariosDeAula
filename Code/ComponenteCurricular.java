@@ -257,7 +257,7 @@ public class ComponenteCurricular {
         String string = "Componente Obrigatório";
         if(optativa)
             string = "Componente Optativo";
-        return "Componente Curricular -> "+ id +"\nNome: "+ nome +"\tCódigo: "+ codigo +"\tCarga Horária: "+ cargaHoraria +"\tSemestre: "+ semestre + "\t"+ string;
+        return "Componente Curricular -> "+ (id+1) +"\nNome: "+ nome +"\tCódigo: "+ codigo +"\tCarga Horária: "+ cargaHoraria +"\tSemestre: "+ semestre + "\t"+ string;
     }
     
 }
