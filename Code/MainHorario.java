@@ -142,10 +142,10 @@ public class MainHorario {
                                 professores = Professor.listarProfessores();
                                 for(int i = 0; i < professores.size() ; i++){
                                 System.out.println(professores.get(i).toString(i));
+                                }
                                 System.out.println("\nPressione Enter para continuar!");
                                 sc.nextLine();
                                 sc.nextLine();
-                            }
                                 break;
                             case 5: // Excluir Profesorres
                                 do {
