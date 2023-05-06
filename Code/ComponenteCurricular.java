@@ -127,7 +127,7 @@ public class ComponenteCurricular {
         PreparedStatement pstmt = null;
     
         try{
-            pstmt = connection.prepareStatement("SELECT * from componente_curricular");
+            pstmt = connection.prepareStatement("SELECT * from componente_curricular ORDER BY id_comp");
             rs = pstmt.executeQuery();
     
             while (rs.next()) {
