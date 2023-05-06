@@ -166,7 +166,7 @@ public class Professor{
         PreparedStatement pstmt = null;
     
         try{
-            pstmt = connection.prepareStatement("SELECT * from professor");
+            pstmt = connection.prepareStatement("SELECT * from professor ORDER BY id_prof");
             rs = pstmt.executeQuery();
     
             while (rs.next()) {
