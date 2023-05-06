@@ -82,7 +82,16 @@ public class ComponenteCurricular {
         PreparedStatement pstmt = null;
 
         try {
-            pstmt = connection.prepareStatement("DELETE from componente_curricular where codigo = ?");
+
+            pstmt = connection.prepareStatement("DELETE FROM turma_professor WHERE id_turma IN (SELECT id_turma FROM turma WHERE id_comp IN (SELECT id_comp FROM componente_curricular WHERE codigo = ?))");
+            pstmt.setString(1, codigo);
+            pstmt.executeUpdate();
+
+            pstmt = connection.prepareStatement("DELETE FROM turma WHERE id_comp IN (SELECT id_comp FROM componente_curricular WHERE codigo = ?)");
+            pstmt.setString(1, codigo);
+            pstmt.executeUpdate();
+
+            pstmt = connection.prepareStatement("DELETE FROM componente_curricular WHERE codigo = ?");
             pstmt.setString(1, codigo);
             int rowsDeleted = pstmt.executeUpdate();
     
