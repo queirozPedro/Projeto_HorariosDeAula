@@ -253,6 +253,6 @@ public class Professor{
      */
     @Override
     public String toString() {
-        return "Informações do Professor\nNome: "+ nome + "\nCpf: "+ cpf +"\nFormação: "+ formacao +"\nEmail: "+ email;
+        return "\nInformações do Professor\nNome: "+ nome + "\nCpf: "+ cpf +"\nFormação: "+ formacao +"\nEmail: "+ email;
     }
 }
