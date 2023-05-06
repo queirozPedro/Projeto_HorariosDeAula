@@ -193,7 +193,7 @@ public class Professor{
         Connection connection = PostgreSQLConnection.getInstance().getConnection();
     
         try {
-
+            //Caso o id do dado seja 1 o nome do professor será atualizado
             if (id_dado == 1) {
                 PreparedStatement pstmt = connection.prepareStatement("UPDATE professor SET nome = ? WHERE id_prof = ?");
                 pstmt.setString(1, dado);
@@ -202,6 +202,7 @@ public class Professor{
 
                 System.out.println("Nome editado com sucesso!");
 
+            //Caso o id do dado seja 2 o cpf do professor será atualizado
             } else if (id_dado == 2) {
                 PreparedStatement pstmt = connection.prepareStatement("UPDATE professor SET cpf = ? WHERE id_prof = ?");
                 pstmt.setString(1, dado);
@@ -210,6 +211,7 @@ public class Professor{
 
                 System.out.println("CPF editado com sucesso!");
 
+            //Caso o id do dado seja 3 a formação do professor será atualizado
             } else if (id_dado == 3) {
                 PreparedStatement pstmt = connection.prepareStatement("UPDATE professor SET formacao = ? WHERE id_prof = ?");
                 pstmt.setString(1, dado);
@@ -218,6 +220,7 @@ public class Professor{
 
                 System.out.println("Formação editada com sucesso!");
                 
+            //Caso o id do dado seja 4 o email do professor será atualizado
             } else if (id_dado == 4) {
                 PreparedStatement pstmt = connection.prepareStatement("UPDATE professor SET email = ? WHERE id_prof = ?");
                 pstmt.setString(1, dado);
