@@ -120,8 +120,7 @@ public class MainHorario {
                                             sc.nextLine();
                                             System.out.println("Buscando Professor");
                                             System.out.print("Insira o Cpf do Professor: ");
-                                            auxString = sc.nextLine();
-                                            auxProf = Professor.buscarProfessor(auxString);
+                                            auxProf = Professor.buscarProfessor(sc.nextLine());
                                             System.out.println(auxProf.toString());
                                             System.out.println("\nPressione Enter para continuar!");
                                             sc.nextLine();
@@ -369,7 +368,8 @@ public class MainHorario {
                                         sc.nextLine();
                                         break;
                                     }
-                                    } while (op != 2);
+                                } while (op != 2);
+                                break;
                             case 4: // Listar Componentes Curriculares
 
                                 break;
