@@ -55,6 +55,7 @@ public class ComponenteCurricular {
         Connection connection = PostgreSQLConnection.getInstance().getConnection();
     
         try {
+            //Chama o método buscarComponente, caso ele seja null significa que o componente não existe no banco ainda, em seguida ele é adicionado no banco
             if (buscarComponente(this.codigo) == null) {
                 PreparedStatement pstmt = connection.prepareStatement("INSERT INTO componente_curricular(nome, carga_horaria, semestre, codigo, optativa) VALUES (?, ?, ?, ?, ?)");
                 pstmt.setString(1, this.nome);
@@ -72,6 +73,7 @@ public class ComponenteCurricular {
         }
     }
 
+    //Deleta o componente a partir do seu código
     public static void ExcluirComponente(String codigo){
         Connection connection = PostgreSQLConnection.getInstance().getConnection();
         PreparedStatement pstmt = null;
@@ -93,6 +95,7 @@ public class ComponenteCurricular {
         }
     }
 
+    //Busca um componente a partir do seu código
     public static ComponenteCurricular buscarComponente(String codigo){
         Connection connection = PostgreSQLConnection.getInstance().getConnection();
         ResultSet rs = null;
@@ -115,6 +118,7 @@ public class ComponenteCurricular {
         return null;
     }
 
+    //Busca um componente a partir do seu id
     public static ComponenteCurricular buscarComponente(int id){
         Connection connection = PostgreSQLConnection.getInstance().getConnection();
         ResultSet rs = null;
@@ -136,6 +140,7 @@ public class ComponenteCurricular {
         return null;
     }
 
+    //Lista todos os componentes do banco de dados
     public static ArrayList<ComponenteCurricular> listarComponentes(){
 
         Connection connection = PostgreSQLConnection.getInstance().getConnection();
@@ -144,14 +149,17 @@ public class ComponenteCurricular {
         PreparedStatement pstmt = null;
     
         try{
+            //Retorna todos os componenentes do banco de dados ordenado pelo id do componente
             pstmt = connection.prepareStatement("SELECT * from componente_curricular ORDER BY id_comp");
             rs = pstmt.executeQuery();
     
             while (rs.next()) {
+                //Cria um objeto de componente curricular com as informações do atual componente que está no laço e em seguida é adicionado a lista
                 ComponenteCurricular componente = new ComponenteCurricular(rs.getInt(1), rs.getInt(3), rs.getString(2), rs.getInt(4), rs.getString(5), rs.getBoolean(6));
                 componentes.add(componente);
             }
     
+            //Retorna a lista de todos os componentes do banco
             return componentes;
         } catch(SQLException e){
             System.out.println(e.getMessage());
@@ -166,6 +174,7 @@ public class ComponenteCurricular {
     
         try {
 
+            //Caso o id do dado seja 1 o nome do componente será atualizado
             if (id_dado == 1) {
                 PreparedStatement pstmt = connection.prepareStatement("UPDATE componente_curricular SET nome = ? WHERE id_comp = ?");
                 String nome = dado.toString();
@@ -175,6 +184,7 @@ public class ComponenteCurricular {
 
                 System.out.println("Nome editado com sucesso!");
 
+            //Caso o id do dado seja 2 a carga horária do componente será atualizada
             } else if (id_dado == 2) {
                 PreparedStatement pstmt = connection.prepareStatement("UPDATE componente_curricular SET carga_horaria = ? WHERE id_comp = ?");
                 int carga_horaria = (int) dado;
@@ -184,6 +194,7 @@ public class ComponenteCurricular {
 
                 System.out.println("Carga horária editada com sucesso!");
 
+            //Caso o id do dado seja 3 o semestre do componente será atualizado
             } else if (id_dado == 3) {
                 PreparedStatement pstmt = connection.prepareStatement("UPDATE componente_curricular SET semestre = ? WHERE id_comp = ?");
                 int semestre = (int) dado;
@@ -193,6 +204,7 @@ public class ComponenteCurricular {
 
                 System.out.println("Semestre editado com sucesso!");
                 
+            //Caso o id do dado seja 4 o código do componente será atualizado
             } else if (id_dado == 4) {
                 PreparedStatement pstmt = connection.prepareStatement("UPDATE componente_curricular SET codigo = ? WHERE id_comp = ?");
                 String codigo = dado.toString();
@@ -202,6 +214,7 @@ public class ComponenteCurricular {
 
                 System.out.println("Código editado com sucesso!");
 
+            //Caso o id do dado seja 5 o status de optativa do componente será atualizado
             } else if (id_dado == 5) {
                 PreparedStatement pstmt = connection.prepareStatement("UPDATE componente_curricular SET optativa = ? WHERE id_comp = ?");
                 Boolean optativa = Boolean.valueOf(dado.toString());
