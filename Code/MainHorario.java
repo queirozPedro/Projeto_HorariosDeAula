@@ -9,7 +9,9 @@ public class MainHorario {
         Scanner sc = new Scanner(System.in);
         ArrayList<Professor> professores = new ArrayList<>();
         ArrayList<ComponenteCurricular> disciplinas = new ArrayList<>();
-        Professor aux = new Professor(null, null, null, null);
+        
+        Professor auxProf = new Professor();
+        ComponenteCurricular auxComp = new ComponenteCurricular();
 
         int op = 0;
         String auxString = null;
@@ -44,28 +46,28 @@ public class MainHorario {
                                             System.out.println("Cadastrando Novo Professor");
                                             sc.nextLine();
                                             System.out.print("Nome: ");
-                                            aux.setNome(sc.nextLine());
+                                            auxProf.setNome(sc.nextLine());
 
                                             System.out.print("Cpf: ");
-                                            aux.setCpf(sc.nextLine());
+                                            auxProf.setCpf(sc.nextLine());
 
                                             System.out.print("Formação: ");
-                                            aux.setFormacao(sc.nextLine());
+                                            auxProf.setFormacao(sc.nextLine());
 
                                             System.out.print("Email: ");
-                                            aux.setEmail(sc.nextLine());
+                                            auxProf.setEmail(sc.nextLine());
 
                                             new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-                                            System.out.println("\n" + aux.toString());
+                                            System.out.println("\n" + auxProf.toString());
                                             System.out.println("\nCadastrar professor? ");
                                             System.out.println(" 1 -> Sim");
                                             System.out.println(" 2 -> Não");
                                             System.out.print("  >> ");
                                             op = sc.nextInt();
                                             if (op == 1) {
-                                                aux.Cadastrar();
+                                                auxProf.Cadastrar();
                                             } else {
-                                                aux.limpaProfessor();
+                                                auxProf.limpaProfessor();
                                             }
                                             break;
                                         case 2:
@@ -98,8 +100,8 @@ public class MainHorario {
                                             System.out.println("Buscando Professor");
                                             System.out.print("Insira o Cpf do Professor: ");
                                             auxString = sc.nextLine();
-                                            aux = Professor.buscarProfessor(auxString);
-                                            System.out.println(aux.toString());
+                                            auxProf = Professor.buscarProfessor(auxString);
+                                            System.out.println(auxProf.toString());
                                             System.out.println("\nPressione Enter para continuar!");
                                             sc.nextLine();
                                             break;
@@ -135,8 +137,8 @@ public class MainHorario {
                                             sc.nextLine();
                                             auxString = sc.nextLine();
                                             new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-                                            aux = Professor.buscarProfessor(auxString);
-                                            System.out.println("\n"+ aux.toString());
+                                            auxProf = Professor.buscarProfessor(auxString);
+                                            System.out.println("\n"+ auxProf.toString());
                                             System.out.println("\nRemover professor? ");
                                             System.out.println(" 1 -> Sim");
                                             System.out.println(" 2 -> Não");
@@ -145,7 +147,7 @@ public class MainHorario {
                                                 Professor.ExcluirProfessor(auxString);
                                             }
                                             else{
-                                                aux.limpaProfessor();
+                                                auxProf.limpaProfessor();
                                             }
                                             break;
                                         case 2:
@@ -175,12 +177,65 @@ public class MainHorario {
                 // Menu do Componente Curricular
                 case 2:
                     do {
+                        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
                         Menu.ComponenteCurricular();
                         System.out.print("  >> ");
                         op = sc.nextInt();
                         switch (op) {
                             case 1:
+                            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                            System.out.println(" => Cadastro de Componentes Curriculares");
+                            System.out.println(" 1 -> Cadastrar Novo Componente Curricular");
+                            System.out.println(" 2 -> Voltar");
+                            System.out.println("  >> ");
+                            op = sc.nextInt();
+                            do {
+                                switch (op) {
+                                    case 1:
+                                        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                                        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                                        System.out.println("Cadastrando Novo Componente Curricular");
+                                        sc.nextLine();
+                                        System.out.print("Nome: ");
+                                        auxComp.setNome(sc.nextLine());
 
+                                        System.out.print("Código: ");
+                                        auxComp.setCodigo(auxString);
+
+                                        System.out.print("Carga Horária: ");
+                                        auxComp.setCargaHoraria(sc.nextInt());
+
+                                        System.out.println("Semestre: ");
+                                        auxComp.setSemestre(sc.nextInt());
+
+                                        System.out.println("Optativa (1 -> Sim; 2 -> Não):");
+                                        op = sc.nextInt();
+                                        if(op == 1)
+                                            auxComp.setOptativa(true);
+
+                                        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                                        System.out.println("\n" + auxComp.toString());
+                                        System.out.println("\nCadastrar Compontente Curricular? ");
+                                        System.out.println(" 1 -> Sim");
+                                        System.out.println(" 2 -> Não");
+                                        System.out.print("  >> ");
+                                        op = sc.nextInt();
+                                        if (op == 1)
+                                            auxComp.Cadastrar();
+                                        else 
+                                            auxComp.limpaComponente();
+                                        
+                                        break;
+                                    case 2:
+                                        break;
+                                    default:
+                                        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                                        System.out.println("Opção não disponível, pressione Enter para continuar!");
+                                        sc.nextLine();
+                                        sc.nextLine();
+                                        break;
+                                }
+                            } while (op != 2);
                                 break;
                             case 2:
 

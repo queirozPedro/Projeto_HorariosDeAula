@@ -26,7 +26,24 @@ public class ComponenteCurricular {
         this.codigo = codigo;
         this.optativa = optativa;
     }
+    public ComponenteCurricular(){}
 
+    
+    public void setCargaHoraria(int cargaHoraria) {
+        this.cargaHoraria = cargaHoraria;
+    }
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+    public void setSemestre(int semestre) {
+        this.semestre = semestre;
+    }
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+    public void setOptativa(boolean optativa) {
+        this.optativa = optativa;
+    }
     public int getCargaHoraria() {
         return cargaHoraria;
     }
@@ -205,10 +222,20 @@ public class ComponenteCurricular {
 
     }
 
+    public void limpaComponente(){
+        this.cargaHoraria = 0;
+        this.nome = null;
+        this.semestre = 0;
+        this.codigo = null;
+        this.optativa = false;
+    }
+
     @Override
     public String toString() {
-        return "ComponenteCurricular [id_componente=" + id_componente + ", cargaHoraria=" + cargaHoraria + ", nome="
-                + nome + ", semestre=" + semestre + ", codigo=" + codigo + ", optativa=" + optativa + "]";
+        String string = "Componente Obrigatório";
+        if(optativa)
+            string = "Componente Optativo";
+        return "Informações do Componente Curricular\nNome: "+ nome +"\nCódigo: "+ codigo +"\nCarga Horária: "+ cargaHoraria +"\nSemestre: "+ semestre + "\n"+ string;
     }
 
     
