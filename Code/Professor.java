@@ -252,8 +252,7 @@ public class Professor{
     public String toString() {
         return "\nInformações do Professor\nNome: "+ nome + "\nCpf: "+ cpf +"\nFormação: "+ formacao +"\nEmail: "+ email;
     }
-
     public String toString(int id){
-        return "Professor -> "+ "id" +" "+ nome + " "+ cpf;
+        return "Professor -> "+ "id" +"\nNome: "+ nome + "\tCpf: "+ cpf;
     }
 }
