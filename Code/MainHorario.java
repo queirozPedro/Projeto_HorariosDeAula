@@ -143,6 +143,9 @@ public class MainHorario {
                                 professores = Professor.listarProfessores();
                                 for(int i = 0; i < professores.size() ; i++){
                                 System.out.println(professores.get(i).toString(i));
+                                System.out.println("\nPressione Enter para continuar!");
+                                sc.nextLine();
+                                sc.nextLine();
                             }
                                 break;
                             case 5: // Excluir Profesorres
@@ -207,7 +210,7 @@ public class MainHorario {
                         System.out.print("  >> ");
                         op = sc.nextInt();
                         switch (op) {
-                            case 1:
+                            case 1: // Cadastrar Componente Curricular 
                             do {
                                 new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
                                 System.out.println(" => Cadastro de Componentes Curriculares");
@@ -267,7 +270,7 @@ public class MainHorario {
                                 }
                             } while (op != 2);
                                 break;
-                            case 2:
+                            case 2: // Editar Componente Curricular
 
                                 disciplinas = ComponenteCurricular.listarComponentes();
                                 System.out.println("Qual componente será editado: \n");
@@ -337,17 +340,16 @@ public class MainHorario {
                                 sc.nextLine();
 
                                 break;
-                            case 3:
+                            case 3: // Ver Dados de um Componente Curricular
 
                                 break;
-                            case 4:
+                            case 4: // Listar Componentes Curriculares
 
                                 break;
-                            case 5:
+                            case 5: // Excluir Componente Curricular
 
                                 break;
                             case 6:
-
                                 break;
                             default:
                                 new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
