@@ -267,23 +267,71 @@ public class MainHorario {
                             case 2:
 
                                 disciplinas = ComponenteCurricular.listarComponentes();
-
-                                System.out.println("Qual componente curricular será editado: \n" + disciplinas);
-
-                                System.out.println(">> ");
+                                System.out.println("Qual componente será editado: \n");
+                                for (int i = 0; i < disciplinas.size(); i++) {
+                                    System.out.println(i+1 + " - " + disciplinas.get(i) + "\n");
+                                }
+                                System.out.print(">> ");
                                 int id = sc.nextInt();
 
-                                System.out.println("\nQual dado desse componente será editado: ");
-                                System.out.println(ComponenteCurricular.buscarComponente(id));
+                                System.out.println("Qual dado será editado: ");
+                                System.out.println(" 1 -> Nome");
+                                System.out.println(" 2 -> Carga horária");
+                                System.out.println(" 3 -> Semestre");
+                                System.out.println(" 4 -> Código");
+                                System.out.println(" 5 -> Status Optativa");
                                 System.out.println(">> ");
-                                int id_dado = sc.nextInt();
+                                op = sc.nextInt();
 
+                                switch (op) {
+                                    case 1:
+                                        System.out.print("Novo nome: ");
+                                        sc.nextLine();
+                                        String nome = sc.nextLine();
+
+                                        ComponenteCurricular.editaComponente(disciplinas.get(id - 1).getId_componente(), nome, op);
+                                        break;
+                                    
+                                    case 2:
+                                        System.out.println("Nova carga horária: ");
+                                        int carga_horaria = sc.nextInt();
+                                        ComponenteCurricular.editaComponente(disciplinas.get(id - 1).getId_componente(), carga_horaria, op);
+                                        break;
+
+                                    case 3:
+                                        System.out.print("Novo semestre: ");
+                                        int semestre = sc.nextInt();
+                                        ComponenteCurricular.editaComponente(disciplinas.get(id - 1).getId_componente(), semestre, op);
+                                        break;
+
+                                    case 4:
+                                        System.out.print("Novo código: ");
+                                        String codigo = sc.next();
+                                        ComponenteCurricular.editaComponente(disciplinas.get(id - 1).getId_componente(), codigo, op);
+                                        break;
+
+                                    case 5:
+                                        System.out.println("Novo status: ");
+                                        System.out.println("1 - Optativa");
+                                        System.out.println("2 - Obrigatório");
+                                        System.out.print(">> ");
+                                        int status = sc.nextInt();
+                                        Boolean optativa = false;
+                                        if (status == 1) {
+                                            optativa = true;
+                                        } else if(status == 2){
+                                            optativa = false;
+                                        }
+                                        ComponenteCurricular.editaComponente(disciplinas.get(id - 1).getId_componente(), optativa, op);
+                                        break;
+                                
+                                    default:
+                                        break;
+                                }
+
+                                System.out.println("Pressione Enter para continuar!");
                                 sc.nextLine();
-
-                                System.out.println("\nDigite o novo XXXX desse componente: ");
-                                Boolean dado = sc.nextBoolean();
-
-                                ComponenteCurricular.editaComponente(id, dado, id_dado);
+                                sc.nextLine();
 
                                 break;
                             case 3:
