@@ -162,8 +162,8 @@ public class MainHorario {
                                             System.out.print("Insira o Cpf:");
                                             sc.nextLine();
                                             auxString = sc.nextLine();
-                                            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
                                             auxProf = Professor.buscarProfessor(auxString);
+                                            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
                                             System.out.println("\n"+ auxProf.toString());
                                             System.out.println("\nRemover professor? ");
                                             System.out.println(" 1 -> Sim");
@@ -172,9 +172,16 @@ public class MainHorario {
                                             op = sc.nextInt();
                                             if(op == 1){
                                                 Professor.ExcluirProfessor(auxString);
+                                                System.out.println("Professor Removido com Sucesso!");
+                                                System.out.println("\nPressione Enter para continuar!");
+                                                sc.nextLine();
+                                                sc.nextLine();
                                             }
                                             else{
                                                 auxProf.limpaProfessor();
+                                                System.out.println("Operação Cancelada, Pressione Enter para continuar!");
+                                                sc.nextLine();
+                                                sc.nextLine();
                                             }
                                             break;
                                         case 2:
@@ -406,9 +413,16 @@ public class MainHorario {
                                         op = sc.nextInt();
                                         if(op == 1){
                                             ComponenteCurricular.ExcluirComponente(auxString);
+                                            System.out.println("Componente Curricular Removido com Sucesso!");
+                                            System.out.println("\nPressione Enter para continuar!");
+                                            sc.nextLine();
+                                            sc.nextLine();
                                         }
                                         else{
                                             auxComp.limpaComponente();
+                                            System.out.println("Operação Cancelada, Pressione Enter para continuar!");
+                                            sc.nextLine();
+                                            sc.nextLine();
                                         }
                                         break;
                                     case 2:
