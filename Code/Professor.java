@@ -254,6 +254,6 @@ public class Professor{
     }
 
     public String toString(int id){
-        return "\nProfessor -> "+ "id" +" "+ nome + " "+ cpf;
+        return "Professor -> "+ "id" +" "+ nome + " "+ cpf;
     }
 }

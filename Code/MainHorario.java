@@ -38,7 +38,7 @@ public class MainHorario {
                                     System.out.println(" => Cadastro de Professores");
                                     System.out.println(" 1 -> Cadastrar Novo Professor");
                                     System.out.println(" 2 -> Voltar");
-                                    System.out.println("  >> ");
+                                    System.out.print("  >> ");
                                     op = sc.nextInt();
                                     switch (op) {
                                         case 1:
@@ -96,7 +96,7 @@ public class MainHorario {
                                     System.out.println(" 2 -> CPF");
                                     System.out.println(" 3 -> Formação");
                                     System.out.println(" 4 -> Email");
-                                    System.out.println(">> ");
+                                    System.out.print(">> ");
                                     op = sc.nextInt();
 
                                     System.out.println("\nNovo dado: ");
