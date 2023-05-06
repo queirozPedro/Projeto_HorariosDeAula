@@ -24,6 +24,7 @@ public class Professor{
         this.formacao = formacao;
         this.email = email;
     }
+    public Professor(){}
     
     // Seters que recebem os dados dos professor
     public void setNome(String nome) {
