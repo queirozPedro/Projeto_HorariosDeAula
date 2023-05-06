@@ -40,6 +40,14 @@ public class Turma{
         return idTurma;
     }
 
+    public String getHorario1() {
+        return horario1;
+    }
+
+    public String getHorario2() {
+        return horario2;
+    }
+
     public void Cadastrar(){
 
         Connection connection = PostgreSQLConnection.getInstance().getConnection();
