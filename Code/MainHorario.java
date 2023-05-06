@@ -162,6 +162,10 @@ public class MainHorario {
                             case 6: // Sair
                                 break;
                             default:
+                                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                                System.out.println("Opção não disponível, pressione Enter para continuar!");
+                                sc.nextLine();
+                                sc.nextLine();
                                 break;
                         }
                     } while (op != 6);
@@ -213,6 +217,10 @@ public class MainHorario {
 
                                 break;
                             default:
+                                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                                System.out.println("Opção não disponível, pressione Enter para continuar!");
+                                sc.nextLine();
+                                sc.nextLine();
                                 break;
                         }
                     } while (op != 6);
@@ -321,6 +329,10 @@ public class MainHorario {
                             case 8:
                                 break;
                             default:
+                                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                                System.out.println("Opção não disponível, pressione Enter para continuar!");
+                                sc.nextLine();
+                                sc.nextLine();
                                 break;
                         }
                     } while (op != 8);
@@ -333,6 +345,10 @@ public class MainHorario {
                     op = -1;
                     break;
                 default:
+                        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                        System.out.println("Opção não disponível, pressione Enter para continuar!");
+                        sc.nextLine();
+                        sc.nextLine();
                     break;
             }
 
