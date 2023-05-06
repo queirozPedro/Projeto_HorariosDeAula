@@ -248,11 +248,12 @@ public class Professor{
         this.email = null;
     }
 
-    /**
-     * ToString simples, preciso organizar depois
-     */
     @Override
     public String toString() {
         return "\nInformações do Professor\nNome: "+ nome + "\nCpf: "+ cpf +"\nFormação: "+ formacao +"\nEmail: "+ email;
+    }
+
+    public String toString(int id){
+        return "\nProfessor -> "+ "id" +" "+ nome + " "+ cpf;
     }
 }

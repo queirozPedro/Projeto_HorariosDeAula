@@ -140,7 +140,10 @@ public class MainHorario {
                             case 4: // Listar Professores 
                                 new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
                                 System.out.println("Lista dos Professores Ativos");
-                                // Falta terminar
+                                professores = Professor.listarProfessores();
+                                for(int i = 0; i < professores.size() ; i++){
+                                System.out.println(professores.get(i).toString(i));
+                            }
                                 break;
                             case 5: // Excluir Profesorres
                                 do {
