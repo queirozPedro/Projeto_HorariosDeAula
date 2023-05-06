@@ -140,6 +140,7 @@ public class MainHorario {
                                             System.out.println(" 1 -> Sim");
                                             System.out.println(" 2 -> Não");
                                             System.out.print("  >> ");
+                                            op = sc.nextInt();
                                             if(op == 1){
                                                 Professor.ExcluirProfessor(auxString);
                                             }
