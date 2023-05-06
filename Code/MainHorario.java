@@ -9,6 +9,7 @@ public class MainHorario {
         Scanner sc = new Scanner(System.in);
         ArrayList<Professor> professores = new ArrayList<>();
         ArrayList<ComponenteCurricular> disciplinas = new ArrayList<>();
+        String [][] horarios = new String [16][7];
         
         Professor auxProf = new Professor();
         ComponenteCurricular auxComp = new ComponenteCurricular();
@@ -527,7 +528,46 @@ public class MainHorario {
                                 break;
                             case 4:
 
-                                System.out.println(Turma.listarTurmasSemestre(3));
+                                turmas = Turma.listarTurmasSemestre(1);
+                                int posicaoH = 0;
+                                System.out.println(turmas);
+
+                                for (int i = 0; i < turmas.size(); i++) {
+                                    for (int z = 0; z < 7; z++) {
+                                        int semana = Character.getNumericValue(turmas.get(i).getHorario1().charAt(0));
+                                        if (z == semana - 1) {
+                                            switch (turmas.get(i).getHorario1().charAt(1)) {
+                                                case 'M':
+                                                    posicaoH = 0;
+                                                    break;
+
+                                                case 'T':
+                                                    posicaoH = 6;
+                                                    break;
+                                                    
+                                                case 'N':
+                                                    posicaoH = 12;
+                                                    break;
+                                                
+                                                default:
+                                                    break;
+                                            }
+
+                                            int hora1 = Character.getNumericValue(turmas.get(i).getHorario1().charAt(2)) - 1;
+                                            int hora2 = Character.getNumericValue(turmas.get(i).getHorario1().charAt(3)) - 1;
+
+                                            horarios[hora1 + posicaoH][z] = turmas.get(i).getHorario1();
+                                            horarios[hora2 + posicaoH][z] = turmas.get(i).getHorario1();
+                                        }
+                                    }
+                                }
+
+                                for (int i = 0; i < 16; i++) {
+                                    for (int j = 0; j < 7; j++) {
+                                        System.out.print(horarios[i][j] + " ");
+                                    }
+                                    System.out.println();
+                                }
 
                                 break;
                             case 5:
