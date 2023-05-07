@@ -287,6 +287,31 @@ public class Turma {
 
     }
 
+    public static void ExcluirProfessor(int id_turma, int id_prof) {
+
+        Connection connection = PostgreSQLConnection.getInstance().getConnection();
+        PreparedStatement pstmt = null;
+
+        try {
+
+            // Insere o professor na turma
+            pstmt = connection.prepareStatement("DELETE FROM turma_professor WHERE id_turma = ? AND id_prof = ?");
+            pstmt.setInt(1, id_turma);
+            pstmt.setInt(2, id_prof);
+            int rowsDeleted = pstmt.executeUpdate();
+
+            if (rowsDeleted != 0) {
+                System.out.println("Professor deletado!");
+            } else{
+                System.out.println("Professor não encontrado!");
+            }
+
+        } catch (java.sql.SQLException e) {
+            System.out.println("Erro ao adicionar o professor: " + e.getMessage());
+        }
+
+    }
+
     // Busca uma turma pelo seu código e pelo seu id
     public static Turma buscarTurma(int codigo, int id_componente) {
         Connection connection = PostgreSQLConnection.getInstance().getConnection();
@@ -319,6 +344,10 @@ public class Turma {
                 numero_turma = rs.getInt(6);
                 professores.add(rs.getInt(7));
 
+            }
+
+            if (id_turma == 0) {
+                return null;
             }
 
             // Retorna a turma encontrada
@@ -806,9 +835,7 @@ public class Turma {
 
     @Override
     public String toString() {
-        return "Turma [idTurma=" + idTurma + ", idProfessor=" + idProfessor + ", idComponenteCurricular="
-                + idComponenteCurricular + ", horario1=" + horario1 + ", horario2=" + horario2 + ", vagas=" + vagas
-                + ", codigo=" + codigo + "]";
+        return "\nTurma -> " + Professor.buscarProfessor(idProfessor.get(0)) + "\n" + ComponenteCurricular.buscarComponente(idComponenteCurricular) + "\nHorário 1: " + horario1 + "\nHorário 2: " + horario2 + "\nNúmero de vagas: " + vagas + "\nTurma 0" + codigo + "\n";
     }
 
     public String toString(int id){
@@ -816,10 +843,12 @@ public class Turma {
             return "\nTurma -> " + (id+1) + Professor.buscarProfessor(idProfessor.get(0)) + "\n" + ComponenteCurricular.buscarComponente(idComponenteCurricular) + "\nHorário 1: " + horario1 + "\nHorário 2: " + horario2 + "\nNúmero de vagas: " + vagas + "\nTurma 0" + codigo + "\n";
         } else{
             ArrayList<Professor> professores = new ArrayList<>();
+            String textoProfessores = "";
             for (int i = 0; i < idProfessor.size(); i++) {
                 professores.add(Professor.buscarProfessor(idProfessor.get(i)));
+                textoProfessores += professores.get(i).toString(i);
             }
-            return "\nTurma -> " + (id+1) + "Professores: \n" + professores + ComponenteCurricular.buscarComponente(idComponenteCurricular) + "\nHorário 1: " + horario1 + "\nHorário 2: " + horario2 + "\nNúmero de vagas: " + vagas + "\nTurma 0" + codigo + "\n";
+            return "\nTurma -> " + (id+1) + "\nProfessores: \n" + textoProfessores + "\n" + ComponenteCurricular.buscarComponente(idComponenteCurricular) + "\nHorário 1: " + horario1 + "\nHorário 2: " + horario2 + "\nNúmero de vagas: " + vagas + "\nTurma 0" + codigo + "\n";
         }
         
     }
