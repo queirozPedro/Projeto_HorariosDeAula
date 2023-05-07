@@ -51,6 +51,10 @@ public class ComponenteCurricular {
     public int getId_componente() {
         return id_componente;
     }
+    
+    public String getCodigo() {
+        return codigo;
+    }
     /**
      * Metodo cadastrar que cadastra o Componente Curricular no Banco.
      */
