@@ -32,7 +32,7 @@ public class Menu {
         System.out.println("1 -> Cadastrar Turma");
         System.out.println("2 -> Editar Turma");
         System.out.println("3 -> Ver dados de uma Turma");
-        System.out.println("4 -> Listar todas as Turmas (em formato de tabela)");
+        System.out.println("4 -> Listar todas as Turmas");
         System.out.println("5 -> Listar Turmas por semestre (em formato de tabela)");
         System.out.println("6 -> Listar Turmas por Professor (em formato de tabela)");
         System.out.println("7 -> Excluir Turma");

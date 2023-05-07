@@ -595,10 +595,10 @@ public class MainHorario {
                                 }
 
                                 break;
-                            case 5:
+                            case 5: // Listar turmas por semestre
 
                                 break;
-                            case 6:
+                            case 6: // Listar turmas por professor
 
                                 break;
                             case 7:
