@@ -552,18 +552,8 @@ public class Turma {
         ResultSet rs = null;
 
         try {
-            // Caso o id do dado passado seja 1 o componente da turma será atualizado
+                // Caso o id do dado seja 1 o horario1 da turma será atualizado 
             if (id_dado == 1) {
-                pstmt = connection.prepareStatement("UPDATE turma SET id_comp = ? WHERE id_turma = ?");
-                int id_comp = (int) dado;
-                pstmt.setInt(1, id_comp);
-                pstmt.setInt(2, id_turma);
-                pstmt.executeUpdate();
-
-                System.out.println("Componente editado com sucesso!");
-
-                // Caso o id do dado seja 2 o horario1 da turma será atualizado
-            } else if (id_dado == 2) {
 
                 String horario1 = dado.toString();
                 Boolean disponivel = true;
@@ -613,9 +603,9 @@ public class Turma {
                     System.out.println("Horário editado com sucesso!");
                 }
 
-                // Caso o id do dado seja 3 o horario2 da turma será atualizado, é basicamente o
+                // Caso o id do dado seja 2 o horario2 da turma será atualizado, é basicamente o
                 // mesmo processo do horario1, só muda do horário1 pra horário2
-            } else if (id_dado == 3) {
+            } else if (id_dado == 2) {
 
                 String horario2 = dado.toString();
                 Boolean disponivel = true;
@@ -657,8 +647,8 @@ public class Turma {
                     System.out.println("Horário editado com sucesso!");
                 }
 
-                // Caso o id do dado seja 4 o numero de vagas da turma será atualizado
-            } else if (id_dado == 4) {
+                // Caso o id do dado seja 3 o numero de vagas da turma será atualizado
+            } else if (id_dado == 3) {
                 pstmt = connection.prepareStatement("UPDATE turma SET vagas = ? WHERE id_turma = ?");
                 int vagas = (int) dado;
                 pstmt.setInt(1, vagas);
@@ -667,8 +657,8 @@ public class Turma {
 
                 System.out.println("Vagas editadas com sucesso!");
 
-                // Caso o id do dado seja 5 o professor da turma será atualizado
-            } else if (id_dado == 5) {
+                // Caso o id do dado seja 4 o professor da turma será atualizado
+            } else if (id_dado == 4) {
 
                 PreparedStatement pstmt2 = null;
                 ResultSet rs2 = null;
@@ -803,7 +793,7 @@ public class Turma {
             }
         }
 
-        System.out.printf("\t\t| %-7s | %-7s | %-7s | %-7s | %-7s | %-7s | %-7s |%n", diasDaSemana[0], diasDaSemana[1], diasDaSemana[2], diasDaSemana[3], diasDaSemana[4], diasDaSemana[5], diasDaSemana[6]);
+        System.out.printf("\n\t\t| %-7s | %-7s | %-7s | %-7s | %-7s | %-7s | %-7s |%n", diasDaSemana[0], diasDaSemana[1], diasDaSemana[2], diasDaSemana[3], diasDaSemana[4], diasDaSemana[5], diasDaSemana[6]);
 
         for (int i = 0; i < 16; i++) {
             System.out.printf("| %-7s | %-7s | %-7s | %-7s | %-7s | %-7s | %-7s | %-7s |%n", horario[i], horarios[i][0], horarios[i][1],
@@ -819,6 +809,19 @@ public class Turma {
         return "Turma [idTurma=" + idTurma + ", idProfessor=" + idProfessor + ", idComponenteCurricular="
                 + idComponenteCurricular + ", horario1=" + horario1 + ", horario2=" + horario2 + ", vagas=" + vagas
                 + ", codigo=" + codigo + "]";
+    }
+
+    public String toString(int id){
+        if (idProfessor.size() == 1) {
+            return "\nTurma -> " + (id+1) + Professor.buscarProfessor(idProfessor.get(0)) + "\n" + ComponenteCurricular.buscarComponente(idComponenteCurricular) + "\nHorário 1: " + horario1 + "\nHorário 2: " + horario2 + "\nNúmero de vagas: " + vagas + "\nTurma 0" + codigo + "\n";
+        } else{
+            ArrayList<Professor> professores = new ArrayList<>();
+            for (int i = 0; i < idProfessor.size(); i++) {
+                professores.add(Professor.buscarProfessor(idProfessor.get(i)));
+            }
+            return "\nTurma -> " + (id+1) + "Professores: \n" + professores + ComponenteCurricular.buscarComponente(idComponenteCurricular) + "\nHorário 1: " + horario1 + "\nHorário 2: " + horario2 + "\nNúmero de vagas: " + vagas + "\nTurma 0" + codigo + "\n";
+        }
+        
     }
 
 }
