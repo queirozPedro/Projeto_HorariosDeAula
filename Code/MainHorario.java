@@ -559,6 +559,33 @@ public class MainHorario {
                                             horarios[hora1 + posicaoH][z] = turmas.get(i).getHorario1();
                                             horarios[hora2 + posicaoH][z] = turmas.get(i).getHorario1();
                                         }
+                                        
+                                        int semana2 = Character.getNumericValue(turmas.get(i).getHorario2().charAt(0));
+
+                                        if (z == semana2 - 1) {
+                                            switch (turmas.get(i).getHorario2().charAt(1)) {
+                                                case 'M':
+                                                    posicaoH = 0;
+                                                    break;
+
+                                                case 'T':
+                                                    posicaoH = 6;
+                                                    break;
+                                                    
+                                                case 'N':
+                                                    posicaoH = 12;
+                                                    break;
+                                                
+                                                default:
+                                                    break;
+                                            }
+
+                                            int hora1 = Character.getNumericValue(turmas.get(i).getHorario2().charAt(2)) - 1;
+                                            int hora2 = Character.getNumericValue(turmas.get(i).getHorario2().charAt(3)) - 1;
+
+                                            horarios[hora1 + posicaoH][z] = turmas.get(i).getHorario2();
+                                            horarios[hora2 + posicaoH][z] = turmas.get(i).getHorario2();
+                                        }
                                     }
                                 }
 
