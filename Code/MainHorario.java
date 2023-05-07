@@ -668,19 +668,29 @@ public class MainHorario {
 
                                             new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
 
-                                            System.out.println("Qual professor será excluído dessa turma: ");
-                                            for(int i = 0; i < professores.size() ; i++){
-                                                System.out.println(professores.get(i).toString(i));
+                                            if (professores.size() > 1) {
+                                                System.out.println("Qual professor será excluído dessa turma: ");
+                                                for(int i = 0; i < professores.size() ; i++){
+                                                    System.out.println(professores.get(i).toString(i));
+                                                }
+
+                                                System.out.print("\n>> ");
+                                                id_prof = sc.nextInt();
+
+                                                Turma.ExcluirProfessor(turmas.get(id - 1).getIdTurma(), professores.get(id_prof - 1).getId_prof());
+
+                                                System.out.println("\nPressione Enter para continuar!");
+                                                sc.nextLine();
+                                                sc.nextLine();
+                                            } else{
+                                                System.out.println("Essa turma só tem um único professor!");
+
+                                                System.out.println("\nPressione Enter para continuar!");
+                                                sc.nextLine();
+                                                sc.nextLine();
                                             }
 
-                                            System.out.print("\n>> ");
-                                            id_prof = sc.nextInt();
-
-                                            Turma.ExcluirProfessor(turmas.get(id - 1).getIdTurma(), professores.get(id_prof - 1).getId_prof());
-
-                                            System.out.println("\nPressione Enter para continuar!");
-                                            sc.nextLine();
-                                            sc.nextLine();
+                                            
 
                                             break;
                                         
