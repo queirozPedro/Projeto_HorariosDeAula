@@ -261,15 +261,15 @@ public class ComponenteCurricular {
 
     @Override
     public String toString() {
-        String string = "Componente Obrigatório";
+        String string = "Componente Obrigatório\n";
         if(optativa)
-            string = "Componente Optativo";
-        return "Informações do Componente Curricular\nNome: "+ nome +"\nCódigo: "+ codigo +"\nCarga Horária: "+ cargaHoraria +"\nSemestre: "+ semestre + "\n"+ string;
+            string = "Componente Optativo\n";
+        return "\nInformações do Componente Curricular\nNome: "+ nome +"\nCódigo: "+ codigo +"\nCarga Horária: "+ cargaHoraria +"\nSemestre: "+ semestre + "\n"+ string;
     }
     public String toString(int id){
-        String string = "Componente Obrigatório";
+        String string = "Componente Obrigatório\n";
         if(optativa)
-            string = "Componente Optativo";
+            string = "Componente Optativo\n";
         return "Componente Curricular "+ (id+1) +" -> "+ codigo +"\nNome: "+ nome +"\nCarga Horária: "+ cargaHoraria +"\tSemestre: "+ semestre +"\t"+ string +"\n";
 
     }
