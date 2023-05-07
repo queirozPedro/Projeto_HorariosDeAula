@@ -9,6 +9,7 @@ public class MainHorario {
         Scanner sc = new Scanner(System.in);
         ArrayList<Professor> professores = new ArrayList<>();
         ArrayList<ComponenteCurricular> disciplinas = new ArrayList<>();
+        ArrayList<Turma> turmas = new ArrayList<>();
         
         Professor auxProf = new Professor();
         ComponenteCurricular auxComp = new ComponenteCurricular();
@@ -513,94 +514,216 @@ public class MainHorario {
                                 break;
                             case 2:
 
-                                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                                do {
+                                    new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                                    System.out.println(" => Editar Turma");
+                                    System.out.println(" 1 -> Editar dados");
+                                    System.out.println(" 2 -> Adicionar Professor");
+                                    System.out.println(" 3 -> Excluir Professor");
+                                    System.out.println(" 4 -> Voltar");
+                                    System.out.print("  >> ");
+                                    op = sc.nextInt();
 
-                                ArrayList<Turma> turmas = Turma.listarTurmas();
-                                int id_prof;
+                                    switch (op) {
+                                        case 1:
 
-                                System.out.println("Qual turma será editada: \n");
-                                for (int i = 0; i < turmas.size(); i++) {
-                                    System.out.println(turmas.get(i).toString(i));
-                                }
+                                            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
 
-                                System.out.print("\n>> ");
-                                int id = sc.nextInt();
+                                            turmas = Turma.listarTurmas();
+                                            int id_prof;
+            
+                                            System.out.println("Qual turma será editada: \n");
+                                            for (int i = 0; i < turmas.size(); i++) {
+                                                System.out.println(turmas.get(i).toString(i));
+                                            }
+            
+                                            System.out.print("\n>> ");
+                                            int id = sc.nextInt();
+            
+                                            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            
+                                            System.out.println("Qual dado será editado: ");
+                                            System.out.println("1 -> Horário 1");
+                                            System.out.println("2 -> Horário 2");
+                                            System.out.println("3 -> Número da vagas");
+                                            System.out.println("4 -> Professor");
+            
+                                            System.out.print("\n>> ");
+                                            int id_dado = sc.nextInt();
+            
+                                            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            
+                                            sc.nextLine();
+            
+                                            switch (id_dado) {
+                                                case 1:
+                                                    System.out.print("Novo Horário: ");
+                                                    horario1 = sc.nextLine();
+            
+                                                    Turma.editaTurma(turmas.get(id - 1).getIdTurma(), horario1, id_dado, 0);
+                                                    
+                                                    break;
+                                                
+                                                case 2:
+                                                    System.out.print("Novo Horário: ");
+                                                    horario2 = sc.nextLine();
+            
+                                                    Turma.editaTurma(turmas.get(id - 1).getIdTurma(), horario2, id_dado, 0);
+            
+                                                    break;
+                                                
+                                                case 3:
+                                                    System.out.print("Novo número de vagas: ");
+                                                    vagas = sc.nextInt();
+            
+                                                    Turma.editaTurma(turmas.get(id - 1).getIdTurma(), vagas, id_dado, 0);
+            
+                                                    break;
+            
+                                                case 4:
+                                                    Turma turma1 = Turma.buscarTurma(turmas.get(id - 1).getIdTurma());
+                                                    ArrayList<Integer> idProfessores = turma1.getIdProfessor();
+                                                    System.out.println("Qual professor deseja editar: ");
+                                                    for (int i = 0; i < idProfessores.size(); i++) {
+                                                        System.out.println(Professor.buscarProfessor(idProfessores.get(i)).toString(i) + "\n");
+                                                    }
+                                                    System.out.print(">> ");
+                                                    id_prof = sc.nextInt();
+                
+                                                    professores = Professor.listarProfessores();
+                                                    System.out.println("\nQual o novo professor dessa turma: ");
+                                                    for (int i = 0; i < professores.size(); i++) {
+                                                        System.out.println(professores.get(i).toString(i) + "\n");
+                                                    }
+                                                    System.out.print("\n>> ");
+                                                    int id_novo_prof = sc.nextInt();
+                
+                                                    Turma.editaTurma(turmas.get(id - 1).getIdTurma(), professores.get(id_novo_prof - 1).getId_prof(), id_dado,
+                                                            idProfessores.get(id_prof - 1));
+                                                    
+                                                    break;
+                                            
+                                                default:
+                                                    break;
+                                                }
 
-                                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                                                System.out.println("\nPressione Enter para continuar!");
+                                                sc.nextLine();
+                                                sc.nextLine();
+                                            
+                                            break;
 
-                                System.out.println("Qual dado será editado: ");
-                                System.out.println("1 -> Horário 1");
-                                System.out.println("2 -> Horário 2");
-                                System.out.println("3 -> Número da vagas");
-                                System.out.println("4 -> Professor");
+                                        case 2:
 
-                                System.out.print("\n>> ");
-                                int id_dado = sc.nextInt();
+                                                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
 
-                                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                                                turmas = Turma.listarTurmas();
+                                                professores = Professor.listarProfessores();
 
-                                sc.nextLine();
+                                                System.out.println("Qual turma um professor será adicionado: ");
+                                                for (int i = 0; i < turmas.size(); i++) {
+                                                    System.out.println(turmas.get(i).toString(i));
+                                                }
+                
+                                                System.out.print(">> ");
+                                                id = sc.nextInt();
 
-                                switch (id_dado) {
-                                    case 1:
-                                        System.out.print("Novo Horário: ");
-                                        horario1 = sc.nextLine();
+                                                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
 
-                                        Turma.editaTurma(turmas.get(id - 1).getIdTurma(), horario1, id_dado, 0);
+                                                System.out.println("Qual professor será adicionado nessa turma: ");
+                                                for(int i = 0; i < professores.size() ; i++){
+                                                    System.out.println(professores.get(i).toString(i));
+                                                }
+
+                                                System.out.print("\n>> ");
+                                                id_prof = sc.nextInt();
+
+                                                Turma.adicionarProfessor(turmas.get(id - 1).getIdTurma(), professores.get(id_prof - 1).getId_prof());
+
+                                                System.out.println("\nPressione Enter para continuar!");
+                                                sc.nextLine();
+                                                sc.nextLine();
+
+                                            break;
+
+                                        case 3:
+
+                                            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+
+                                            turmas = Turma.listarTurmas();
+
+                                            System.out.println("Qual turma um professor será excluído: ");
+                                            for (int i = 0; i < turmas.size(); i++) {
+                                                System.out.println(turmas.get(i).toString(i));
+                                            }
+            
+                                            System.out.print(">> ");
+                                            id = sc.nextInt();
+                                            
+                                            professores = new ArrayList<>();
+
+                                            for (int i = 0; i < turmas.get(id - 1).getIdProfessor().size(); i++) {
+                                                professores.add(Professor.buscarProfessor(turmas.get(id - 1).getIdProfessor().get(i)));
+                                            }
+
+                                            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+
+                                            System.out.println("Qual professor será excluído dessa turma: ");
+                                            for(int i = 0; i < professores.size() ; i++){
+                                                System.out.println(professores.get(i).toString(i));
+                                            }
+
+                                            System.out.print("\n>> ");
+                                            id_prof = sc.nextInt();
+
+                                            Turma.ExcluirProfessor(turmas.get(id - 1).getIdTurma(), professores.get(id_prof - 1).getId_prof());
+
+                                            System.out.println("\nPressione Enter para continuar!");
+                                            sc.nextLine();
+                                            sc.nextLine();
+
+                                            break;
                                         
-                                        break;
+                                        case 4:
+                                            
+                                            break;
                                     
-                                    case 2:
-                                        System.out.print("Novo Horário: ");
-                                        horario2 = sc.nextLine();
-
-                                        Turma.editaTurma(turmas.get(id - 1).getIdTurma(), horario2, id_dado, 0);
-
-                                        break;
-                                    
-                                    case 3:
-                                        System.out.print("Novo número de vagas: ");
-                                        vagas = sc.nextInt();
-
-                                        Turma.editaTurma(turmas.get(id - 1).getIdTurma(), vagas, id_dado, 0);
-
-                                        break;
-
-                                    case 4:
-                                        Turma turma1 = Turma.buscarTurma(turmas.get(id - 1).getIdTurma());
-                                        ArrayList<Integer> idProfessores = turma1.getIdProfessor();
-                                        System.out.println("Qual professor deseja editar: ");
-                                        for (int i = 0; i < idProfessores.size(); i++) {
-                                            System.out.println(Professor.buscarProfessor(idProfessores.get(i)).toString(i) + "\n");
-                                        }
-                                        System.out.print(">> ");
-                                        id_prof = sc.nextInt();
-    
-                                        professores = Professor.listarProfessores();
-                                        System.out.println("\nQual o novo professor dessa turma: ");
-                                        for (int i = 0; i < professores.size(); i++) {
-                                            System.out.println(professores.get(i).toString(i) + "\n");
-                                        }
-                                        System.out.print("\n>> ");
-                                        int id_novo_prof = sc.nextInt();
-    
-                                        Turma.editaTurma(turmas.get(id - 1).getIdTurma(), professores.get(id_novo_prof - 1).getId_prof(), id_dado,
-                                                idProfessores.get(id_prof - 1));
-                                        
-                                        break;
-                                
-                                    default:
-                                        break;
-                                }
-
-                                System.out.println("\nPressione Enter para continuar!");
-                                sc.nextLine();
-                                sc.nextLine();
+                                        default:
+                                            break;
+                                    }
+                                } while (op != 4);
 
                                 break;
                             case 3:
 
-                                Turma.adicionarProfessor(6, 5);
+                                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                                sc.nextLine();
+                                System.out.println("Buscando Turma");
+                                disciplinas = ComponenteCurricular.listarComponentes();
+                                System.out.println("\nQual o componente curricular da turma: \n");
+                                for(int i = 0; i < disciplinas.size() ; i++){
+                                    System.out.print(disciplinas.get(i).toString(i));
+                                }
+
+                                System.out.print(">> ");
+                                int id_comp = sc.nextInt();
+
+                                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                                System.out.println("Qual o número da turma: ");
+                                int codigo = sc.nextInt();
+
+                                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                                Turma turma = Turma.buscarTurma(codigo, id_comp);
+
+                                if (turma != null) {
+                                    System.out.println(turma);
+                                } else{
+                                    System.out.println("Turma não encontrada!");
+                                }
+                                
+                                System.out.println("\nPressione Enter para continuar!");
+                                sc.nextLine();
+                                sc.nextLine();
 
                                 break;
                             case 4:
