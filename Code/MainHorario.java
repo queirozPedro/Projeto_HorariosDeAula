@@ -173,7 +173,6 @@ public class MainHorario {
                                             op = sc.nextInt();
                                             if(op == 1){
                                                 Professor.ExcluirProfessor(auxString);
-                                                System.out.println("Professor Removido com Sucesso!");
                                                 System.out.println("\nPressione Enter para continuar!");
                                                 sc.nextLine();
                                                 sc.nextLine();
@@ -414,7 +413,6 @@ public class MainHorario {
                                         op = sc.nextInt();
                                         if(op == 1){
                                             ComponenteCurricular.ExcluirComponente(auxString);
-                                            System.out.println("Componente Curricular Removido com Sucesso!");
                                             System.out.println("\nPressione Enter para continuar!");
                                             sc.nextLine();
                                             sc.nextLine();
