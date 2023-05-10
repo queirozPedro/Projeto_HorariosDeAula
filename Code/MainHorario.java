@@ -82,7 +82,11 @@ public class MainHorario {
                                             System.out.print("  >> ");
                                             op = sc.nextInt();
                                             if (op == 1) {
+                                                new ProcessBuilder(limpar1, limpar2, limpar3).inheritIO().start().waitFor();
                                                 auxProf.Cadastrar();
+                                                System.out.println("Pressione Enter para continuar!");
+                                                sc.nextLine();
+                                                sc.nextLine();
                                             } else {
                                                 auxProf.limpaProfessor();
                                             }
