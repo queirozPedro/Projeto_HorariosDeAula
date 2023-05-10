@@ -204,12 +204,17 @@ public class Professor{
 
             //Caso o id do dado seja 2 o cpf do professor será atualizado
             } else if (id_dado == 2) {
-                PreparedStatement pstmt = connection.prepareStatement("UPDATE professor SET cpf = ? WHERE id_prof = ?");
-                pstmt.setString(1, dado);
-                pstmt.setInt(2, id_prof);
-                pstmt.executeUpdate();
+                if (buscarProfessor(dado) == null) {
+                    PreparedStatement pstmt = connection.prepareStatement("UPDATE professor SET cpf = ? WHERE id_prof = ?");
+                    pstmt.setString(1, dado);
+                    pstmt.setInt(2, id_prof);
+                    pstmt.executeUpdate();
 
-                System.out.println("CPF editado com sucesso!");
+                    System.out.println("CPF editado com sucesso!");
+                } else{
+                    System.out.println("CPF já cadastrado no sistema!");
+                }
+                
 
             //Caso o id do dado seja 3 a formação do professor será atualizado
             } else if (id_dado == 3) {
