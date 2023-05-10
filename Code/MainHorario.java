@@ -32,6 +32,7 @@ public class MainHorario {
         int op = 0;
         String auxString = null;
 
+        
         do {
             new ProcessBuilder(limpar1, limpar2, limpar3).inheritIO().start().waitFor();
             Menu.Principal();
@@ -228,11 +229,14 @@ public class MainHorario {
                                     switch (op) {
                                         case 1:
                                             new ProcessBuilder(limpar1, limpar2, limpar3).inheritIO().start().waitFor();
-                                            System.out.println(" => Remover de Professor");
-                                            System.out.println(" 1 -> Remover Professor");
-                                            System.out.println(" 2 -> Voltar");
-                                            System.out.print("  >> ");
-                                            op = sc.nextInt();
+                                            System.out.println("Lista de Professores");
+                                            professores = Professor.listarProfessores();
+                                            for (int i = 0; i < professores.size(); i++) {
+                                                System.out.println(i + 1 + " => " + professores.get(i) + "\n");
+                                            }
+                                            System.out.println("\nPressione Enter para continuar!");
+                                            sc.nextLine();
+                                            sc.nextLine();
                                             break;
                                         case 2:
                                             break;
