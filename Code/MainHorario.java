@@ -350,17 +350,31 @@ public class MainHorario {
                                     switch (op) {
                                         case 1:
                                             new ProcessBuilder(limpar1, limpar2, limpar3).inheritIO().start().waitFor();
-                                            new ProcessBuilder(limpar1, limpar2, limpar3).inheritIO().start().waitFor();
                                             System.out.println("Cadastrando Novo Componente Curricular");
-                                            sc.nextLine();
                                             System.out.print("Nome: ");
+                                            sc.nextLine();
                                             auxComp.setNome(sc.nextLine());
 
                                             System.out.print("Código: ");
                                             auxComp.setCodigo(sc.nextLine());
 
-                                            System.out.print("Carga Horária: ");
-                                            auxComp.setCargaHoraria(sc.nextInt());
+                                            int opcao;
+                                            do {
+                                                System.out.println("Carga Horária: ");
+                                                System.out.println("1 -> 30");
+                                                System.out.println("2 -> 60");
+                                                System.out.print(">> ");
+                                                opcao = sc.nextInt();
+                                                if (opcao == 1) {
+                                                    auxComp.setCargaHoraria(30);
+                                                } else if (opcao == 2) {
+                                                    auxComp.setCargaHoraria(60);
+                                                } else{
+                                                    new ProcessBuilder(limpar1, limpar2, limpar3).inheritIO().start().waitFor();
+                                                }
+                                            } while (opcao != 1 && opcao != 2);
+
+                                            
 
                                             System.out.print("Semestre: ");
                                             auxComp.setSemestre(sc.nextInt());
@@ -430,9 +444,25 @@ public class MainHorario {
 
                                     case 2:
                                         System.out.println("Nova carga horária: ");
-                                        int carga_horaria = sc.nextInt();
-                                        ComponenteCurricular.editaComponente(disciplinas.get(id - 1).getId_componente(),
-                                                carga_horaria, op);
+                                        int opcao;
+                                            do {
+                                                new ProcessBuilder(limpar1, limpar2, limpar3).inheritIO().start().waitFor();
+                                                System.out.println("Carga Horária: ");
+                                                System.out.println("1 -> 30");
+                                                System.out.println("2 -> 60");
+                                                System.out.println("3 -> Voltar");
+                                                System.out.print(">> ");
+                                                opcao = sc.nextInt();
+                                                if (opcao == 1) {
+                                                    ComponenteCurricular.editaComponente(disciplinas.get(id - 1).getId_componente(),
+                                                            30, op);
+                                                            break;
+                                                } else if (opcao == 2) {
+                                                    ComponenteCurricular.editaComponente(disciplinas.get(id - 1).getId_componente(),
+                                                            60, op);
+                                                            break;
+                                                }
+                                            } while (opcao != 3);
                                         break;
 
                                     case 3:
