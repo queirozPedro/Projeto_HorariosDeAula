@@ -87,28 +87,93 @@ public class MainHorario {
                                 break;
                             case 2: // Editar Professor
                                 do {
-                                    professores = Professor.listarProfessores();
-                                    System.out.println("Qual professor será editado: \n");
-                                    for (int i = 0; i < professores.size(); i++) {
-                                        System.out.println(i + 1 + " - " + professores.get(i) + "\n");
-                                    }
-                                    System.out.print(">> ");
-                                    int id = sc.nextInt();
-
-                                    System.out.println("Qual dado será editado: ");
-                                    System.out.println(" 1 -> Nome");
-                                    System.out.println(" 2 -> CPF");
-                                    System.out.println(" 3 -> Formação");
-                                    System.out.println(" 4 -> Email");
-                                    System.out.print(">> ");
+                                    new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                                    System.out.println(" => Editar Professores");
+                                    System.out.println(" 1 -> Editar Professor");
+                                    System.out.println(" 2 -> Voltar");
+                                    System.out.print("  >> ");
                                     op = sc.nextInt();
+                                    switch (op) {
+                                        case 1:
+                                            String dado;
+                                            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                                            do {
+                                                System.out.println("Professores\n");
+                                                professores = Professor.listarProfessores();
+                                                for (int i = 0; i < professores.size(); i++) {
+                                                    System.out.println(i + 1 + " - " + professores.get(i) + "\n");
+                                                }
+                                                System.out.println("\nInsira o indice do Professor");
+                                                System.out.print(">> ");
+                                                int id = sc.nextInt();
+                                                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                                                System.out.println(professores.get(id - 1));
+                                                System.out.println("\nQual dado será editado: ");
+                                                System.out.println(" 1 -> Nome");
+                                                System.out.println(" 2 -> CPF");
+                                                System.out.println(" 3 -> Formação");
+                                                System.out.println(" 4 -> Email");
+                                                System.out.print(">> ");
+                                                op = sc.nextInt();
+                                                switch (op) {
+                                                    case 1:
+                                                        System.out.print("\nNovo Nome: ");
+                                                        sc.nextLine();
+                                                        dado = sc.nextLine();
+        
+                                                        Professor.editaProfessor(professores.get(id - 1).getId_prof(), dado, op);
+                                                        System.out.println("\nPressione Enter para continuar!");
+                                                        sc.nextLine();
+                                                        break;
+                                                    case 2:
+                                                        System.out.print("\nNovo CPF: ");
+                                                        sc.nextLine();
+                                                        dado = sc.nextLine();
+        
+                                                        Professor.editaProfessor(professores.get(id - 1).getId_prof(), dado, op);
+                                                        System.out.println("\nPressione Enter para continuar!");
+                                                        sc.nextLine();
+                                                        break;
+                                                    case 3:
+                                                        System.out.print("\nNovo Formação: ");
+                                                        sc.nextLine();
+                                                        dado = sc.nextLine();
+        
+                                                        Professor.editaProfessor(professores.get(id - 1).getId_prof(), dado, op);
+                                                        System.out.println("\nPressione Enter para continuar!");
+                                                        sc.nextLine();
+                                                        break;
+                                                    case 4:
+                                                        System.out.print("\nNovo Email: ");
+                                                        sc.nextLine();
+                                                        dado = sc.nextLine();
+        
+                                                        Professor.editaProfessor(professores.get(id - 1).getId_prof(), dado, op);
+                                                        System.out.println("\nPressione Enter para continuar!");
+                                                        sc.nextLine();
+                                                        break;
+                                                    default:
+                                                        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                                                        System.out.println("Opção não disponível, pressione Enter para continuar!");
+                                                        sc.nextLine();
+                                                        sc.nextLine();
+                                                        break;
+                                                }
 
-                                    System.out.println("\nNovo dado: ");
-                                    sc.nextLine();
-                                    String dado = sc.nextLine();
+                                            } while (op != 4);
 
-                                    Professor.editaProfessor(professores.get(id - 1).getId_prof(), dado, op);
-                                } while (op != 4);
+                                            break;
+                                        case 2:
+                                            break;
+                                        default:
+                                            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                                            System.out.println("Opção não disponível, pressione Enter para continuar!");
+                                            sc.nextLine();
+                                            sc.nextLine();
+                                            break;
+                                    }
+                                } while (op != 2);
+
                                 break;
                             case 3: // Ver dados do Professor
                                 do {
