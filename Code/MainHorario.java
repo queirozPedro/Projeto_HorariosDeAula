@@ -97,6 +97,7 @@ public class MainHorario {
                                             break;
                                     }
                                 } while (op != 2);
+                                op = 0;
                                 break;
                             case 2: // Editar Professor
                                 do {
@@ -116,9 +117,15 @@ public class MainHorario {
                                                 for (int i = 0; i < professores.size(); i++) {
                                                     System.out.println(i + 1 + " - " + professores.get(i) + "\n");
                                                 }
+                                                System.out.println(" 0 -> Cancelar");
                                                 System.out.println("\nInsira o indice do Professor");
                                                 System.out.print("  >> ");
                                                 int id = sc.nextInt();
+                                                if(id == 0){
+                                                    System.out.println("\nPressione Enter para continuar!");
+                                                    sc.nextLine();
+                                                    break;
+                                                }
                                                 new ProcessBuilder(limpar1, limpar2, limpar3).inheritIO().start().waitFor();
                                                 System.out.println(professores.get(id - 1));
                                                 System.out.println("\nQual dado será editado: ");
@@ -126,6 +133,7 @@ public class MainHorario {
                                                 System.out.println(" 2 -> CPF");
                                                 System.out.println(" 3 -> Formação");
                                                 System.out.println(" 4 -> Email");
+                                                System.out.println(" 5 -> Cancelar");
                                                 System.out.print("  >> ");
                                                 op = sc.nextInt();
                                                 switch (op) {
@@ -165,16 +173,22 @@ public class MainHorario {
                                                         System.out.println("\nPressione Enter para continuar!");
                                                         sc.nextLine();
                                                         break;
-                                                    default:
-                                                        new ProcessBuilder(limpar1, limpar2, limpar3).inheritIO().start().waitFor();
-                                                        System.out.println("Opção não disponível, pressione Enter para continuar!");
+                                                    case 5:
+                                                        System.out.println("\nOperação Cancelada");
+                                                        System.out.println("Pressione Enter para continuar!");
                                                         sc.nextLine();
                                                         sc.nextLine();
                                                         break;
+                                                    default:
+                                                        new ProcessBuilder(limpar1, limpar2, limpar3).inheritIO().start().waitFor();
+                                                        System.out.println("Pressione Enter para continuar!");
+                                                        sc.nextLine();
+                                                        sc.nextLine();
+                                                        op = 5;
+                                                        break;
                                                 }
 
-                                            } while (op != 4);
-
+                                            } while (op != 5);
                                             break;
                                         case 2:
                                             break;
@@ -186,7 +200,7 @@ public class MainHorario {
                                             break;
                                     }
                                 } while (op != 2);
-
+                                op = 0;
                                 break;
                             case 3: // Ver dados do Professor
                                 do {
@@ -217,6 +231,7 @@ public class MainHorario {
                                             break;
                                     }
                                 } while (op != 2);
+                                op = 0;
                                 break;
                             case 4: // Listar Professores
                                 do{
@@ -249,6 +264,7 @@ public class MainHorario {
                                     }
 
                                 }while(op != 2);
+                                op = 0;
                                 break;
                             case 5: // Excluir Profesorres
                                 do {
@@ -296,6 +312,7 @@ public class MainHorario {
                                             break;
                                     }
                                 } while (op != 2);
+                                op = 0;
                                 break;
                             case 6: // Sair
                                 break;
@@ -376,6 +393,7 @@ public class MainHorario {
                                             break;
                                     }
                                 } while (op != 2);
+                                op = 0;
                                 break;
                             case 2: // Editar Componente Curricular
 
@@ -450,7 +468,7 @@ public class MainHorario {
                                 System.out.println("Pressione Enter para continuar!");
                                 sc.nextLine();
                                 sc.nextLine();
-
+                                op = 0;
                                 break;
                             case 3: // Ver Dados de um Componente Curricular
                                 do {
@@ -482,6 +500,7 @@ public class MainHorario {
                                             break;
                                     }
                                 } while (op != 2);
+                                op = 0;
                                 break;
                             case 4: // Listar Componentes Curriculares
                                 new ProcessBuilder(limpar1, limpar2, limpar3).inheritIO().start().waitFor();
@@ -493,6 +512,7 @@ public class MainHorario {
                                 System.out.println("\nPressione Enter para continuar!");
                                 sc.nextLine();
                                 sc.nextLine();
+                                op = 0;
                                 break;
                             case 5: // Excluir Componente Curricular
                                 do {
@@ -540,6 +560,7 @@ public class MainHorario {
                                             break;
                                     }
                                 } while (op != 2);
+                                op = 0;
                                 break;
                             case 6:
                                 break;
@@ -614,7 +635,7 @@ public class MainHorario {
                                 System.out.println("\nPressione Enter para continuar!");
                                 sc.nextLine();
                                 sc.nextLine();
-
+                                op = 0;
                                 break;
                             case 2:
 
@@ -812,7 +833,7 @@ public class MainHorario {
                                             break;
                                     }
                                 } while (op != 4);
-
+                                op = 0;
                                 break;
                             case 3:
 
@@ -844,7 +865,7 @@ public class MainHorario {
                                 System.out.println("\nPressione Enter para continuar!");
                                 sc.nextLine();
                                 sc.nextLine();
-
+                                op = 0;
                                 break;
                             case 4:
 
@@ -857,7 +878,7 @@ public class MainHorario {
                                 System.out.println("\nPressione Enter para continuar!");
                                 sc.nextLine();
                                 sc.nextLine();
-
+                                op = 0;
                                 break;
                             case 5: // Listar turmas por semestre
 
@@ -871,7 +892,7 @@ public class MainHorario {
                                 System.out.println("\nPressione Enter para continuar!");
                                 sc.nextLine();
                                 sc.nextLine();
-
+                                op = 0;
                                 break;
                             case 6: // Listar turmas por professor
 
@@ -893,7 +914,7 @@ public class MainHorario {
                                 System.out.println("\nPressione Enter para continuar!");
                                 sc.nextLine();
                                 sc.nextLine();
-
+                                op = 0;
                                 break;
                             case 7:
 
@@ -914,7 +935,7 @@ public class MainHorario {
                                 System.out.println("\nPressione Enter para continuar!");
                                 sc.nextLine();
                                 sc.nextLine();
-
+                                op = 0;
                                 break;
                             case 8:
                                 break;
@@ -923,6 +944,7 @@ public class MainHorario {
                                 System.out.println("Opção não disponível, pressione Enter para continuar!");
                                 sc.nextLine();
                                 sc.nextLine();
+                                op = 0;
                                 break;
                         }
                     } while (op != 8);
