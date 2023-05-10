@@ -116,7 +116,7 @@ public class MainHorario {
                                                     System.out.println(i + 1 + " - " + professores.get(i) + "\n");
                                                 }
                                                 System.out.println("\nInsira o indice do Professor");
-                                                System.out.print(">> ");
+                                                System.out.print("  >> ");
                                                 int id = sc.nextInt();
                                                 new ProcessBuilder(limpar1, limpar2, limpar3).inheritIO().start().waitFor();
                                                 System.out.println(professores.get(id - 1));
@@ -125,7 +125,7 @@ public class MainHorario {
                                                 System.out.println(" 2 -> CPF");
                                                 System.out.println(" 3 -> Formação");
                                                 System.out.println(" 4 -> Email");
-                                                System.out.print(">> ");
+                                                System.out.print("  >> ");
                                                 op = sc.nextInt();
                                                 switch (op) {
                                                     case 1:
@@ -218,15 +218,33 @@ public class MainHorario {
                                 } while (op != 2);
                                 break;
                             case 4: // Listar Professores
-                                new ProcessBuilder(limpar1, limpar2, limpar3).inheritIO().start().waitFor();
-                                System.out.println("Lista dos Professores Ativos");
-                                professores = Professor.listarProfessores();
-                                for (int i = 0; i < professores.size(); i++) {
-                                    System.out.println(professores.get(i).toString(i));
-                                }
-                                System.out.println("\nPressione Enter para continuar!");
-                                sc.nextLine();
-                                sc.nextLine();
+                                do{
+                                    new ProcessBuilder(limpar1, limpar2, limpar3).inheritIO().start().waitFor();
+                                    System.out.println(" => Listar Professores");
+                                    System.out.println(" 1 -> Listar");
+                                    System.out.println(" 2 -> Voltar");
+                                    System.out.print("  >> ");
+                                    op = sc.nextInt();
+                                    switch (op) {
+                                        case 1:
+                                            new ProcessBuilder(limpar1, limpar2, limpar3).inheritIO().start().waitFor();
+                                            System.out.println(" => Remover de Professor");
+                                            System.out.println(" 1 -> Remover Professor");
+                                            System.out.println(" 2 -> Voltar");
+                                            System.out.print("  >> ");
+                                            op = sc.nextInt();
+                                            break;
+                                        case 2:
+                                            break;
+                                        default:
+                                            new ProcessBuilder(limpar1, limpar2, limpar3).inheritIO().start().waitFor();
+                                            System.out.println("Opção não disponível, pressione Enter para continuar!");
+                                            sc.nextLine();
+                                            sc.nextLine();
+                                            break;
+                                    }
+
+                                }while(op != 2);
                                 break;
                             case 5: // Excluir Profesorres
                                 do {
@@ -234,7 +252,7 @@ public class MainHorario {
                                     System.out.println(" => Remover de Professor");
                                     System.out.println(" 1 -> Remover Professor");
                                     System.out.println(" 2 -> Voltar");
-                                    System.out.println("  >> ");
+                                    System.out.print("  >> ");
                                     op = sc.nextInt();
                                     switch (op) {
                                         case 1:
@@ -362,7 +380,7 @@ public class MainHorario {
                                 for (int i = 0; i < disciplinas.size(); i++) {
                                     System.out.println(i + 1 + " - " + disciplinas.get(i));
                                 }
-                                System.out.print(">> ");
+                                System.out.print("  >> ");
                                 int id = sc.nextInt();
 
                                 System.out.println("Qual dado será editado: ");
@@ -371,7 +389,7 @@ public class MainHorario {
                                 System.out.println(" 3 -> Semestre");
                                 System.out.println(" 4 -> Código");
                                 System.out.println(" 5 -> Status Optativa");
-                                System.out.println(">> ");
+                                System.out.println("  >> ");
                                 op = sc.nextInt();
 
                                 switch (op) {
@@ -409,7 +427,7 @@ public class MainHorario {
                                         System.out.println("Novo status: ");
                                         System.out.println("1 - Optativa");
                                         System.out.println("2 - Obrigatório");
-                                        System.out.print(">> ");
+                                        System.out.print("  >> ");
                                         int status = sc.nextInt();
                                         Boolean optativa = false;
                                         if (status == 1) {
@@ -551,7 +569,7 @@ public class MainHorario {
                                 for (int i = 0; i < professores.size(); i++) {
                                     System.out.println(professores.get(i).toString(i));
                                 }
-                                System.out.print("\n>> ");
+                                System.out.print("\n  >> ");
                                 idProfessor = sc.nextInt();
 
                                 new ProcessBuilder(limpar1, limpar2, limpar3).inheritIO().start().waitFor();
@@ -560,7 +578,7 @@ public class MainHorario {
                                 for (int i = 0; i < disciplinas.size(); i++) {
                                     System.out.println(disciplinas.get(i).toString(i));
                                 }
-                                System.out.print("\n>> ");
+                                System.out.print("\n  >> ");
                                 idComponente = sc.nextInt();
 
                                 new ProcessBuilder(limpar1, limpar2, limpar3).inheritIO().start().waitFor();
@@ -619,7 +637,7 @@ public class MainHorario {
                                                 System.out.println(turmas.get(i).toString(i));
                                             }
 
-                                            System.out.print("\n>> ");
+                                            System.out.print("\n  >> ");
                                             int id = sc.nextInt();
 
                                             new ProcessBuilder(limpar1, limpar2, limpar3).inheritIO().start().waitFor();
@@ -630,7 +648,7 @@ public class MainHorario {
                                             System.out.println("3 -> Número da vagas");
                                             System.out.println("4 -> Professor");
 
-                                            System.out.print("\n>> ");
+                                            System.out.print("\n  >> ");
                                             int id_dado = sc.nextInt();
 
                                             new ProcessBuilder(limpar1, limpar2, limpar3).inheritIO().start().waitFor();
@@ -674,7 +692,7 @@ public class MainHorario {
                                                                 .println(Professor.buscarProfessor(idProfessores.get(i))
                                                                         .toString(i) + "\n");
                                                     }
-                                                    System.out.print(">> ");
+                                                    System.out.print("  >> ");
                                                     id_prof = sc.nextInt();
 
                                                     professores = Professor.listarProfessores();
@@ -682,7 +700,7 @@ public class MainHorario {
                                                     for (int i = 0; i < professores.size(); i++) {
                                                         System.out.println(professores.get(i).toString(i) + "\n");
                                                     }
-                                                    System.out.print("\n>> ");
+                                                    System.out.print("\n  >> ");
                                                     int id_novo_prof = sc.nextInt();
 
                                                     Turma.editaTurma(turmas.get(id - 1).getIdTurma(),
@@ -713,7 +731,7 @@ public class MainHorario {
                                                 System.out.println(turmas.get(i).toString(i));
                                             }
 
-                                            System.out.print(">> ");
+                                            System.out.print("  >> ");
                                             id = sc.nextInt();
 
                                             new ProcessBuilder(limpar1, limpar2, limpar3).inheritIO().start().waitFor();
@@ -723,7 +741,7 @@ public class MainHorario {
                                                 System.out.println(professores.get(i).toString(i));
                                             }
 
-                                            System.out.print("\n>> ");
+                                            System.out.print("\n  >> ");
                                             id_prof = sc.nextInt();
 
                                             Turma.adicionarProfessor(turmas.get(id - 1).getIdTurma(),
@@ -746,7 +764,7 @@ public class MainHorario {
                                                 System.out.println(turmas.get(i).toString(i));
                                             }
 
-                                            System.out.print(">> ");
+                                            System.out.print("  >> ");
                                             id = sc.nextInt();
 
                                             professores = new ArrayList<>();
@@ -764,7 +782,7 @@ public class MainHorario {
                                                     System.out.println(professores.get(i).toString(i));
                                                 }
 
-                                                System.out.print("\n>> ");
+                                                System.out.print("\n  >> ");
                                                 id_prof = sc.nextInt();
 
                                                 Turma.ExcluirProfessor(turmas.get(id - 1).getIdTurma(),
@@ -803,7 +821,7 @@ public class MainHorario {
                                     System.out.print(disciplinas.get(i).toString(i));
                                 }
 
-                                System.out.print(">> ");
+                                System.out.print("  >> ");
                                 int id_comp = sc.nextInt();
 
                                 new ProcessBuilder(limpar1, limpar2, limpar3).inheritIO().start().waitFor();
@@ -862,7 +880,7 @@ public class MainHorario {
                                     System.out.println(professores.get(i).toString(i));
                                 }
 
-                                System.out.print(">> ");
+                                System.out.print("  >> ");
                                 int professor = sc.nextInt();
 
                                 Turma.imprimirHorarios(
@@ -884,7 +902,7 @@ public class MainHorario {
                                     System.out.println(turmas.get(i).toString(i));
                                 }
 
-                                System.out.print(">> ");
+                                System.out.print("  >> ");
                                 int id_turma = sc.nextInt();
 
                                 Turma.ExcluirTurma(turmas.get(id_turma - 1).getIdTurma());
