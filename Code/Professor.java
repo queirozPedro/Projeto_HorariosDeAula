@@ -44,12 +44,25 @@ public class Professor{
         return id_prof;
     }
 
+    public static boolean verificaCPF(String cpf){
+        if (cpf.length() == 11) {
+            return true;
+        } else{
+            return false;
+        }
+    }
+
     /**
      * Função que Cadastra o Professor no Banco de Dados. 
      */
     public void Cadastrar(){
         // Cria um Objeto connection que vai servir para conectar ao Banco
         Connection connection = PostgreSQLConnection.getInstance().getConnection();
+
+        if (!verificaCPF(this.cpf)) {
+            System.out.println("CPF inválido!");
+            return;
+        }
     
         try {
             if (buscarProfessor(this.cpf) == null) {
@@ -204,7 +217,7 @@ public class Professor{
 
             //Caso o id do dado seja 2 o cpf do professor será atualizado
             } else if (id_dado == 2) {
-                if (buscarProfessor(dado) == null) {
+                if (buscarProfessor(dado) == null && verificaCPF(dado)) {
                     PreparedStatement pstmt = connection.prepareStatement("UPDATE professor SET cpf = ? WHERE id_prof = ?");
                     pstmt.setString(1, dado);
                     pstmt.setInt(2, id_prof);
@@ -212,7 +225,7 @@ public class Professor{
 
                     System.out.println("CPF editado com sucesso!");
                 } else{
-                    System.out.println("CPF já cadastrado no sistema!");
+                    System.out.println("CPF já cadastrado no sistema ou inválido!");
                 }
                 
 
