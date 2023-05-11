@@ -492,6 +492,9 @@ public class MainHorario {
                                                     ComponenteCurricular.editaComponente(
                                                             disciplinas.get(id - 1).getId_componente(),
                                                             nome, op);
+                                                    System.out.println("Pressione Enter para continuar!");
+                                                    sc.nextLine();
+                                                    sc.nextLine();
                                                     break;
 
                                                 case 2:
@@ -519,6 +522,9 @@ public class MainHorario {
                                                             break;
                                                         }
                                                     } while (opcao != 3);
+                                                    System.out.println("Pressione Enter para continuar!");
+                                                    sc.nextLine();
+                                                    sc.nextLine();
                                                     break;
 
                                                 case 3:
@@ -527,6 +533,9 @@ public class MainHorario {
                                                     ComponenteCurricular.editaComponente(
                                                             disciplinas.get(id - 1).getId_componente(),
                                                             semestre, op);
+                                                    System.out.println("Pressione Enter para continuar!");
+                                                    sc.nextLine();
+                                                    sc.nextLine();
                                                     break;
 
                                                 case 4:
@@ -535,6 +544,9 @@ public class MainHorario {
                                                     ComponenteCurricular.editaComponente(
                                                             disciplinas.get(id - 1).getId_componente(),
                                                             codigo, op);
+                                                    System.out.println("Pressione Enter para continuar!");
+                                                    sc.nextLine();
+                                                    sc.nextLine();
                                                     break;
 
                                                 case 5:
