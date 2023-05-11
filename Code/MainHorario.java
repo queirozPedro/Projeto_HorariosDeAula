@@ -625,14 +625,32 @@ public class MainHorario {
                                 break;
                             case 4: // Listar Componentes Curriculares
                                 new ProcessBuilder(limpar1, limpar2, limpar3).inheritIO().start().waitFor();
-                                System.out.println("Lista dos Componentes Curriculares");
-                                disciplinas = ComponenteCurricular.listarComponentes();
-                                for (int i = 0; i < disciplinas.size(); i++) {
-                                    System.out.print(disciplinas.get(i).toString(i));
+                                System.out.println(" => Listar Componente Curricular");
+                                System.out.println(" 1 -> Listar Componente Curricular");
+                                System.out.println(" 2 -> Voltar");
+                                System.out.print("  >> ");
+                                op = sc.nextInt();
+                                switch (op) {
+                                    case 1:
+                                        new ProcessBuilder(limpar1, limpar2, limpar3).inheritIO().start().waitFor();
+                                        System.out.println("Lista dos Componentes Curriculares");
+                                        disciplinas = ComponenteCurricular.listarComponentes();
+                                        for (int i = 0; i < disciplinas.size(); i++) {
+                                            System.out.print(disciplinas.get(i).toString(i));
+                                        }
+                                        System.out.println("\nPressione Enter para continuar!");
+                                        sc.nextLine();
+                                        sc.nextLine();
+                                        break;
+                                    case 2:
+                                        break;
+
+                                    default:
+                                        System.out.println("Opção não disponível, pressione Enter para continuar!");
+                                        sc.nextLine();
+                                        sc.nextLine();
+                                        break;
                                 }
-                                System.out.println("\nPressione Enter para continuar!");
-                                sc.nextLine();
-                                sc.nextLine();
                                 op = 0;
                                 break;
                             case 5: // Excluir Componente Curricular
@@ -1160,7 +1178,7 @@ public class MainHorario {
                                             System.out.println("Qual turma deseja excluir");
                                             System.out.print("  >> ");
                                             int id_turma = sc.nextInt();
-                                            if(id_turma == 0){
+                                            if (id_turma == 0) {
                                                 System.out.println("Pressione Enter para continuar!");
                                                 sc.nextLine();
                                                 sc.nextLine();
@@ -1186,7 +1204,7 @@ public class MainHorario {
                                             System.out.println("Opção não disponível, pressione Enter para continuar!");
                                             sc.nextLine();
                                             sc.nextLine();
-                                        break;
+                                            break;
                                     }
 
                                 } while (op != 2);
