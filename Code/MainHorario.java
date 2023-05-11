@@ -129,6 +129,11 @@ public class MainHorario {
                                                     System.out.println("\nPressione Enter para continuar!");
                                                     sc.nextLine();
                                                     break;
+                                                } else if(id > professores.size() || id < 0){
+                                                    System.out.println("Opção não disponível, pressione Enter para continuar!");
+                                                    sc.nextLine();
+                                                    sc.nextLine();
+                                                    break;
                                                 }
                                                 new ProcessBuilder(limpar1, limpar2, limpar3).inheritIO().start().waitFor();
                                                 System.out.println(professores.get(id - 1));
@@ -221,9 +226,15 @@ public class MainHorario {
                                             System.out.println("Buscando Professor");
                                             System.out.print("Insira o Cpf do Professor: ");
                                             auxProf = Professor.buscarProfessor(sc.nextLine());
-                                            System.out.println(auxProf.toString());
-                                            System.out.println("\nPressione Enter para continuar!");
-                                            sc.nextLine();
+                                            if (auxProf == null) {
+                                                System.out.println("Professor não encontrado, pressione Enter para continuar!");
+                                                sc.nextLine();
+                                                sc.nextLine();
+                                            } else{
+                                                System.out.println(auxProf.toString());
+                                                System.out.println("\nPressione Enter para continuar!");
+                                                sc.nextLine();
+                                            }
                                             break;
                                         case 2:
                                             break;
@@ -286,24 +297,30 @@ public class MainHorario {
                                             sc.nextLine();
                                             auxString = sc.nextLine();
                                             auxProf = Professor.buscarProfessor(auxString);
-                                            new ProcessBuilder(limpar1, limpar2, limpar3).inheritIO().start().waitFor();
-                                            System.out.println("\n" + auxProf.toString());
-                                            System.out.println("\nRemover professor? ");
-                                            System.out.println(" 1 -> Sim");
-                                            System.out.println(" 2 -> Não");
-                                            System.out.print("  >> ");
-                                            op = sc.nextInt();
-                                            if (op == 1) {
-                                                Professor.ExcluirProfessor(auxString);
-                                                System.out.println("\nPressione Enter para continuar!");
+                                            if (auxProf == null) {
+                                                System.out.println("Professor não encontrado, pressione Enter para continuar!");
                                                 sc.nextLine();
                                                 sc.nextLine();
-                                            } else {
-                                                auxProf.limpaProfessor();
-                                                System.out
-                                                        .println("Operação Cancelada, Pressione Enter para continuar!");
-                                                sc.nextLine();
-                                                sc.nextLine();
+                                            } else{
+                                                new ProcessBuilder(limpar1, limpar2, limpar3).inheritIO().start().waitFor();
+                                                System.out.println("\n" + auxProf.toString());
+                                                System.out.println("\nRemover professor? ");
+                                                System.out.println(" 1 -> Sim");
+                                                System.out.println(" 2 -> Não");
+                                                System.out.print("  >> ");
+                                                op = sc.nextInt();
+                                                if (op == 1) {
+                                                    Professor.ExcluirProfessor(auxString);
+                                                    System.out.println("\nPressione Enter para continuar!");
+                                                    sc.nextLine();
+                                                    sc.nextLine();
+                                                } else {
+                                                    auxProf.limpaProfessor();
+                                                    System.out
+                                                            .println("Operação Cancelada, Pressione Enter para continuar!");
+                                                    sc.nextLine();
+                                                    sc.nextLine();
+                                                }
                                             }
                                             break;
                                         case 2:
@@ -423,6 +440,13 @@ public class MainHorario {
                                 System.out.print("  >> ");
                                 int id = sc.nextInt();
 
+                                if (id > disciplinas.size() || id <= 0) {
+                                    System.out.println("Opção não disponível, pressione Enter para continuar!");
+                                    sc.nextLine();
+                                    sc.nextLine();
+                                    break;
+                                }
+
                                 System.out.println("Qual dado será editado: ");
                                 System.out.println(" 1 -> Nome");
                                 System.out.println(" 2 -> Carga horária");
@@ -520,9 +544,15 @@ public class MainHorario {
                                             System.out.println("Buscando Componente Curricular");
                                             System.out.print("Insira o Código do Componente: ");
                                             auxComp = ComponenteCurricular.buscarComponente(sc.nextLine());
+                                            if (auxComp == null) {
+                                                System.out.println("Componente não encontrado, pressione Enter para continuar!");
+                                                sc.nextLine();
+                                                sc.nextLine();
+                                            } else{
                                             System.out.println(auxComp.toString());
                                             System.out.println("\nPressione Enter para continuar!");
                                             sc.nextLine();
+                                            }
                                             break;
                                         case 2:
                                             break;
@@ -563,25 +593,30 @@ public class MainHorario {
                                             System.out.print("Insira o Código do Componente Curricular:");
                                             sc.nextLine();
                                             auxString = sc.nextLine();
-                                            new ProcessBuilder(limpar1, limpar2, limpar3).inheritIO().start().waitFor();
                                             auxComp = ComponenteCurricular.buscarComponente(auxString);
-                                            System.out.println("\n" + auxComp.toString());
-                                            System.out.println("\nRemover Componente Curricular? ");
-                                            System.out.println(" 1 -> Sim");
-                                            System.out.println(" 2 -> Não");
-                                            System.out.print("  >> ");
-                                            op = sc.nextInt();
-                                            if (op == 1) {
-                                                ComponenteCurricular.ExcluirComponente(auxString);
-                                                System.out.println("\nPressione Enter para continuar!");
+                                            if (auxComp == null) {
+                                                System.out.println("Componente não encontrado, pressione Enter para continuar!");
                                                 sc.nextLine();
                                                 sc.nextLine();
-                                            } else {
-                                                auxComp.limpaComponente();
-                                                System.out
-                                                        .println("Operação Cancelada, Pressione Enter para continuar!");
-                                                sc.nextLine();
-                                                sc.nextLine();
+                                            } else{
+                                                System.out.println("\n" + auxComp.toString());
+                                                System.out.println("\nRemover Componente Curricular? ");
+                                                System.out.println(" 1 -> Sim");
+                                                System.out.println(" 2 -> Não");
+                                                System.out.print("  >> ");
+                                                op = sc.nextInt();
+                                                if (op == 1) {
+                                                    ComponenteCurricular.ExcluirComponente(auxString);
+                                                    System.out.println("\nPressione Enter para continuar!");
+                                                    sc.nextLine();
+                                                    sc.nextLine();
+                                                } else {
+                                                    auxComp.limpaComponente();
+                                                    System.out
+                                                            .println("Operação Cancelada, Pressione Enter para continuar!");
+                                                    sc.nextLine();
+                                                    sc.nextLine();
+                                                }
                                             }
                                             break;
                                         case 2:
@@ -631,6 +666,13 @@ public class MainHorario {
                                 System.out.print("\n  >> ");
                                 idProfessor = sc.nextInt();
 
+                                if (idProfessor > professores.size() || idProfessor <= 0) {
+                                    System.out.println("Opção não disponível, pressione Enter para continuar!");
+                                    sc.nextLine();
+                                    sc.nextLine();
+                                    break;
+                                }
+
                                 new ProcessBuilder(limpar1, limpar2, limpar3).inheritIO().start().waitFor();
 
                                 System.out.println("\nQual será a disciplina dessa turma: \n");
@@ -640,12 +682,19 @@ public class MainHorario {
                                 System.out.print("\n  >> ");
                                 idComponente = sc.nextInt();
 
+                                if (idComponente > disciplinas.size() || idComponente <= 0) {
+                                    System.out.println("Opção não disponível, pressione Enter para continuar!");
+                                    sc.nextLine();
+                                    sc.nextLine();
+                                    break;
+                                }
+
                                 new ProcessBuilder(limpar1, limpar2, limpar3).inheritIO().start().waitFor();
 
-                                if (disciplinas.get(idComponente).getCargaHoraria() == 30) {
+                                if (disciplinas.get(idComponente - 1).getCargaHoraria() == 30) {
                                     System.out.println("Qual o horário dessa turma: ");
                                     horario1 = sc.next();
-                                } else if (disciplinas.get(idComponente).getCargaHoraria() == 60) {
+                                } else if (disciplinas.get(idComponente - 1).getCargaHoraria() == 60) {
                                     System.out.println("Quais são os horários dessa turma: ");
                                     System.out.print("\nHorário 1:");
                                     horario1 = sc.next();
@@ -699,6 +748,13 @@ public class MainHorario {
                                             System.out.print("\n  >> ");
                                             int id = sc.nextInt();
 
+                                            if (id > turmas.size() || id <= 0) {
+                                                System.out.println("Opção não disponível, pressione Enter para continuar!");
+                                                sc.nextLine();
+                                                sc.nextLine();
+                                                break;
+                                            }
+
                                             new ProcessBuilder(limpar1, limpar2, limpar3).inheritIO().start().waitFor();
 
                                             System.out.println("Qual dado será editado: ");
@@ -725,11 +781,18 @@ public class MainHorario {
                                                     break;
 
                                                 case 2:
-                                                    System.out.print("Novo Horário: ");
-                                                    horario2 = sc.nextLine();
-
-                                                    Turma.editaTurma(turmas.get(id - 1).getIdTurma(), horario2, id_dado,
-                                                            0);
+                                                    if (ComponenteCurricular.buscarComponente(turmas.get(id - 1).getIdComponenteCurricular()).getCargaHoraria() == 30) {
+                                                        System.out.println("O componente curricular dessa turma possui apenas 30 horas de carga horária!");
+                                                        sc.nextLine();
+                                                        sc.nextLine();
+                                                        
+                                                    } else{
+                                                        System.out.print("Novo Horário: ");
+                                                        horario2 = sc.nextLine();
+    
+                                                        Turma.editaTurma(turmas.get(id - 1).getIdTurma(), horario2, id_dado,
+                                                                0);
+                                                    }
 
                                                     break;
 
@@ -754,6 +817,13 @@ public class MainHorario {
                                                     System.out.print("  >> ");
                                                     id_prof = sc.nextInt();
 
+                                                    if (id_prof > idProfessores.size() || id_prof <= 0) {
+                                                        System.out.println("Opção não disponível!");
+                                                        sc.nextLine();
+                                                        sc.nextLine();
+                                                        break;
+                                                    }
+
                                                     professores = Professor.listarProfessores();
                                                     System.out.println("\nQual o novo professor dessa turma: ");
                                                     for (int i = 0; i < professores.size(); i++) {
@@ -761,6 +831,13 @@ public class MainHorario {
                                                     }
                                                     System.out.print("\n  >> ");
                                                     int id_novo_prof = sc.nextInt();
+
+                                                    if (id_novo_prof > professores.size() || id_novo_prof <= 0) {
+                                                        System.out.println("Opção não disponível!");
+                                                        sc.nextLine();
+                                                        sc.nextLine();
+                                                        break;
+                                                    }
 
                                                     Turma.editaTurma(turmas.get(id - 1).getIdTurma(),
                                                             professores.get(id_novo_prof - 1).getId_prof(), id_dado,
@@ -792,6 +869,13 @@ public class MainHorario {
 
                                             System.out.print("  >> ");
                                             id = sc.nextInt();
+                                            
+                                            if (id > turmas.size() || id <= 0) {
+                                                System.out.println("Opção não disponível, pressione Enter para continuar!");
+                                                sc.nextLine();
+                                                sc.nextLine();
+                                                break;
+                                            }
 
                                             new ProcessBuilder(limpar1, limpar2, limpar3).inheritIO().start().waitFor();
 
@@ -802,6 +886,13 @@ public class MainHorario {
 
                                             System.out.print("\n  >> ");
                                             id_prof = sc.nextInt();
+
+                                            if (id_prof > professores.size() || id_prof <= 0) {
+                                                System.out.println("Opção não disponível, pressione Enter para continuar!");
+                                                sc.nextLine();
+                                                sc.nextLine();
+                                                break;
+                                            }
 
                                             Turma.adicionarProfessor(turmas.get(id - 1).getIdTurma(),
                                                     professores.get(id_prof - 1).getId_prof());
@@ -826,6 +917,13 @@ public class MainHorario {
                                             System.out.print("  >> ");
                                             id = sc.nextInt();
 
+                                            if (id > turmas.size() || id <= 0) {
+                                                System.out.println("Opção não disponível, pressione Enter para continuar!");
+                                                sc.nextLine();
+                                                sc.nextLine();
+                                                break;
+                                            }
+
                                             professores = new ArrayList<>();
 
                                             for (int i = 0; i < turmas.get(id - 1).getIdProfessor().size(); i++) {
@@ -843,6 +941,13 @@ public class MainHorario {
 
                                                 System.out.print("\n  >> ");
                                                 id_prof = sc.nextInt();
+
+                                                if (id_prof > professores.size() || id_prof <= 0) {
+                                                    System.out.println("Opção não disponível, pressione Enter para continuar!");
+                                                    sc.nextLine();
+                                                    sc.nextLine();
+                                                    break;
+                                                }
 
                                                 Turma.ExcluirProfessor(turmas.get(id - 1).getIdTurma(),
                                                         professores.get(id_prof - 1).getId_prof());
@@ -882,6 +987,13 @@ public class MainHorario {
 
                                 System.out.print("  >> ");
                                 int id_comp = sc.nextInt();
+
+                                if (id_comp > disciplinas.size() || id_comp <= 0) {
+                                    System.out.println("Opção não disponível, pressione Enter para continuar!");
+                                    sc.nextLine();
+                                    sc.nextLine();
+                                    break;
+                                }
 
                                 new ProcessBuilder(limpar1, limpar2, limpar3).inheritIO().start().waitFor();
                                 System.out.println("Qual o número da turma: ");
@@ -942,6 +1054,13 @@ public class MainHorario {
                                 System.out.print("  >> ");
                                 int professor = sc.nextInt();
 
+                                if (professor > professores.size() || professor <= 0) {
+                                    System.out.println("Opção não disponível, pressione Enter para continuar!");
+                                    sc.nextLine();
+                                    sc.nextLine();
+                                    break;
+                                }
+
                                 Turma.imprimirHorarios(
                                         Turma.listarTurmasProfessor(professores.get(professor - 1).getId_prof()));
 
@@ -963,6 +1082,13 @@ public class MainHorario {
 
                                 System.out.print("  >> ");
                                 int id_turma = sc.nextInt();
+
+                                if (id_turma > turmas.size() || id_turma <= 0) {
+                                    System.out.println("Opção não disponível, pressione Enter para continuar!");
+                                    sc.nextLine();
+                                    sc.nextLine();
+                                    break;
+                                }
 
                                 Turma.ExcluirTurma(turmas.get(id_turma - 1).getIdTurma());
 
