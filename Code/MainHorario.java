@@ -459,14 +459,15 @@ public class MainHorario {
                                             System.out.println("Qual componente será editado: \n");
                                             System.out.print("  >> ");
                                             int id = sc.nextInt();
-                                            if(op == 0){
+                                            if (id == 0) {
                                                 System.out.println("Pressione Enter para continuar!");
                                                 sc.nextLine();
                                                 sc.nextLine();
                                                 break;
                                             }
                                             if (id > disciplinas.size() || id <= 0) {
-                                                System.out.println("Opção não disponível, pressione Enter para continuar!");
+                                                System.out.println(
+                                                        "Opção não disponível, pressione Enter para continuar!");
                                                 sc.nextLine();
                                                 sc.nextLine();
                                                 break;
@@ -548,24 +549,25 @@ public class MainHorario {
                                                     } else if (status == 2) {
                                                         optativa = false;
                                                     }
-                                                    ComponenteCurricular.editaComponente(disciplinas.get(id - 1).getId_componente(), optativa, op);
-                                                        System.out.println("Pressione Enter para continuar!");
-                                                        sc.nextLine();
-                                                        sc.nextLine();
+                                                    ComponenteCurricular.editaComponente(
+                                                            disciplinas.get(id - 1).getId_componente(), optativa, op);
+                                                    System.out.println("Pressione Enter para continuar!");
+                                                    sc.nextLine();
+                                                    sc.nextLine();
                                                     break;
 
                                                 default:
                                                     break;
                                             }
                                             break;
-                                            case 2:
-                                                break;
-                                            default:
-                                                new ProcessBuilder(limpar1, limpar2, limpar3).inheritIO().start().waitFor();
-                                                System.out.println("Opção não disponível, pressione Enter para continuar!");
-                                                sc.nextLine();
-                                                sc.nextLine();
-                                                break;
+                                        case 2:
+                                            break;
+                                        default:
+                                            new ProcessBuilder(limpar1, limpar2, limpar3).inheritIO().start().waitFor();
+                                            System.out.println("Opção não disponível, pressione Enter para continuar!");
+                                            sc.nextLine();
+                                            sc.nextLine();
+                                            break;
                                     }
                                 } while (op != 2);
                                 op = 0;
@@ -1124,32 +1126,58 @@ public class MainHorario {
                                 sc.nextLine();
                                 op = 0;
                                 break;
-                            case 7:
+                            case 7: // Excluir Turma
+                                do {
+                                    new ProcessBuilder(limpar1, limpar2, limpar3).inheritIO().start().waitFor();
+                                    System.out.println(" => Remover Turma");
+                                    System.out.println(" 1 -> Remover Turma");
+                                    System.out.println(" 2 -> Voltar");
+                                    System.out.print("  >> ");
+                                    op = sc.nextInt();
+                                    switch (op) {
+                                        case 1:
+                                            new ProcessBuilder(limpar1, limpar2, limpar3).inheritIO().start().waitFor();
 
-                                new ProcessBuilder(limpar1, limpar2, limpar3).inheritIO().start().waitFor();
+                                            turmas = Turma.listarTurmas();
 
-                                turmas = Turma.listarTurmas();
+                                            System.out.println("Lista de Turmas");
+                                            for (int i = 0; i < turmas.size(); i++) {
+                                                System.out.println(turmas.get(i).toString(i));
+                                            }
+                                            System.out.println(" 0 -> Voltar\n");
+                                            System.out.println("Qual turma deseja excluir");
+                                            System.out.print("  >> ");
+                                            int id_turma = sc.nextInt();
+                                            if(id_turma == 0){
+                                                System.out.println("Pressione Enter para continuar!");
+                                                sc.nextLine();
+                                                sc.nextLine();
+                                                break;
+                                            }
+                                            if (id_turma > turmas.size() || id_turma <= 0) {
+                                                System.out.println(
+                                                        "Opção não disponível, pressione Enter para continuar!");
+                                                sc.nextLine();
+                                                sc.nextLine();
+                                                break;
+                                            }
 
-                                System.out.println("Qual turma deseja excluir: \n");
-                                for (int i = 0; i < turmas.size(); i++) {
-                                    System.out.println(turmas.get(i).toString(i));
-                                }
+                                            Turma.ExcluirTurma(turmas.get(id_turma - 1).getIdTurma());
 
-                                System.out.print("  >> ");
-                                int id_turma = sc.nextInt();
+                                            System.out.println("\nPressione Enter para continuar!");
+                                            sc.nextLine();
+                                            sc.nextLine();
+                                            break;
+                                        case 2:
+                                            break;
+                                        default:
+                                            System.out.println("Opção não disponível, pressione Enter para continuar!");
+                                            sc.nextLine();
+                                            sc.nextLine();
+                                        break;
+                                    }
 
-                                if (id_turma > turmas.size() || id_turma <= 0) {
-                                    System.out.println("Opção não disponível, pressione Enter para continuar!");
-                                    sc.nextLine();
-                                    sc.nextLine();
-                                    break;
-                                }
-
-                                Turma.ExcluirTurma(turmas.get(id_turma - 1).getIdTurma());
-
-                                System.out.println("\nPressione Enter para continuar!");
-                                sc.nextLine();
-                                sc.nextLine();
+                                } while (op != 2);
                                 op = 0;
                                 break;
                             case 8:
